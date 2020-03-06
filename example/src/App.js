@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
 import Divider from '@material-ui/core/Divider';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import List from '@material-ui/core/List';
@@ -8,12 +7,12 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import MailIcon from '@material-ui/icons/Mail';
-import { AppLayout, ProfileHeader } from 'taigo-ui-components'
+import { AppLayout, Drawer, ProfileHeader } from 'taigo-ui-components';
 
 export default class App extends Component {
   render () {
     const drawer = (
-      <div>
+      <Drawer>
         <Divider />
         <List>
           {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
@@ -32,7 +31,7 @@ export default class App extends Component {
             </ListItem>
           ))}
         </List>
-      </div>
+      </Drawer>
     );
 
     return (
