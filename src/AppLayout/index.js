@@ -40,13 +40,18 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function AppLayout(props) {
-  const { menuData, drawerWidth = 250, children } = props;
+  const { menuData, drawerWidth = 250, listItemComponent, children } = props;
   const classes = useStyles({ drawerWidth });
   const theme = useTheme();
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);
+  };
+
+  const sideMenuProps = {
+    menuData,
+    width: drawerWidth,
   };
 
   return (
@@ -72,8 +77,7 @@ function AppLayout(props) {
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Hidden smUp implementation="css">
           <SideMenu
-            menuData={menuData}
-            width={drawerWidth}
+            {...sideMenuProps}
             variant="temporary"
             anchor={theme.direction === 'rtl' ? 'right' : 'left'}
             open={drawerOpen}
@@ -85,8 +89,7 @@ function AppLayout(props) {
         </Hidden>
         <Hidden xsDown implementation="css">
           <SideMenu
-            menuData={menuData}
-            width={drawerWidth}
+            {...sideMenuProps}
             variant="permanent"
             open
           />

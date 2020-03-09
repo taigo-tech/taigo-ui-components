@@ -1,4 +1,5 @@
-import React, { createElement } from 'react';
+import React, { createElement, forwardRef } from 'react';
+import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
@@ -19,6 +20,7 @@ export default ({ item, level }) => {
             button
             onClick={item.onClick}
             className={clsx({ [classes.nested]: level > 0 })}
+            component={forwardRef((props, ref) => <Link to={item.path} {...props} ref={ref} />)}
         >
             <ListItemIcon>
                 {createElement(item.icon)}

@@ -35,6 +35,8 @@ const SideMenu = props => {
 
 SideMenu.propTypes = {
   menuData: PropTypes.array,
+  width: PropTypes.number,
+  open: PropTypes.bool,
 };
 
 export default SideMenu;
