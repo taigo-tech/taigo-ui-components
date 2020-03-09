@@ -1,46 +1,60 @@
-import React, { Component } from 'react';
-
-import Divider from '@material-ui/core/Divider';
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import MailIcon from '@material-ui/icons/Mail';
-import { AppLayout, Drawer, ProfileHeader } from 'taigo-ui-components';
+import DraftsIcon from '@material-ui/icons/Drafts';
+import { AppLayout, ProfileHeader } from 'taigo-ui-components';
+import logo from './assets/taigo_logo_white.png';
 
-export default class App extends Component {
-  render () {
-    const drawer = (
-      <Drawer>
-        <Divider />
-        <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
-    );
-
-    return (
-      <AppLayout
-        drawer={drawer}
-        drawerWidth={240}
-      >
-        <ProfileHeader text='ProfileHeader' />
-      </AppLayout>
-    )
-  }
+export default () => {
+  return (
+    <AppLayout
+      logo={logo}
+      menuData={[
+        {
+          name: 'Inbox',
+          icon: InboxIcon,
+          path: '/inbox',
+        },
+        {
+          name: 'Starred',
+          icon: InboxIcon,
+          path: '/starred',
+        },
+        {
+          name: 'Others',
+          icon: DraftsIcon,
+          path: '/others',
+          defaultOpen: true,
+          routes: [
+            {
+              name: 'Trash',
+              icon: InboxIcon,
+              path: '/others/trash',
+            },
+            {
+              name: 'Spam',
+              icon: InboxIcon,
+              path: '/others/Spam',
+            }
+          ]
+        }
+      ]}
+    >
+      <ProfileHeader text='ProfileHeader' />
+      <Switch>
+        <Route path="/inbox">
+          <div>Inbox</div>
+        </Route>
+        <Route path="/starred">
+          <div>Starred</div>
+        </Route>
+        <Route path="/others/trash">
+          <div>Trash</div>
+        </Route>
+        <Route path="/others/Spam">
+          <div>Spam</div>
+        </Route>
+      </Switch>
+    </AppLayout>
+  );
 }

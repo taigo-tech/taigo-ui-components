@@ -1,0 +1,19 @@
+@import "../colors.scss";
+
+.root {
+    .sideMenu {
+        padding: 16px 0;
+        color: $white;
+        background-color: $dark-blue;
+    }
+
+    .icon {
+        color: $white;
+    }
+
+    .listItem {
+        &:hover, .selected {
+            background-color: $cyan;
+        }
+    }
+}
