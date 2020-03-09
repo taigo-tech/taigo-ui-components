@@ -6,6 +6,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import Collapse from '@material-ui/core/Collapse';
+import styles from './styles.scss';
 
 export default ({ item, children }) => {
     const [open, setOpen] = useState(!!item.defaultOpen);
@@ -16,7 +17,7 @@ export default ({ item, children }) => {
     return (
         <Fragment>
             <ListItem button onClick={handleClick}>
-                <ListItemIcon>
+                <ListItemIcon className={styles.icon}>
                     {createElement(item.icon)}
                 </ListItemIcon>
                 <ListItemText primary="Inbox" />

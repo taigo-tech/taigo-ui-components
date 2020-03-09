@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function AppLayout(props) {
-  const { menuData, drawerWidth = 250, listItemComponent, children } = props;
+  const { menuData, drawerWidth = 300, listItemComponent, children } = props;
   const classes = useStyles({ drawerWidth });
   const theme = useTheme();
   const [drawerOpen, setDrawerOpen] = useState(false);
