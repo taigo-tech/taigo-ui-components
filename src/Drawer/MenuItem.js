@@ -11,13 +11,13 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default ({ item, level, onClick }) => {
+export default ({ item, level }) => {
     const classes = useStyles(level);
 
     return (
         <ListItem
             button
-            onClick={() => onClick && onClick(item.path)}
+            onClick={item.onClick}
             className={clsx({ [classes.nested]: level > 0 })}
         >
             <ListItemIcon>

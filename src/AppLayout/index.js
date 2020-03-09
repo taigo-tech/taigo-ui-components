@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
-import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import IconButton from '@material-ui/core/IconButton';
@@ -9,6 +8,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import SideMenu from '../Drawer';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -37,16 +37,13 @@ const useStyles = makeStyles(theme => ({
       flexShrink: 0,
     },
   },
-  drawerPaper: {
-    width: ({ drawerWidth }) => drawerWidth,
-  },
 }));
 
 function AppLayout(props) {
-  const { drawer, children } = props;
-  const classes = useStyles(props);
+  const { menuData, drawerWidth = 250, children } = props;
+  const classes = useStyles({ drawerWidth });
   const theme = useTheme();
-  const [drawerOpen, setDrawerOpen] = React.useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);
@@ -74,31 +71,25 @@ function AppLayout(props) {
       <nav className={classes.drawer} aria-label="mailbox folders">
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Hidden smUp implementation="css">
-          <Drawer
+          <SideMenu
+            menuData={menuData}
+            width={drawerWidth}
             variant="temporary"
             anchor={theme.direction === 'rtl' ? 'right' : 'left'}
             open={drawerOpen}
             onClose={handleDrawerToggle}
-            classes={{
-              paper: classes.drawerPaper,
-            }}
             ModalProps={{
               keepMounted: true, // Better open performance on mobile.
             }}
-          >
-            {drawer}
-          </Drawer>
+          />
         </Hidden>
         <Hidden xsDown implementation="css">
-          <Drawer
-            classes={{
-              paper: classes.drawerPaper,
-            }}
+          <SideMenu
+            menuData={menuData}
+            width={drawerWidth}
             variant="permanent"
             open
-          >
-            {drawer}
-          </Drawer>
+          />
         </Hidden>
       </nav>
       <main className={classes.content}>

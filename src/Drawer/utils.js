@@ -8,7 +8,7 @@ const isUrl = path => reg.test(path);
 
 const useStyles = makeStyles(theme => ({
 	nested: {
-			paddingLeft: theme.spacing(4),
+		paddingLeft: theme.spacing(4),
 	},
 }));
 
@@ -46,8 +46,8 @@ export default class MenuUtil {
 		if (isUrl(itemPath)) {
 			return (
 				<a href={itemPath}>
-          {createElement(item.icon)} <span>{item.name}</span>
-        </a>
+					{createElement(item.icon)} <span>{item.name}</span>
+				</a>
 			);
 		}
 
@@ -55,7 +55,6 @@ export default class MenuUtil {
 			<MenuItem
 				key={item.key || item.path} item={item}
 				level={level}
-				onClick={this.props.onMenuClick}
 			/>
 		);
 	}
