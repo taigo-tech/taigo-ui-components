@@ -7,6 +7,7 @@
   "dependencies": {
     "react": "file:../node_modules/react",
     "react-dom": "file:../node_modules/react-dom",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "file:../node_modules/react-scripts",
     "taigo-ui-components": "file:.."
   },
