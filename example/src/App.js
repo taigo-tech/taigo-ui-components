@@ -22,13 +22,11 @@ export default () => {
         },
         {
           name: 'Others',
-          icon: DraftsIcon,
           path: '/others',
           defaultOpen: true,
           routes: [
             {
               name: 'Trash',
-              icon: InboxIcon,
               path: '/others/trash',
             },
             {

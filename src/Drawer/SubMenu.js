@@ -17,10 +17,12 @@ export default ({ item, children }) => {
     return (
         <Fragment>
             <ListItem button onClick={handleClick}>
-                <ListItemIcon className={styles.icon}>
-                    {createElement(item.icon)}
-                </ListItemIcon>
-                <ListItemText primary="Inbox" />
+                {item.icon && (
+                    <ListItemIcon className={styles.icon}>
+                        {createElement(item.icon)}
+                    </ListItemIcon>
+                )}
+                <ListItemText primary={item.name} inset={!item.icon} />
                 {open ? <ExpandLess /> : <ExpandMore />}
             </ListItem>
             <Collapse in={open} timeout="auto" unmountOnExit>
