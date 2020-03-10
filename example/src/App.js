@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Link } from 'react-router-dom';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import { AppLayout, ProfileHeader } from 'taigo-ui-components';
@@ -39,6 +39,7 @@ export default () => {
           ]
         }
       ]}
+      menuItemComponent={Link}
     >
       <ProfileHeader text='ProfileHeader' />
       <Switch>
