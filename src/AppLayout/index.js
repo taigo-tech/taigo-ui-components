@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function AppLayout(props) {
-  const { menuData, drawerWidth = 300, menuItemComponent, onMenuItemClick, children } = props;
+  const { logo, menuData, drawerWidth = 300, menuItemComponent, onMenuItemClick, footerMenu, children } = props;
   const classes = useStyles({ drawerWidth });
   const theme = useTheme();
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -50,7 +50,9 @@ function AppLayout(props) {
   };
 
   const sideMenuProps = {
+    logo,
     menuData,
+    footerMenu,
     width: drawerWidth,
     menuItemComponent,
     onMenuItemClick,
@@ -107,6 +109,7 @@ function AppLayout(props) {
 
 AppLayout.propTypes = {
   menuData: PropTypes.array.isRequired,
+  footerMenu: PropTypes.array,
   drawerWidth: PropTypes.number,
   menuItemComponent: PropTypes.elementType,
   onMenuItemClick: PropTypes.func,

@@ -37,7 +37,19 @@ export default () => {
               path: '/others/Spam',
             }
           ]
-        }
+        },
+      ]}
+      footerMenu={[
+        {
+          name: 'Inbox',
+          icon: InboxIcon,
+          path: '/inbox',
+        },
+        {
+          name: 'Starred',
+          icon: InboxIcon,
+          path: '/starred',
+        },
       ]}
       menuItemComponent={Link}
     >

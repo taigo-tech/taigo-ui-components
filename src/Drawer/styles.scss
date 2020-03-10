@@ -2,9 +2,34 @@
 
 .root {
     .sideMenu {
-        padding: 16px 0;
         color: $white;
         background-color: $dark-blue;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+
+        .divider {
+            background-color: $hint-grey;
+        }
+
+        .drawerHeader {
+            text-align: center;
+
+            .logo {
+                height: 100px;
+            }
+        }
+
+        .navList {
+            flex: 1;
+            overflow-y: auto;
+            -ms-overflow-style: none;  // IE 10+
+            overflow: -moz-scrollbars-none;  // Firefox
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
     }
 
     .icon {
