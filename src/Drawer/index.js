@@ -15,9 +15,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const SideMenu = props => {
-  const { logo, menuData, menuItemComponent, onMenuItemClick, footerMenu, ...restProps } = props;
+  const { logo, menuData, menuItemComponent: MenuLink, onMenuItemClick, footerMenu, ...restProps } = props;
   const classes = useStyles(props);
   const menuUtils = new MenuUtil(props);
+
+const LogoLink = ({ children, ...restProps }) => MenuLink ? <MenuLink to="/" {...restProps}>{children}</MenuLink> : <a href="/" {...restProps}>{children}</a>;
 
   return (
     <Drawer
@@ -28,10 +30,10 @@ const SideMenu = props => {
       {...restProps}
     >
       {logo && (
-        <div className={styles.drawerHeader}>
+        <LogoLink className={styles.drawerHeader}>
           <img src={logo} alt="logo" className={styles.logo} />
           <Divider className={styles.divider} />
-        </div>
+        </LogoLink>
       )}
       <List
         component="nav"
