@@ -38,8 +38,12 @@
     }
 
     .listItem {
-        &:hover, &.selected, &.selected:hover {
+        &.selected, &.selected:hover {
             background-color: #344ba1;
+        }
+
+        .text {
+            color: $white;
         }
     }
 }

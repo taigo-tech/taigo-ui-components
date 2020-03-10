@@ -41,7 +41,7 @@ export default ({ item, level, onClick, menuItemComponent: MenuLink, selected })
                     {createElement(item.icon)}
                 </ListItemIcon>
             )}
-            <ListItemText primary={item.name} inset={!item.icon} />
+            <ListItemText primary={item.name} inset={!item.icon} className={styles.text} />
         </ListItem>
     );
 }
