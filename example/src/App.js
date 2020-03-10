@@ -1,11 +1,11 @@
 import React from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route, Link, useLocation } from 'react-router-dom';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
 import { AppLayout, ProfileHeader } from 'taigo-ui-components';
 import logo from './assets/taigo_logo_white.png';
 
 export default () => {
+  const location = useLocation();
   return (
     <AppLayout
       logo={logo}
@@ -23,7 +23,6 @@ export default () => {
         {
           name: 'Others',
           path: '/others',
-          defaultOpen: true,
           routes: [
             {
               name: 'Trash',
@@ -32,7 +31,7 @@ export default () => {
             {
               name: 'Spam',
               icon: InboxIcon,
-              path: '/others/Spam',
+              path: '/others/spam',
             }
           ]
         },
@@ -50,6 +49,7 @@ export default () => {
         },
       ]}
       menuItemComponent={Link}
+      location={location}
     >
       <ProfileHeader name='Profile Header' email='profileheader@example.com'
         profileMenuData={[

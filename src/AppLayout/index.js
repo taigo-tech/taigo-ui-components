@@ -9,6 +9,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import SideMenu from '../Drawer';
+import { isBrowser } from '../utils/utils';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -40,7 +41,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function AppLayout(props) {
-  const { logo, menuData, drawerWidth = 300, menuItemComponent, onMenuItemClick, footerMenu, children } = props;
+  const { logo, menuData, drawerWidth = 300, menuItemComponent, onMenuItemClick, footerMenu, children, location } = props;
   const classes = useStyles({ drawerWidth });
   const theme = useTheme();
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -56,6 +57,7 @@ function AppLayout(props) {
     width: drawerWidth,
     menuItemComponent,
     onMenuItemClick,
+    location,
   };
 
   return (
@@ -113,6 +115,10 @@ AppLayout.propTypes = {
   drawerWidth: PropTypes.number,
   menuItemComponent: PropTypes.elementType,
   onMenuItemClick: PropTypes.func,
+};
+
+AppLayout.defaultProps = {
+  location: isBrowser() ? window.location : undefined,
 };
 
 export default AppLayout;

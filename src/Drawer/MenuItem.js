@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default ({ item, level, onClick, menuItemComponent: MenuLink }) => {
+export default ({ item, level, onClick, menuItemComponent: MenuLink, selected }) => {
     const classes = useStyles(level);
 
     const listItemComponent = MenuLink && forwardRef((props, ref) => <MenuLink to={item.path} {...props} ref={ref} />);
@@ -34,6 +34,7 @@ export default ({ item, level, onClick, menuItemComponent: MenuLink }) => {
                 root: clsx(styles.listItem, { [classes.nested]: level > 0 }),
                 selected: styles.selected,
             }}
+            selected={selected}
         >
             {item.icon && (
                 <ListItemIcon className={styles.icon}>

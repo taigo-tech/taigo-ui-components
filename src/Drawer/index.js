@@ -19,7 +19,7 @@ const SideMenu = props => {
   const classes = useStyles(props);
   const menuUtils = new MenuUtil(props);
 
-const LogoLink = ({ children, ...restProps }) => MenuLink ? <MenuLink to="/" {...restProps}>{children}</MenuLink> : <a href="/" {...restProps}>{children}</a>;
+  const LogoLink = ({ children, ...restProps }) => MenuLink ? <MenuLink to="/" {...restProps}>{children}</MenuLink> : <a href="/" {...restProps}>{children}</a>;
 
   return (
     <Drawer

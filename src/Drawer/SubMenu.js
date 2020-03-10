@@ -8,8 +8,8 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import Collapse from '@material-ui/core/Collapse';
 import styles from './styles.scss';
 
-export default ({ item, children }) => {
-    const [open, setOpen] = useState(!!item.defaultOpen);
+export default ({ item, defaultOpen, children }) => {
+    const [open, setOpen] = useState(!!item.defaultOpen || defaultOpen);
     const handleClick = () => {
         setOpen(!open);
     };

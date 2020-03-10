@@ -2,9 +2,7 @@ import React, { createElement } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import SubMenu from './SubMenu';
 import MenuItem from './MenuItem';
-
-const reg = /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/;
-const isUrl = path => reg.test(path);
+import { isUrl } from '../utils/utils';
 
 const useStyles = makeStyles(theme => ({
 	nested: {
@@ -25,13 +23,11 @@ export default class MenuUtil {
 	}
 
 	getSubMenuOrItem = (item, level) => {
-		if (
-			Array.isArray(item.routes) &&
-      !item.hideChildrenInMenu &&
-      item.routes.some(child => child && !!child.name)
-		) {
+		const { location: { pathname } } = this.props;
+
+		if (Array.isArray(item.routes) && !item.hideChildrenInMenu && item.routes.some(child => child && !!child.name)) {
 			return (
-				<SubMenu key={item.key || item.path} item={item}>
+				<SubMenu key={item.key || item.path} item={item} defaultOpen={item.routes.some(child => child && child.path === pathname)}>
 					{this.getNavMenuItems(item.routes, level + 1)}
 				</SubMenu>
 			)
@@ -42,6 +38,7 @@ export default class MenuUtil {
 
 	getMenuItemPath = (item, level) => {
 		const itemPath = this.conversionPath(item.path || '/');
+		const { location: { pathname } } = this.props;
 
 		if (isUrl(itemPath)) {
 			return (
@@ -57,6 +54,7 @@ export default class MenuUtil {
 				menuItemComponent={this.props.menuItemComponent}
 				onClick={this.props.onMenuItemClick}
 				level={level}
+				selected={item.path === pathname}
 			/>
 		);
 	}
