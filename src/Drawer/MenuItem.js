@@ -1,5 +1,4 @@
 import React, { createElement, forwardRef } from 'react';
-import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
@@ -13,14 +12,24 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default ({ item, level }) => {
+export default ({ item, level, onClick, menuItemComponent: MenuLink }) => {
     const classes = useStyles(level);
+
+    const listItemComponent = MenuLink && forwardRef((props, ref) => <MenuLink to={item.path} {...props} ref={ref} />);
+
+    const onItemClick = () => {
+        if (typeof item.onClick === 'function') {
+            item.onClick(item);
+        } else if (typeof onClick === 'function') {
+            onClick(item);
+        }
+    }
 
     return (
         <ListItem
             button
-            onClick={item.onClick}
-            component={forwardRef((props, ref) => <Link to={item.path} {...props} ref={ref} />)}
+            onClick={onItemClick}
+            component={listItemComponent}
             classes={{
                 root: clsx(styles.listItem, { [classes.nested]: level > 0 }),
                 selected: styles.selected,

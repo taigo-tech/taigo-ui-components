@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const SideMenu = props => {
-  const { menuData, ...restProps } = props;
+  const { menuData, menuItemComponent, onMenuItemClick, ...restProps } = props;
   const classes = useStyles(props);
   const menuUtils = new MenuUtil(props);
 

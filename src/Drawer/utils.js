@@ -54,15 +54,17 @@ export default class MenuUtil {
 		return (
 			<MenuItem
 				key={item.key || item.path} item={item}
+				menuItemComponent={this.props.menuItemComponent}
+				onClick={this.props.onMenuItemClick}
 				level={level}
 			/>
 		);
 	}
 
 	conversionPath = path => {
-    if (path && path.indexOf('http') === 0) {
-      return path;
-    }
-    return `/${path || ''}`.replace(/\/+/g, '/');
-  };
+		if (path && path.indexOf('http') === 0) {
+			return path;
+		}
+		return `/${path || ''}`.replace(/\/+/g, '/');
+	};
 }
