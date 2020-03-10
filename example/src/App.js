@@ -41,7 +41,11 @@ export default () => {
       ]}
       menuItemComponent={Link}
     >
-      <ProfileHeader text='ProfileHeader' />
+      <ProfileHeader name='Profile Header' email='profileheader@example.com'
+        profileMenuData={[
+          { to: '/profile', label: 'Profile Settings' }
+        ]} />
+        
       <Switch>
         <Route path="/inbox">
           <div>Inbox</div>
