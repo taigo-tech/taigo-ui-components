@@ -16,14 +16,14 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
   },
   appBar: {
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       width: ({ drawerWidth }) => `calc(100% - ${drawerWidth}px)`,
       marginLeft: ({ drawerWidth }) => drawerWidth,
     },
   },
   menuButton: {
     marginRight: theme.spacing(2),
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       display: 'none',
     },
   },
@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(3),
   },
   drawer: {
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       width: ({ drawerWidth }) => drawerWidth,
       flexShrink: 0,
     },
@@ -49,6 +49,13 @@ function AppLayout(props) {
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);
   };
+
+  const onMobileMenuItemClick = item => {
+    handleDrawerToggle();
+    if (typeof onMenuItemClick === 'function') {
+      onMenuItemClick(item);
+    }
+  }
 
   const sideMenuProps = {
     logo,
@@ -81,19 +88,20 @@ function AppLayout(props) {
       </AppBar>
       <nav className={classes.drawer} aria-label="mailbox folders">
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Hidden smUp implementation="css">
+        <Hidden mdUp implementation="css">
           <SideMenu
             {...sideMenuProps}
             variant="temporary"
             anchor={theme.direction === 'rtl' ? 'right' : 'left'}
             open={drawerOpen}
             onClose={handleDrawerToggle}
+            onMenuItemClick={onMobileMenuItemClick}
             ModalProps={{
               keepMounted: true, // Better open performance on mobile.
             }}
           />
         </Hidden>
-        <Hidden xsDown implementation="css">
+        <Hidden smDown implementation="css">
           <SideMenu
             {...sideMenuProps}
             variant="permanent"
