@@ -17,7 +17,7 @@ export default class MenuUtil {
 
 	getNavMenuItems = (menusData = [], level = 0) => {
 		return menusData
-			.filter(item => item.name && !item.hideInMenu)
+			.filter(item => item.title && !item.hideInMenu)
 			.map(item => this.getSubMenuOrItem(item, level))
 			.filter(item => item);
 	}
@@ -25,7 +25,7 @@ export default class MenuUtil {
 	getSubMenuOrItem = (item, level) => {
 		const { location: { pathname } } = this.props;
 
-		if (Array.isArray(item.routes) && !item.hideChildrenInMenu && item.routes.some(child => child && !!child.name)) {
+		if (Array.isArray(item.routes) && !item.hideChildrenInMenu && item.routes.some(child => child && !!child.title)) {
 			return (
 				<SubMenu key={item.key || item.path} item={item} defaultOpen={item.routes.some(child => child && child.path === pathname)}>
 					{this.getNavMenuItems(item.routes, level + 1)}
@@ -43,7 +43,7 @@ export default class MenuUtil {
 		if (isUrl(itemPath)) {
 			return (
 				<a href={itemPath}>
-					{createElement(item.icon)} <span>{item.name}</span>
+					{createElement(item.icon)} <span>{item.title}</span>
 				</a>
 			);
 		}
