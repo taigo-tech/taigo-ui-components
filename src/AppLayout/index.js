@@ -11,7 +11,9 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import SideMenu from '../Drawer';
 import PageHeader from '../PageHeader';
 import { isBrowser } from '../utils/utils';
-import colors from '../colors.scss'
+import colors from '../colors.scss';
+import styles from './styles.scss';
+import { blue } from '@material-ui/core/colors';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -19,13 +21,14 @@ const useStyles = makeStyles(theme => ({
   },
   appBar: {
     boxShadow: 'unset',
-    borderBottom: `1px solid ${colors.grey}`, 
+    borderBottom: `1px solid ${colors.grey}`,
     [theme.breakpoints.up('md')]: {
       width: ({ drawerWidth }) => `calc(100% - ${drawerWidth}px)`,
       marginLeft: ({ drawerWidth }) => drawerWidth,
     },
   },
   menuButton: {
+    color: colors['dark-blue'],
     marginRight: theme.spacing(2),
     [theme.breakpoints.up('md')]: {
       display: 'none',
@@ -36,6 +39,10 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: colors.white,
     display: 'flex',
     flexDirection: 'row',
+  },
+  pageTitle: {
+    fontWeight: 'bold',
+    color: colors['dark-blue'],
   },
   content: {
     flexGrow: 1,
@@ -50,11 +57,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function AppLayout(props) {
-  const { logo, menuData, drawerWidth = 300, menuItemComponent, onMenuItemClick, footerMenu, children, location } = props;
+  const { logo, menuData, drawerWidth = 300, menuItemComponent, onMenuItemClick, footerMenu, children, location, getPageTitle } = props;
   const classes = useStyles({ drawerWidth });
   const theme = useTheme();
   const [drawerOpen, setDrawerOpen] = useState(false);
-  console.log('applayout props', props);
 
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);
@@ -90,6 +96,7 @@ function AppLayout(props) {
           >
             <MenuIcon />
           </IconButton>
+          <h2 className={classes.pageTitle}>{getPageTitle && getPageTitle(props.location.pathname)}</h2>
           <div style={{ flexGrow: 1 }} />
           <PageHeader name='John Smith' email='johnsmith@taigo.com.my' style={{ alignSelf: 'flex-end' }} />
         </Toolbar>
@@ -130,6 +137,7 @@ AppLayout.propTypes = {
   drawerWidth: PropTypes.number,
   menuItemComponent: PropTypes.elementType,
   onMenuItemClick: PropTypes.func,
+  getPageTitle: PropTypes.func,
 };
 
 AppLayout.defaultProps = {

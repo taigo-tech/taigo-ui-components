@@ -11,25 +11,25 @@ export default () => {
       logo={logo}
       menuData={[
         {
-          name: 'Inbox',
+          title: 'Inbox',
           icon: InboxIcon,
           path: '/inbox',
         },
         {
-          name: 'Starred',
+          title: 'Starred',
           icon: InboxIcon,
           path: '/starred',
         },
         {
-          name: 'Others',
+          title: 'Others',
           path: '/others',
           routes: [
             {
-              name: 'Trash',
+              title: 'Trash',
               path: '/others/trash',
             },
             {
-              name: 'Spam',
+              title: 'Spam',
               icon: InboxIcon,
               path: '/others/spam',
             }
@@ -38,19 +38,29 @@ export default () => {
       ]}
       footerMenu={[
         {
-          name: 'Inbox',
+          title: 'Inbox',
           icon: InboxIcon,
           path: '/inbox',
         },
         {
-          name: 'Starred',
+          title: 'Starred',
           icon: InboxIcon,
           path: '/starred',
         },
       ]}
       menuItemComponent={Link}
       location={location}
-    >        
+      getPageTitle={path => {
+        switch (path) {
+          case '/starred':
+            return 'Starred';
+          case '/inbox':
+            return 'Inbox';
+          default:
+            break;
+        }
+      }}
+    >
       <Switch>
         <Route path="/inbox">
           <div>Inbox</div>

@@ -22,7 +22,7 @@ export default ({ item, defaultOpen, children }) => {
                         {createElement(item.icon)}
                     </ListItemIcon>
                 )}
-                <ListItemText primary={item.name} inset={!item.icon} />
+                <ListItemText primary={item.title} inset={!item.icon} />
                 {open ? <ExpandLess /> : <ExpandMore />}
             </ListItem>
             <Collapse in={open} timeout="auto" unmountOnExit>
