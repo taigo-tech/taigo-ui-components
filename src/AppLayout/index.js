@@ -43,6 +43,7 @@ const useStyles = makeStyles(theme => ({
   pageTitle: {
     fontWeight: 'bold',
     color: colors['dark-blue'],
+    margin: 0,
   },
   content: {
     flexGrow: 1,
