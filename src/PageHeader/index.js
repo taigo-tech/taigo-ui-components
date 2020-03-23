@@ -3,16 +3,17 @@ import PropTypes from 'prop-types'
 
 import Card from '@material-ui/core/Card';
 import IconButton from '@material-ui/core/IconButton';
+import Hidden from '@material-ui/core/Hidden';
 import Button from '@material-ui/core/Button';
 import Badge from '@material-ui/core/Badge';
 import Menu from '@material-ui/core/Menu';
 import ProfileMenuItem from '../ProfileMenuItem';
-
+import _ from 'lodash';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 
 import styles from './styles.scss'
 
-export default class ProfileHeader extends Component {
+export default class PageHeader extends Component {
   constructor(props) {
     super(props);
 
@@ -23,7 +24,7 @@ export default class ProfileHeader extends Component {
   }
 
   static propTypes = {
-    text: PropTypes.string,
+    name: PropTypes.string,
     email: PropTypes.string,
     profilePic: PropTypes.string,
     profileMenuData: PropTypes.arrayOf(PropTypes.object),
@@ -89,9 +90,8 @@ export default class ProfileHeader extends Component {
         disableAutoFocusItem={true}
       >
         {
-          profileMenuData.map((data, index) => {
+          _.map(profileMenuData, (data, index) => {
             const { label, to } = data;
-            console.log(label, to);
 
             return <ProfileMenuItem key={index} label={label} to={to} handleProfileMenuClose={this.handleProfileMenuClose} />
           })
@@ -100,8 +100,8 @@ export default class ProfileHeader extends Component {
     }
 
     return (
-      <div>
-        <Card className={styles.main}>
+      <div className={styles.main}>
+        <Hidden smDown implementation="css">
           <IconButton color="inherit" onClick={this.handleNotificationMenuOpen}
             className={isNotificationMenuOpen ? styles.notification_button_highlight : styles.notification_button}
           >
@@ -109,31 +109,34 @@ export default class ProfileHeader extends Component {
               <NotificationsIcon />
             </Badge>
           </IconButton>
+        </Hidden>
 
-          <Button color="inherit" onClick={this.handleProfileMenuOpen} className={styles.menu_button}>
-            <div className={styles.button_inner}>
-              <div className={styles.avatar_container}>
-                {
-                  profilePic && profilePic !== 'null' ?
-                    <img className="avatar" src={profilePic} />
-                    :
-                    <div className={styles.text_avatar}>
-                      {name && name[0].toUpperCase()}
-                    </div>
-                }
-              </div>
+        <Button color="inherit" onClick={this.handleProfileMenuOpen} className={styles.menu_button}>
+          <div className={styles.button_inner}>
+            <div className={styles.avatar_container}>
+              {
+                profilePic && profilePic !== 'null' ?
+                  <img className="avatar" src={profilePic} />
+                  :
+                  <div className={styles.text_avatar}>
+                    {name && name[0].toUpperCase()}
+                  </div>
+              }
+            </div>
 
+            <Hidden smDown implementation="css">
               <div className={styles.name_container}>
                 <div className={styles.text_name}>
                   {name}
                 </div>
                 <div className={styles.text_email}>
-                  {email}
+                  Profile Menu
                 </div>
               </div>
-            </div>
-          </Button>
-        </Card>
+            </Hidden>
+
+          </div>
+        </Button>
 
         {renderProfileMenu()}
         {renderNotificationMenu()}

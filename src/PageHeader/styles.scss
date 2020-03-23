@@ -2,20 +2,13 @@
 @import "../common.scss";
 @import "../layout.scss";
 
-.test {
-  display: inline-block;
-  margin: 2em auto;
-  border: 2px solid #000;
-  font-size: 2em;
-  color: $dark-blue;
-  background-color: $dark-blue;
-}
-
 .main {
   @include flex-row;
-  width: 420px;
+  height: 100px;
   align-items: center;
   padding: $small-margin;
+  border-color: $grey;
+  border-bottom: '1px';
 }
 
 .text_avatar {
@@ -42,7 +35,6 @@
 .button_inner {
   @include flex-row;
   align-items: center;
-  width: 320px;
   max-width: 320px;
 }
 

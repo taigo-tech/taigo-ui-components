@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route, Link, useLocation } from 'react-router-dom';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import { AppLayout, ProfileHeader } from 'taigo-ui-components';
+import { AppLayout } from 'taigo-ui-components';
 import logo from './assets/taigo_logo_white.png';
 
 export default () => {
@@ -50,12 +50,7 @@ export default () => {
       ]}
       menuItemComponent={Link}
       location={location}
-    >
-      <ProfileHeader name='Profile Header' email='profileheader@example.com'
-        profileMenuData={[
-          { to: '/profile', label: 'Profile Settings' }
-        ]} />
-        
+    >        
       <Switch>
         <Route path="/inbox">
           <div>Inbox</div>

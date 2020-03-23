@@ -17,3 +17,25 @@ $yellow: #fad745;
 $orange: #ff8000;
 $purple-pink: #d533f2;
 $dark-purple: #5c3de2;
+
+:export {
+    light-grey-blue: $light-grey-blue;
+    light-blue: $light-blue;
+
+    dark-blue: $dark-blue;
+    smoke-blue: $smoke-blue;
+    cyan: $cyan;
+    red: $red;
+    green: $green;
+
+    dark-grey: $dark-grey;
+    medium-grey: $medium-grey;
+    grey: $grey;
+    hint-grey: $hint-grey;
+    white: $white;
+
+    yellow: $yellow;
+    orange: $orange;
+    purple-pink: $purple-pink;
+    dark-purple: $dark-purple;
+  }

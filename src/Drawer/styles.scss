@@ -15,9 +15,12 @@
 
         .drawerHeader {
             text-align: center;
-
+            display: flex;
+            flex-direction: column;
+            max-height: 100px;
             .logo {
-                height: 100px;
+                object-fit: contain;
+                height: 100%;
             }
         }
 

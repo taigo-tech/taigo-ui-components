@@ -18,6 +18,7 @@ const SideMenu = props => {
   const { logo, menuData, menuItemComponent: MenuLink, onMenuItemClick, footerMenu, ...restProps } = props;
   const classes = useStyles(props);
   const menuUtils = new MenuUtil(props);
+  console.log('sidemenu props', props);
 
   const LogoLink = ({ children, ...restProps }) => MenuLink ? <MenuLink to="/" {...restProps}>{children}</MenuLink> : <a href="/" {...restProps}>{children}</a>;
 

@@ -9,13 +9,17 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import SideMenu from '../Drawer';
+import PageHeader from '../PageHeader';
 import { isBrowser } from '../utils/utils';
+import colors from '../colors.scss'
 
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
   },
   appBar: {
+    boxShadow: 'unset',
+    borderBottom: `1px solid ${colors.grey}`, 
     [theme.breakpoints.up('md')]: {
       width: ({ drawerWidth }) => `calc(100% - ${drawerWidth}px)`,
       marginLeft: ({ drawerWidth }) => drawerWidth,
@@ -27,7 +31,12 @@ const useStyles = makeStyles(theme => ({
       display: 'none',
     },
   },
-  toolbar: theme.mixins.toolbar,
+  toolbar: {
+    width: '100%',
+    backgroundColor: colors.white,
+    display: 'flex',
+    flexDirection: 'row',
+  },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
@@ -45,6 +54,7 @@ function AppLayout(props) {
   const classes = useStyles({ drawerWidth });
   const theme = useTheme();
   const [drawerOpen, setDrawerOpen] = useState(false);
+  console.log('applayout props', props);
 
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);
@@ -71,19 +81,17 @@ function AppLayout(props) {
     <div className={classes.root}>
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
+        <Toolbar className={classes.toolbar}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
-            edge="start"
             onClick={handleDrawerToggle}
             className={classes.menuButton}
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
-            App Layout
-          </Typography>
+          <div style={{ flexGrow: 1 }} />
+          <PageHeader name='John Smith' email='johnsmith@taigo.com.my' style={{ alignSelf: 'flex-end' }} />
         </Toolbar>
       </AppBar>
       <nav className={classes.drawer} aria-label="mailbox folders">
@@ -110,7 +118,6 @@ function AppLayout(props) {
         </Hidden>
       </nav>
       <main className={classes.content}>
-        <div className={classes.toolbar} />
         {children}
       </main>
     </div>
