@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Switch, Route, Link, useLocation } from 'react-router-dom';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import { AppLayout, RoundedButton } from 'taigo-ui-components';
@@ -6,6 +6,7 @@ import logo from './assets/taigo_logo_white.png';
 
 export default () => {
   const location = useLocation();
+
   return (
     <AppLayout
       logo={logo}
@@ -63,9 +64,12 @@ export default () => {
     >
       <Switch>
         <Route path="/inbox" component={() => {
+          const [isLoading, setIsLoading] = useState(false);
+          console.log(isLoading);
+
           return <div>
             <div>Inbox</div>
-            <RoundedButton text={'Inbox'} />
+            <RoundedButton text={'Inbox'} onClick={() => { setIsLoading(!isLoading); }} size='small' isLoading={isLoading} />
           </div>
         }} />
 
