@@ -6,14 +6,11 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import SideMenu from '../Drawer';
 import PageHeader from '../PageHeader';
 import { isBrowser } from '../utils/utils';
-import colors from '../colors.scss';
-import styles from './styles.scss';
-import { blue } from '@material-ui/core/colors';
+import colors from '../theme/colors.scss';
 
 const useStyles = makeStyles(theme => ({
   root: {

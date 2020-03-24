@@ -5,8 +5,8 @@ import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import _ from 'lodash';
 import clsx from 'clsx';
-import colors from '../colors.scss';
-import transition from '../transition.scss';
+import colors from '../theme/colors.scss';
+import transition from '../theme/transition.scss';
 
 const RoundedButton = props => {
   const { isLoading, size, text, color, textColor, customComponent, ...buttonProps } = props;
