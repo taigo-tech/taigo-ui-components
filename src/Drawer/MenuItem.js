@@ -36,12 +36,12 @@ export default ({ item, level, onClick, menuItemComponent: MenuLink, selected })
             }}
             selected={selected}
         >
-            {item.icon && (
+            {item.icon && !item.hideIcon && (
                 <ListItemIcon className={styles.icon}>
                     {createElement(item.icon)}
                 </ListItemIcon>
             )}
-            <ListItemText primary={item.title} inset={!item.icon} className={styles.text} />
+            <ListItemText primary={item.title} className={styles.text} />
         </ListItem>
     );
 }

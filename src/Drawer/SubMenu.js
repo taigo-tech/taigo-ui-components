@@ -26,7 +26,7 @@ export default ({ item, defaultOpen, children }) => {
                 {open ? <ExpandLess /> : <ExpandMore />}
             </ListItem>
             <Collapse in={open} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
+                <List component="div" disablePadding classes={{ root: styles.collapsibleList }}>
                     {children}
                 </List>
             </Collapse>
