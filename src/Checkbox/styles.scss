@@ -1,0 +1,10 @@
+@import "../theme/colors.scss";
+@import "../theme/common.scss";
+
+.root {
+  color: $grey !important;
+}
+
+.checked {
+  color: $cyan !important;
+}
