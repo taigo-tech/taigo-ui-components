@@ -134,6 +134,7 @@ function AppLayout(props) {
 }
 
 AppLayout.propTypes = {
+  logo: PropTypes.string,
   menuData: PropTypes.array.isRequired,
   footerMenu: PropTypes.array,
   drawerWidth: PropTypes.number,
