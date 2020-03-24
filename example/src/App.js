@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { Switch, Route, Link, useLocation } from 'react-router-dom';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import { AppLayout, RoundedButton, TextInput } from 'taigo-ui-components';
+import React from 'react';
+import { Link, Route, Switch, useLocation } from 'react-router-dom';
+import { AppLayout } from 'taigo-ui-components';
 import logo from './assets/taigo_logo_white.png';
+import GlobalComponents from './demo-views/GlobalComponents';
 
 export default () => {
   const location = useLocation();
@@ -12,9 +13,9 @@ export default () => {
       logo={logo}
       menuData={[
         {
-          title: 'Inbox',
+          title: 'Global Components',
           icon: InboxIcon,
-          path: '/inbox',
+          path: '/global',
         },
         {
           title: 'Starred',
@@ -55,26 +56,17 @@ export default () => {
         switch (path) {
           case '/starred':
             return 'Starred';
-          case '/inbox':
-            return 'Inbox';
+          case '/global':
+            return 'Global Components';
           default:
             break;
         }
       }}
     >
       <Switch>
-        <Route path="/inbox" component={() => {
-          const [isLoading, setIsLoading] = useState(false);
-
-          return <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-            <div>Click to test Button Loading and Input Error</div>
-            <RoundedButton onClick={() => { setIsLoading(!isLoading); }} size='small' isLoading={isLoading}>
-              Test Button
-            </RoundedButton>
-            <div style={{ margin: '1em' }} />
-            <TextInput id="text-input" label="Label" defaultValue="DefaultValue" error={isLoading} helperText={isLoading && "Error sample"} />
-          </div>
-        }} />
+        <Route path="/global">
+          <GlobalComponents />
+        </Route>
 
         <Route path="/starred">
           <div>Starred</div>

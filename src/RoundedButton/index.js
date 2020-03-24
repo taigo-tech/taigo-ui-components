@@ -14,7 +14,7 @@ const RoundedButton = props => {
   if (isLoading) {
     buttonProps.disabled = true;
   }
-  console.log(isLoading);
+  
   return (
     <Button
       classes={{
