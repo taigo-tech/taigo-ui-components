@@ -22,10 +22,7 @@ const useStyles = makeStyles(theme => ({
   appBar: {
     boxShadow: 'unset',
     borderBottom: `1px solid ${colors.grey}`,
-    [theme.breakpoints.up('md')]: {
-      width: ({ drawerWidth }) => `calc(100% - ${drawerWidth}px)`,
-      marginLeft: ({ drawerWidth }) => drawerWidth,
-    },
+    width: '100%',
   },
   menuButton: {
     color: colors['dark-blue'],
@@ -48,6 +45,10 @@ const useStyles = makeStyles(theme => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
+  },
+  contentWithAppbar: {
+    flexGrow: 1,
+    width: '100%',
   },
   drawer: {
     [theme.breakpoints.up('md')]: {
@@ -87,21 +88,7 @@ function AppLayout(props) {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar className={classes.toolbar}>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerToggle}
-            className={classes.menuButton}
-          >
-            <MenuIcon />
-          </IconButton>
-          <h2 className={classes.pageTitle}>{getPageTitle && getPageTitle(props.location.pathname)}</h2>
-          <div style={{ flexGrow: 1 }} />
-          <PageHeader name='John Smith' email='johnsmith@taigo.com.my' style={{ alignSelf: 'flex-end' }} />
-        </Toolbar>
-      </AppBar>
+
       <nav className={classes.drawer} aria-label="mailbox folders">
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Hidden mdUp implementation="css">
@@ -125,9 +112,26 @@ function AppLayout(props) {
           />
         </Hidden>
       </nav>
-      <main className={classes.content}>
-        {children}
-      </main>
+      <div className={classes.contentWithAppbar}>
+        <AppBar position="static" className={classes.appBar}>
+          <Toolbar className={classes.toolbar}>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerToggle}
+              className={classes.menuButton}
+            >
+              <MenuIcon />
+            </IconButton>
+            <h2 className={classes.pageTitle}>{getPageTitle && getPageTitle(props.location.pathname)}</h2>
+            <div style={{ flexGrow: 1 }} />
+            <PageHeader name='John Smith' email='johnsmith@taigo.com.my' style={{ alignSelf: 'flex-end' }} />
+          </Toolbar>
+        </AppBar>
+        <main className={classes.content}>
+          {children}
+        </main>
+      </div>
     </div>
   );
 }

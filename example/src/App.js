@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route, Link, useLocation } from 'react-router-dom';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import { AppLayout } from 'taigo-ui-components';
+import { AppLayout, RoundedButton } from 'taigo-ui-components';
 import logo from './assets/taigo_logo_white.png';
 
 export default () => {
@@ -62,9 +62,13 @@ export default () => {
       }}
     >
       <Switch>
-        <Route path="/inbox">
-          <div>Inbox</div>
-        </Route>
+        <Route path="/inbox" component={() => {
+          return <div>
+            <div>Inbox</div>
+            <RoundedButton text={'Inbox'} />
+          </div>
+        }} />
+
         <Route path="/starred">
           <div>Starred</div>
         </Route>
