@@ -9,7 +9,7 @@ import colors from '../theme/colors.scss';
 import transition from '../theme/transition.scss';
 
 const RoundedButton = props => {
-  const { isLoading, size, text, color, textColor, customComponent, ...buttonProps } = props;
+  const { isLoading, size, text, color, textColor, children, ...buttonProps } = props;
 
   if (isLoading) {
     buttonProps.disabled = true;
@@ -24,9 +24,7 @@ const RoundedButton = props => {
       {...buttonProps}
     >
       <div className={isLoading ? transition.fadeout : transition.fadein}>
-        {
-          customComponent ? customComponent : text
-        }
+        {children}
       </div>
 
       <div className={clsx(styles.load, isLoading ? transition.fadein : transition.fadeout)}>
@@ -41,7 +39,6 @@ RoundedButton.propTypes = {
   text: PropTypes.string,
   color: PropTypes.string,
   textColor: PropTypes.string,
-  customComponent: PropTypes.object,
   size: PropTypes.oneOf(['small', 'medium', 'large']).isRequired,
 };
 

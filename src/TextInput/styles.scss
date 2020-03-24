@@ -1,0 +1,13 @@
+@import "../theme/colors.scss";
+@import "../theme/common.scss";
+
+.label {
+  color: $dark-grey;
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: $small-margin;
+}
+
+.error {
+  color: $red;
+}

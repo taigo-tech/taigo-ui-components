@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Switch, Route, Link, useLocation } from 'react-router-dom';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import { AppLayout, RoundedButton } from 'taigo-ui-components';
+import { AppLayout, RoundedButton, TextInput } from 'taigo-ui-components';
 import logo from './assets/taigo_logo_white.png';
 
 export default () => {
@@ -65,11 +65,14 @@ export default () => {
       <Switch>
         <Route path="/inbox" component={() => {
           const [isLoading, setIsLoading] = useState(false);
-          console.log(isLoading);
 
-          return <div>
-            <div>Inbox</div>
-            <RoundedButton text={'Inbox'} onClick={() => { setIsLoading(!isLoading); }} size='small' isLoading={isLoading} />
+          return <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+            <div>Click to test Button Loading and Input Error</div>
+            <RoundedButton onClick={() => { setIsLoading(!isLoading); }} size='small' isLoading={isLoading}>
+              Test Button
+            </RoundedButton>
+            <div style={{ margin: '1em' }} />
+            <TextInput id="text-input" label="Label" defaultValue="DefaultValue" error={isLoading} helperText={isLoading && "Error sample"} />
           </div>
         }} />
 
