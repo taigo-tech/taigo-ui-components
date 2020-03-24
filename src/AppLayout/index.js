@@ -18,6 +18,7 @@ import { blue } from '@material-ui/core/colors';
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
+    height: '100vh',
   },
   appBar: {
     boxShadow: 'unset',
@@ -48,7 +49,6 @@ const useStyles = makeStyles(theme => ({
   },
   contentWithAppbar: {
     flexGrow: 1,
-    width: '100%',
   },
   drawer: {
     [theme.breakpoints.up('md')]: {
