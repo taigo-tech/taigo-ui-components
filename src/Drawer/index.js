@@ -6,17 +6,46 @@ import Divider from '@material-ui/core/Divider';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import MenuUtil from './utils';
-import styles from './styles.scss';
 
 const useStyles = makeStyles(theme => ({
   drawerPaper: {
     width: ({ width }) => width,
   },
+  sideMenu: {
+    color: theme.palette.common.white,
+    backgroundColor: theme.palette.primary.main,
+    display: 'flex',
+    flexDirection: 'column',
+    overflow: 'hidden',
+    borderRight: 0,
+  },
+  divider: {
+    backgroundColor: theme.palette.grey[300],
+  },
+  drawerHeader: {
+    textAlign: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    maxHeight: '100px',
+  },
+  logo: {
+    objectFit: 'contain',
+    height: '100%',
+  },
+  navList: {
+    flex: 1,
+    overflowY: 'auto',
+    msOverflowStyle: 'none',  // IE 10+
+    overflow: '-moz-scrollbars-none',
+    '&::-webkit-scrollbar': {
+      display: 'none',
+    },
+  },
 }));
 
 const SideMenu = props => {
   const { logo, menuData, menuItemComponent: MenuLink, onMenuItemClick, footerMenu, ...restProps } = props;
-  const classes = useStyles(props);
+  const styles = useStyles(props);
   const menuUtils = new MenuUtil(props);
 
   const LogoLink = ({ children, ...restProps }) => MenuLink ? <MenuLink to="/" {...restProps}>{children}</MenuLink> : <a href="/" {...restProps}>{children}</a>;
@@ -24,8 +53,7 @@ const SideMenu = props => {
   return (
     <Drawer
       classes={{
-        root: styles.root,
-        paper: clsx(styles.sideMenu, classes.drawerPaper),
+        paper: clsx(styles.sideMenu, styles.drawerPaper),
       }}
       {...restProps}
     >
@@ -44,10 +72,7 @@ const SideMenu = props => {
       {footerMenu && footerMenu.length > 0 && (
         <Fragment>
           <Divider className={styles.divider} />
-          <List
-            component="nav"
-            className={styles.footerList}
-          >
+          <List component="nav">
             {menuUtils.getNavMenuItems(footerMenu)}
           </List>
         </Fragment>

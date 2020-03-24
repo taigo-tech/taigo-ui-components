@@ -10,7 +10,6 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import SideMenu from '../Drawer';
 import PageHeader from '../PageHeader';
 import { isBrowser } from '../utils/utils';
-import colors from '../theme/colors.scss';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -19,11 +18,11 @@ const useStyles = makeStyles(theme => ({
   },
   appBar: {
     boxShadow: 'unset',
-    borderBottom: `1px solid ${colors.grey}`,
+    borderBottom: `1px solid ${theme.palette.grey[300]}`,
     width: '100%',
   },
   menuButton: {
-    color: colors['dark-blue'],
+    color: theme.palette.primary.main,
     marginRight: theme.spacing(2),
     [theme.breakpoints.up('md')]: {
       display: 'none',
@@ -31,13 +30,13 @@ const useStyles = makeStyles(theme => ({
   },
   toolbar: {
     width: '100%',
-    backgroundColor: colors.white,
+    backgroundColor: theme.palette.common.white,
     display: 'flex',
     flexDirection: 'row',
   },
   pageTitle: {
     fontWeight: 'bold',
-    color: colors['dark-blue'],
+    color: theme.palette.primary.main,
     margin: 0,
   },
   content: {

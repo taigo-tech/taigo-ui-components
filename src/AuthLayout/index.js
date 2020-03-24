@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import colors from '../theme/colors.scss';
+import Hidden from '@material-ui/core/Hidden';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -33,12 +33,12 @@ const useStyles = makeStyles(theme => ({
     },
     title: {
         fontSize: '18px',
-        color: colors['dark-blue'],
+        color: theme.palette.primary.main,
         lineHeight: 2,
     },
     subtitle: {
         fontSize: '15px',
-        color: colors['grey'],
+        color: theme.palette.grey[500],
     }
 }));
 
@@ -64,7 +64,9 @@ const AuthLayout = ({ children, image, imagePosition, logo, title, subtitle }) =
                     <div>{children}</div>
                 </div>
             </div>
-            <div className={classes.imageWrapper} style={{ backgroundImage: `url(${image})` }} />
+            <Hidden smDown>
+                <div className={classes.imageWrapper} style={{ backgroundImage: `url(${image})` }} />
+            </Hidden>
         </div>
     );
 }

@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-
+import { makeStyles } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
 import MenuItem from '@material-ui/core/MenuItem';
 
-import NotificationsIcon from '@material-ui/icons/Notifications';
+const useStyles = makeStyles(theme => ({
 
-import styles from './styles.scss'
+}));
 
 export default class ProfileMenuItem extends Component {
   constructor(props) {
@@ -23,6 +23,7 @@ export default class ProfileMenuItem extends Component {
 
   render() {
     const { to, label, handleProfileMenuClose } = this.props;
+    const styles = useStyles();
 
     return (
       <Link to={to}>

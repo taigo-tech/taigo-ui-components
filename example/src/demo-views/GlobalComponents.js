@@ -32,7 +32,7 @@ export default () => {
 
             <div style={{ margin: '1em' }} />
 
-            <TextInput id="text-input" label="Error" defaultValue="Error" error helperText={"Error sample"} />
+            <TextInput id="text-input-error" label="Error" defaultValue="Error" error helperText={"Error sample"} />
         </div>
     )
 }

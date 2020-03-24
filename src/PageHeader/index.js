@@ -1,19 +1,77 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-
-import Card from '@material-ui/core/Card';
+import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Hidden from '@material-ui/core/Hidden';
 import Button from '@material-ui/core/Button';
 import Badge from '@material-ui/core/Badge';
 import Menu from '@material-ui/core/Menu';
-import ProfileMenuItem from '../ProfileMenuItem';
-import _ from 'lodash';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import _ from 'lodash';
+import ProfileMenuItem from '../ProfileMenuItem';
 
-import styles from './styles.scss'
+const styles = theme => ({
+  main: {
+    display: 'flex',
+    flexDirection: 'row',
+    height: '100px',
+    alignItems: 'center',
+    padding: theme.spacing(1),
+    borderColor: theme.palette.grey[500],
+    borderBottom: '1px',
+  },
+  text_avatar: {
+    width: '40px',
+    height: '40px',
+    borderRadius: '50%',
+    color: theme.palette.common.white,
+    backgroundColor: theme.palette.secondary.main,
+    textAlign: 'center',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontWeight: 'bold',
+    fontSize: '1em',
+  },
+  menu_button: {
+    borderRadius: '30px',
+    '&:hover': {
+      backgroundColor: '#EDF6FC',
+    },
+  },
+  button_inner: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    maxWidth: '320px',
+  },
+  name_container: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    margin: `0 ${theme.spacing(2)}px`,
+  },
+  text_name: {
+    color: theme.palette.grey[900],
+    fontWeight: 'bold',
+  },
+  text_email: {
+    color: theme.palette.grey[500],
+  },
+  menu: {
+    padding: theme.spacing(1),
+  },
+  notification_button: {
+    color: theme.palette.primary.main,
+    backgroundColor: theme.palette.common.white,
+  },
+  notification_button_highlight: {
+    color: theme.palette.common.white,
+    backgroundColor: theme.palette.primary.main,
+  },
+});
 
-export default class PageHeader extends Component {
+class PageHeader extends Component {
   constructor(props) {
     super(props);
 
@@ -48,10 +106,11 @@ export default class PageHeader extends Component {
 
   render() {
     const {
+      classes,
       name,
       email,
       profilePic,
-      profileMenuData
+      profileMenuData,
     } = this.props;
 
     const {
@@ -71,7 +130,7 @@ export default class PageHeader extends Component {
         getContentAnchorEl={null}
         open={isNotificationMenuOpen}
         onClose={this.handleNotificationMenuClose}
-        className={styles.menu}
+        className={classes.menu}
         disableAutoFocusItem={true}
       >
         {children}
@@ -86,7 +145,7 @@ export default class PageHeader extends Component {
         getContentAnchorEl={null}
         open={isProfileMenuOpen}
         onClose={this.handleProfileMenuClose}
-        className={styles.menu}
+        className={classes.menu}
         disableAutoFocusItem={true}
       >
         {
@@ -100,10 +159,10 @@ export default class PageHeader extends Component {
     }
 
     return (
-      <div className={styles.main}>
+      <div className={classes.main}>
         <Hidden smDown implementation="css">
           <IconButton color="inherit" onClick={this.handleNotificationMenuOpen}
-            className={isNotificationMenuOpen ? styles.notification_button_highlight : styles.notification_button}
+            className={isNotificationMenuOpen ? classes.notification_button_highlight : classes.notification_button}
           >
             <Badge className="badge" color="secondary" badgeContent={notificationCount > 0 ? notificationCount : ''}>
               <NotificationsIcon />
@@ -111,25 +170,25 @@ export default class PageHeader extends Component {
           </IconButton>
         </Hidden>
 
-        <Button color="inherit" onClick={this.handleProfileMenuOpen} className={styles.menu_button}>
-          <div className={styles.button_inner}>
-            <div className={styles.avatar_container}>
+        <Button color="inherit" onClick={this.handleProfileMenuOpen} className={classes.menu_button}>
+          <div className={classes.button_inner}>
+            <div className={classes.avatar_container}>
               {
                 profilePic && profilePic !== 'null' ?
                   <img className="avatar" src={profilePic} />
                   :
-                  <div className={styles.text_avatar}>
+                  <div className={classes.text_avatar}>
                     {name && name[0].toUpperCase()}
                   </div>
               }
             </div>
 
             <Hidden smDown implementation="css">
-              <div className={styles.name_container}>
-                <div className={styles.text_name}>
+              <div className={classes.name_container}>
+                <div className={classes.text_name}>
                   {name}
                 </div>
-                <div className={styles.text_email}>
+                <div className={classes.text_email}>
                   Profile Menu
                 </div>
               </div>
@@ -144,3 +203,5 @@ export default class PageHeader extends Component {
     )
   }
 }
+
+export default withStyles(styles)(PageHeader);

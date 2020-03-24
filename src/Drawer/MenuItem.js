@@ -4,16 +4,27 @@ import { makeStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import styles from './styles.scss';
 
 const useStyles = makeStyles(theme => ({
     nested: {
-        paddingLeft: level => theme.spacing(8 * level),
+        paddingLeft: level => theme.spacing(9 * level),
+    },
+    icon: {
+        color: theme.palette.common.white,
+    },
+    selected: {
+        backgroundColor: '#344ba1 !important',
+        '&:hover': {
+            backgroundColor: '#344ba1 !important',
+        },
+    },
+    text: {
+        color: theme.palette.common.white,
     },
 }));
 
 export default ({ item, level, onClick, menuItemComponent: MenuLink, selected }) => {
-    const classes = useStyles(level);
+    const styles = useStyles(level);
 
     const listItemComponent = MenuLink && forwardRef((props, ref) => <MenuLink to={item.path} {...props} ref={ref} />);
 
@@ -31,7 +42,7 @@ export default ({ item, level, onClick, menuItemComponent: MenuLink, selected })
             onClick={onItemClick}
             component={listItemComponent}
             classes={{
-                root: clsx(styles.listItem, { [classes.nested]: level > 0 }),
+                root: clsx({ [styles.nested]: level > 0 }),
                 selected: styles.selected,
             }}
             selected={selected}
