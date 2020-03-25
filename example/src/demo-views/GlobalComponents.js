@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { RoundedButton, TextInput, Checkbox, Dialog, colors } from 'taigo-ui-components';
+import { RoundedButton, TextInput, Checkbox, Dialog, ErrorDialog } from 'taigo-ui-components';
 import { useTheme } from '@material-ui/core/styles';
 
 export default () => {
@@ -50,9 +50,9 @@ export default () => {
                 Open Error Dialog
             </RoundedButton>
 
-            <Dialog type="alert" open={isErrorDialogOpen} onClose={() => { setErrorDialogOpen(false) }}>
+            <ErrorDialog open={isErrorDialogOpen} onClose={() => { setErrorDialogOpen(false) }}>
                 Error Dialog
-            </Dialog>
+            </ErrorDialog>
 
             <div style={{ margin: '1em' }} />
 
