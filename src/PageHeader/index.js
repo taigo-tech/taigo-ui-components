@@ -9,6 +9,7 @@ import Menu from '@material-ui/core/Menu';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import _ from 'lodash';
 import ProfileMenuItem from '../ProfileMenuItem';
+import colors from '../utils/colors.scss';
 
 const styles = theme => ({
   main: {
@@ -34,9 +35,9 @@ const styles = theme => ({
     fontSize: '1em',
   },
   menu_button: {
-    borderRadius: '30px',
+    borderRadius: '50px',
     '&:hover': {
-      backgroundColor: '#EDF6FC',
+      backgroundColor: `${colors.lightblue} !important`,
     },
   },
   button_inner: {
