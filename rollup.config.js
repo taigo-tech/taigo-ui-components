@@ -12,16 +12,16 @@ export default {
   input: 'src/index.js',
   output: [
     {
-      file: pkg.main,
+      dir: 'cjs',
       format: 'cjs',
-      sourcemap: true
     },
     {
-      file: pkg.module,
-      format: 'es',
-      sourcemap: true
+      dir: 'esm',
+      format: 'esm',
     }
   ],
+  preserveModules: true,
+  external: Object.keys(pkg.dependencies).concat(['react', 'react-dom', 'lodash']),
   plugins: [
     external(),
     postcss({
@@ -32,9 +32,9 @@ export default {
     svgr(),
     babel({
       exclude: 'node_modules/**',
-      plugins: [ 'external-helpers' ]
+      runtimeHelpers: true,
     }),
     resolve(),
-    commonjs()
+    commonjs(),
   ]
 }
