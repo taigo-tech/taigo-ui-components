@@ -1,8 +1,6 @@
 import MuiDialog from '@material-ui/core/Dialog';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import clsx from 'clsx';
 import React from 'react';
-import styles from './styles.scss';
 import PropTypes from 'prop-types';
 import colors from '../utils/colors.scss';
 

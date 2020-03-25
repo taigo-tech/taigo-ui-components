@@ -1,5 +1,5 @@
 // theme
-export { default as ThemeProvider } from './ThemeProvider';
+export { default as ThemeProvider } from './ThemeProvider'
 export { default as AppLayout } from './AppLayout'
 export { default as AuthLayout } from './AuthLayout'
 export { default as SideMenu } from './Drawer'
@@ -8,4 +8,4 @@ export { default as RoundedButton } from './RoundedButton'
 export { default as TextInput } from './TextInput'
 export { default as Checkbox } from './Checkbox'
 export { default as Dialog } from './Dialog'
-export colors from './utils/colors.scss'
+export { default as Colors } from './utils/colors.scss'
