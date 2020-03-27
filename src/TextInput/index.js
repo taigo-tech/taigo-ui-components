@@ -22,16 +22,16 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const TextInput = props => {
-  const { value, editMode, error, label, ...inputProps } = props;
+  const { value, editable, error, label, ...inputProps } = props;
   const styles = useStyles();
 
   return (
     <div>
-      <div className={clsx(styles.label, (error && editMode) && styles.error)}>
+      <div className={clsx(styles.label, (error && editable) && styles.error)}>
         {label}
       </div>
       {
-        editMode ?
+        editable ?
           <TextField
             value={value}
             error={error}
@@ -49,11 +49,11 @@ const TextInput = props => {
 }
 
 TextInput.defaultProps = {
-  editMode: true
+  editable: true
 }
 
 TextInput.propTypes = {
-  editMode: PropTypes.bool
+  editable: PropTypes.bool
 };
 
 export default TextInput;

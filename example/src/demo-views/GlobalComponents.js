@@ -7,7 +7,7 @@ export default () => {
     const [isLoading, setIsLoading] = useState(false);
     const [isConfirmDialogOpen, setConfirmDialogOpen] = useState(false);
     const [isErrorDialogOpen, setErrorDialogOpen] = useState(false);
-    const [isEditMode, setEditMode] = useState(false);
+    const [isEditable, setEditable] = useState(false);
     const [inputValue, setInputValue] = useState('Value');
 
     return (
@@ -40,11 +40,11 @@ export default () => {
 
             <div style={{ margin: '1em' }} />
 
-            <Checkbox onChange={(event) => { setEditMode(event.target.checked); }} />
+            <Checkbox onChange={(event) => { setEditable(event.target.checked); }} />
 
             <div style={{ margin: '1em' }} />
 
-            <TextInput id="text-input" label="Label" value={inputValue} onChange={(event) => { setInputValue(event.target.value) }} defaultValue="DefaultValue" editMode={isEditMode} />
+            <TextInput id="text-input" label="Label" value={inputValue} onChange={(event) => { setInputValue(event.target.value) }} editable={isEditable} />
 
             <div style={{ margin: '1em' }} />
 

@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 
 const EditableCard = props => {
-  const { editMode, title, children, ...inputProps } = props;
+  const { editable, title, children, ...inputProps } = props;
   const theme = useTheme();
 
   const useStyles = makeStyles(theme => ({
@@ -49,18 +49,18 @@ const EditableCard = props => {
       <div className={styles.divider} />
 
       {
-        React.Children.map(children, child => React.cloneElement(child, { editMode: editMode }))
+        React.Children.map(children, child => React.cloneElement(child, { editable: editable }))
       }
     </Card>
   );
 }
 
 EditableCard.defaultProps = {
-  editMode: false
+  editable: false
 }
 
 EditableCard.propTypes = {
-  editMode: PropTypes.bool
+  editable: PropTypes.bool
 }
 
 export default EditableCard;
