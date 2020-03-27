@@ -63,16 +63,6 @@ export default () => {
       ]}
       menuItemComponent={Link}
       location={location}
-      getPageTitle={path => {
-        switch (path) {
-          case '/starred':
-            return 'Starred';
-          case '/global':
-            return 'Global Components';
-          default:
-            break;
-        }
-      }}
     >
       <Switch>
         <Route path="/global">

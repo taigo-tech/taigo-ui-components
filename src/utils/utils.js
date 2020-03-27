@@ -10,3 +10,17 @@ export const isBrowser = () =>
   typeof window !== 'undefined' &&
   typeof window.document !== 'undefined' &&
   !isNode;
+
+export const getFlatMenus = (menuData = []) => {
+  let menus = {};
+  menuData.forEach(item => {
+    if (!item || item.hideInMenu) {
+      return;
+    }
+    menus[item.path || '/'] = item;
+    if (item.routes && !item.hideChildrenInMenu) {
+      menus = { ...menus, ...getFlatMenus(item.routes) };
+    }
+  });
+  return menus;
+};

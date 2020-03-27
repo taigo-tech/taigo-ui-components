@@ -9,7 +9,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import SideMenu from '../Drawer';
 import PageHeader from '../PageHeader';
-import { isBrowser } from '../utils/utils';
+import { isBrowser, getFlatMenus } from '../utils/utils';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -81,6 +81,9 @@ function AppLayout(props) {
     location,
   };
 
+  const flatMenus = getFlatMenus(menuData);
+  const pageTitle = flatMenus[location.pathname] ? flatMenus[location.pathname].title : '';
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -119,7 +122,7 @@ function AppLayout(props) {
             >
               <MenuIcon />
             </IconButton>
-            <h2 className={classes.pageTitle}>{getPageTitle && getPageTitle(props.location.pathname)}</h2>
+            <h2 className={classes.pageTitle}>{getPageTitle ? getPageTitle(pageTitle) : pageTitle}</h2>
             <div style={{ flexGrow: 1 }} />
             <PageHeader name='John Smith' email='johnsmith@taigo.com.my' style={{ alignSelf: 'flex-end' }} />
           </Toolbar>
