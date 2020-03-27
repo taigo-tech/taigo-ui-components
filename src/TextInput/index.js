@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import clsx from 'clsx';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles(theme => ({
   label: {
@@ -21,20 +22,16 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const TextInput = props => {
-  const { value, displayMode, error, label, ...inputProps } = props;
+  const { value, editMode, error, label, ...inputProps } = props;
   const styles = useStyles();
 
   return (
     <div>
-      <div className={clsx(styles.label, (error && !displayMode) && styles.error)}>
+      <div className={clsx(styles.label, (error && editMode) && styles.error)}>
         {label}
       </div>
       {
-        displayMode ?
-          <div className={styles.input} style={{ display: 'flex', alignItems: 'center', fontSize: '16px' }}>
-            <span>{value}</span>
-          </div>
-          :
+        editMode ?
           <TextField
             value={value}
             error={error}
@@ -42,12 +39,21 @@ const TextInput = props => {
             {...inputProps}
             variant="outlined"
           />
+          :
+          <div className={styles.input} style={{ display: 'flex', alignItems: 'center', fontSize: '16px' }}>
+            <span>{value}</span>
+          </div>
       }
     </div>
   );
 }
 
+TextInput.defaultProps = {
+  editMode: true
+}
+
 TextInput.propTypes = {
+  editMode: PropTypes.bool
 };
 
 export default TextInput;

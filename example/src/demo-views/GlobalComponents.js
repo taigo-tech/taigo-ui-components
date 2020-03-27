@@ -7,8 +7,8 @@ export default () => {
     const [isLoading, setIsLoading] = useState(false);
     const [isConfirmDialogOpen, setConfirmDialogOpen] = useState(false);
     const [isErrorDialogOpen, setErrorDialogOpen] = useState(false);
-    const [isDisplayMode, setDisplayMode] = useState(false);
-    const [inputValue, setInputValue] = useState('');
+    const [isEditMode, setEditMode] = useState(false);
+    const [inputValue, setInputValue] = useState('Value');
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
@@ -40,15 +40,15 @@ export default () => {
 
             <div style={{ margin: '1em' }} />
 
-            <Checkbox onChange={(event) => { setDisplayMode(event.target.checked); }} />
+            <Checkbox onChange={(event) => { setEditMode(event.target.checked); }} />
 
             <div style={{ margin: '1em' }} />
 
-            <TextInput id="text-input" label="Label" value={inputValue} onChange={(event) => { setInputValue(event.target.value) }} defaultValue="DefaultValue" displayMode={isDisplayMode} />
+            <TextInput id="text-input" label="Label" value={inputValue} onChange={(event) => { setInputValue(event.target.value) }} defaultValue="DefaultValue" editMode={isEditMode} />
 
             <div style={{ margin: '1em' }} />
 
-            <TextInput id="text-error-input" label="Error" defaultValue="Error" error helperText={"Error sample"} displayMode={isDisplayMode} />
+            <TextInput id="text-error-input" label="Error" defaultValue="Error" error helperText={"Error sample"} />
 
             <div style={{ margin: '1em' }} />
 

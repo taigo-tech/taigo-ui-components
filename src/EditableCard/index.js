@@ -4,10 +4,11 @@ import React from 'react';
 import colors from '../utils/colors.scss';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 
 const EditableCard = props => {
-  const { children, type, color, ...inputProps } = props;
+  const { editMode, title, children, ...inputProps } = props;
   const theme = useTheme();
 
   const useStyles = makeStyles(theme => ({
@@ -22,26 +23,44 @@ const EditableCard = props => {
       color: theme.palette.error.main,
       marginBottom: `${theme.spacing(2)}px`
     },
-    content: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      fontWeight: '600',
-      color: theme.palette.grey[900]
+    card: {
+      color: theme.palette.primary.main,
+      padding: '40px',
+    },
+    title: {
+      fontWeight: 'bold'
+    },
+    divider: {
+      height: 1,
+      width: '100%',
+      borderBottom: `2px solid ${theme.palette.primary.main}`,
+      margin: '20px 0',
     }
   }))
 
   const styles = useStyles();
-
+  console.log(children);
   return (
-    <Card {...inputProps}>
-      asdasd
+    <Card {...inputProps} className={styles.card}>
+      <Typography component="h4" className={styles.title}>
+        {title}
+      </Typography>
+
+      <div className={styles.divider} />
+
+      {
+        React.Children.map(children, child => React.cloneElement(child, { editMode: editMode }))
+      }
     </Card>
   );
 }
 
-EditableCard.propTypes = {
+EditableCard.defaultProps = {
+  editMode: false
+}
 
+EditableCard.propTypes = {
+  editMode: PropTypes.bool
 }
 
 export default EditableCard;

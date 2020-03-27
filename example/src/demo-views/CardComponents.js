@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { EditableCard } from 'taigo-ui-components';
+import { EditableCard, TextInput, RoundedButton } from 'taigo-ui-components';
 import { useTheme } from '@material-ui/core/styles';
 
 export default () => {
@@ -7,7 +7,10 @@ export default () => {
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-            <EditableCard />
+            <EditableCard title='EDITABLE CARD' editMode={true}>
+                <TextInput id="input-name" label="Name" />
+                <TextInput id="input-name" label="Name" />
+            </EditableCard>
         </div>
     )
 }
