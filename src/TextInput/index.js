@@ -16,24 +16,33 @@ const useStyles = makeStyles(theme => ({
   input: {
     height: '48px',
     padding: '0px 14px',
+    color: theme.palette.grey[900],
   }
 }));
 
 const TextInput = props => {
-  const { error, label, ...inputProps } = props;
+  const { value, displayMode, error, label, ...inputProps } = props;
   const styles = useStyles();
 
   return (
     <div>
-      <div className={clsx(styles.label, error && styles.error)}>
+      <div className={clsx(styles.label, (error && !displayMode) && styles.error)}>
         {label}
       </div>
-      <TextField
-        error={error}
-        InputProps={{ classes: { input: styles.input } }}
-        {...inputProps}
-        variant="outlined"
-      />
+      {
+        displayMode ?
+          <div className={styles.input} style={{ display: 'flex', alignItems: 'center', fontSize: '16px' }}>
+            <span>{value}</span>
+          </div>
+          :
+          <TextField
+            value={value}
+            error={error}
+            InputProps={{ classes: { input: styles.input } }}
+            {...inputProps}
+            variant="outlined"
+          />
+      }
     </div>
   );
 }
