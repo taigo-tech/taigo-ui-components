@@ -13,6 +13,10 @@ const useStyles = makeStyles(theme => ({
   error: {
     color: theme.palette.error.main,
   },
+  input: {
+    height: '48px',
+    padding: '0px 14px',
+  }
 }));
 
 const TextInput = props => {
@@ -26,6 +30,7 @@ const TextInput = props => {
       </div>
       <TextField
         error={error}
+        InputProps={{ classes: { input: styles.input } }}
         {...inputProps}
         variant="outlined"
       />
