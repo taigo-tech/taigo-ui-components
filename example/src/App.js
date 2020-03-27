@@ -3,6 +3,7 @@ import React from 'react';
 import { Link, Route, Switch, useLocation } from 'react-router-dom';
 import { AppLayout, AuthLayout } from 'taigo-ui-components';
 import GlobalComponents from './demo-views/GlobalComponents';
+import CardComponents from './demo-views/CardComponents';
 import logo from './assets/taigo_logo_white.png';
 import logoPurple from './assets/taigo_logo_purple.png';
 import signInBg from './assets/login_bg.jpg';
@@ -34,9 +35,9 @@ export default () => {
           path: '/global',
         },
         {
-          title: 'Starred',
+          title: 'Card Components',
           icon: InboxIcon,
-          path: '/starred',
+          path: '/card',
         },
         {
           title: 'Others',
@@ -72,8 +73,8 @@ export default () => {
           <GlobalComponents />
         </Route>
 
-        <Route path="/starred">
-          <div>Starred</div>
+        <Route path="/card">
+          <CardComponents />
         </Route>
         <Route path="/others/trash">
           <div>Trash</div>
