@@ -1,15 +1,19 @@
 import { useTheme, makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import colors from '../utils/colors';
 import CloseIcon from '@material-ui/icons/Close';
+import CheckIcon from '@material-ui/icons/Check';
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
+import EditableContext from '../context/EditableContext';
 
 const EditableCard = props => {
-  const { editable, title, children, ...inputProps } = props;
+  const { onAccept, title, children, ...inputProps } = props;
   const theme = useTheme();
+  const [editable, setEditable] = useState(false);
 
   const useStyles = makeStyles(theme => ({
     close: {
@@ -19,9 +23,20 @@ const EditableCard = props => {
       color: theme.palette.grey[300],
       padding: 0,
     },
-    icon: {
+    editIcon: {
+      color: theme.palette.secondary.main,
+    },
+    closeIcon: {
       color: theme.palette.error.main,
-      marginBottom: `${theme.spacing(2)}px`
+    },
+    checkIcon: {
+      color: theme.palette.success.main,
+    },
+    iconButton: {
+      padding: 0,
+      "&:hover": {
+        backgroundColor: "transparent"
+      }
     },
     card: {
       color: theme.palette.primary.main,
@@ -29,6 +44,11 @@ const EditableCard = props => {
     },
     title: {
       fontWeight: 'bold'
+    },
+    row: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
     },
     divider: {
       height: 1,
@@ -39,24 +59,42 @@ const EditableCard = props => {
   }))
 
   const styles = useStyles();
-  console.log(children);
+
   return (
     <Card {...inputProps} className={styles.card}>
-      <Typography component="h4" className={styles.title}>
-        {title}
-      </Typography>
+      <div className={styles.row}>
+        <Typography component="h4" className={styles.title}>
+          {title}
+        </Typography>
+
+        <div style={{ flexGrow: 1 }} />
+
+        {
+          editable ?
+            <div>
+              <IconButton className={styles.iconButton} disableRipple onClick={() => { setEditable(false); }}>
+                <CloseIcon className={styles.closeIcon} />
+              </IconButton>
+
+              <IconButton className={styles.iconButton} disableRipple onClick={() => { onAccept && onAccept(() => { setEditable(false) }) }}>
+                <CheckIcon className={styles.checkIcon} />
+              </IconButton>
+            </div>
+            :
+            <IconButton className={styles.iconButton} disableRipple onClick={() => { setEditable(true); }}>
+              <EditOutlinedIcon className={styles.editIcon} />
+            </IconButton>
+        }
+
+      </div>
 
       <div className={styles.divider} />
 
-      {
-        React.Children.map(children, child => React.cloneElement(child, { editable: editable }))
-      }
+      <EditableContext.Provider value={editable}>
+        {children}
+      </EditableContext.Provider>
     </Card>
   );
-}
-
-EditableCard.defaultProps = {
-  editable: false
 }
 
 EditableCard.propTypes = {

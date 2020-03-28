@@ -7,7 +7,7 @@ export default () => {
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-            <EditableCard title='EDITABLE CARD' editable={true}>
+            <EditableCard title='EDITABLE CARD' onAccept={(done) => { done() }}>
                 <TextInput id="input-name" label="Name" />
                 <TextInput id="input-name" label="Name" />
             </EditableCard>
