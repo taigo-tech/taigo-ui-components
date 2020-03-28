@@ -26,7 +26,7 @@ const RoundedButton = props => {
     },
     small: {
       height: '40px',
-      fontSize: '16px',
+      fontSize: '15px',
       padding: `0 ${theme.spacing(3)}px`,
     },
     medium: {

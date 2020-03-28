@@ -23,27 +23,29 @@ export const taigoTheme = {
         },
     },
     typography: {
+        htmlFontSize: 16,
+        fontSize: 13,
         fontFamily: 'Ubuntu, sans-serif',
         h1: {
-            fontSize: '3rem',
+            fontSize: 36,
         },
         h2: {
-            fontSize: '2.3rem',
+            fontSize: 28,
         },
         h3: {
-            fontSize: '2rem',
+            fontSize: 24,
         },
         h4: {
-            fontSize: '1.5rem',
+            fontSize: 28,
         },
         h5: {
-            fontSize: '1.4rem',
+            fontSize: 16,
         },
         h6: {
-            fontSize: '1.2rem',
+            fontSize: 14,
         },
     },
-    spacing: 8,
+    spacing: 10,
 }
 
 export default createMuiTheme(taigoTheme);

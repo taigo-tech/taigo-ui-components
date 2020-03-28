@@ -19,10 +19,10 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center',
     },
     wrapper: {
         textAlign: 'center',
+        padding: theme.spacing(2),
     },
     topContent: {
         marginBottom: '40px',

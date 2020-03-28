@@ -6,6 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import SideMenu from '../Drawer';
 import PageHeader from '../PageHeader';
@@ -122,7 +123,7 @@ function AppLayout(props) {
             >
               <MenuIcon />
             </IconButton>
-            <h2 className={classes.pageTitle}>{getPageTitle ? getPageTitle(pageTitle) : pageTitle}</h2>
+            <Typography variant="h2" className={classes.pageTitle}>{getPageTitle ? getPageTitle(pageTitle) : pageTitle}</Typography>
             <div style={{ flexGrow: 1 }} />
             <PageHeader name='John Smith' email='johnsmith@taigo.com.my' style={{ alignSelf: 'flex-end' }} />
           </Toolbar>
