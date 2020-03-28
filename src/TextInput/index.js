@@ -8,16 +8,21 @@ const useStyles = makeStyles(theme => ({
   label: {
     color: theme.palette.grey[900],
     fontWeight: 'bold',
-    fontSize: '14px',
-    marginBottom: theme.spacing(1),
+    fontSize: 12,
+    marginBottom: theme.spacing(0.5),
   },
   error: {
     color: theme.palette.error.main,
   },
   input: {
-    height: '48px',
+    height: '36px',
     padding: '0px 14px',
     color: theme.palette.grey[900],
+    fontSize: 14,
+  },
+  text: {
+    display: 'flex',
+    alignItems: 'center',
   }
 }));
 
@@ -38,9 +43,10 @@ const TextInput = props => {
             InputProps={{ classes: { input: styles.input } }}
             {...inputProps}
             variant="outlined"
+            fullWidth
           />
           :
-          <div className={styles.input} style={{ display: 'flex', alignItems: 'center', fontSize: '16px' }}>
+          <div className={clsx(styles.input, styles.text)}>
             <span>{value}</span>
           </div>
       }
