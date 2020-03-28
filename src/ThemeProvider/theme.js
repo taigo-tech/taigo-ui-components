@@ -1,18 +1,19 @@
 import { createMuiTheme } from '@material-ui/core/styles';
+import colors from '../utils/colors';
 
 export const taigoTheme = {
     palette: {
         primary: {
-            main: '#263675',
+            main: colors.primary,
         },
         secondary: {
-            main: '#4ec9ed',
+            main: colors.cyan,
         },
         error: {
-            main: '#FF4646',
+            main: colors.red,
         },
         success: {
-            main: '#51D32A',
+            main: colors.green,
         },
         grey: {
             300: '#CCCCCC',

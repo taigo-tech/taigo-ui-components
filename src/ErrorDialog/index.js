@@ -1,7 +1,7 @@
 import { useTheme, makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import React from 'react';
-import colors from '../utils/colors.scss';
+import colors from '../utils/colors';
 import Dialog from '../Dialog';
 import WarningIcon from '@material-ui/icons/WarningRounded';
 import CloseIcon from '@material-ui/icons/Close';

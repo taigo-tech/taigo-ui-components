@@ -2,7 +2,7 @@ import MuiDialog from '@material-ui/core/Dialog';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import React from 'react';
 import PropTypes from 'prop-types';
-import colors from '../utils/colors.scss';
+import colors from '../utils/colors';
 
 const Dialog = props => {
   const { children, type, color, ...inputProps } = props;

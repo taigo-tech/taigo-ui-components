@@ -9,7 +9,7 @@ import Menu from '@material-ui/core/Menu';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import _ from 'lodash';
 import ProfileMenuItem from '../ProfileMenuItem';
-import colors from '../utils/colors.scss';
+import colors from '../utils/colors';
 
 const styles = theme => ({
   main: {
