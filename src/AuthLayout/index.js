@@ -25,7 +25,8 @@ const useStyles = makeStyles(theme => ({
         padding: theme.spacing(2),
     },
     topContent: {
-        marginBottom: '40px',
+        maxWidth: '300px',
+        margin: '0 auto 40px',
     },
     logo: {
         maxHeight: '80px',
