@@ -10,6 +10,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import SideMenu from '../Drawer';
+import PageHeader from '../PageHeader';
 import { isBrowser, getFlatMenus } from '../utils/utils';
 
 const useStyles = makeStyles(theme => ({
@@ -71,7 +72,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function AppLayout(props) {
-  const { logo, menuData, drawerWidth = 300, menuItemComponent, onMenuItemClick, footerMenu, children, location, getPageTitle, rightContent } = props;
+  const { logo, menuData, drawerWidth = 300, menuItemComponent, onMenuItemClick, footerMenu, children, location, getPageTitle, rightContent, username, email } = props;
   const classes = useStyles({ drawerWidth });
   const theme = useTheme();
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -141,7 +142,9 @@ function AppLayout(props) {
               </IconButton>
               <Typography variant="h2" className={classes.pageTitle}>{getPageTitle ? getPageTitle(pageTitle) : pageTitle}</Typography>
             </Box>
-            {rightContent}
+            {rightContent || (username && (
+              <PageHeader name={username} email={email} style={{ alignSelf: 'flex-end' }} />
+            ))}
           </Toolbar>
         </AppBar>
         <main className={classes.content}>
@@ -161,6 +164,8 @@ AppLayout.propTypes = {
   onMenuItemClick: PropTypes.func,
   getPageTitle: PropTypes.func,
   rightContent: PropTypes.element,
+  username: PropTypes.string,
+  email: PropTypes.string,
 };
 
 AppLayout.defaultProps = {

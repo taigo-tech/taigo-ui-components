@@ -64,7 +64,7 @@ export default () => {
       ]}
       menuItemComponent={Link}
       location={location}
-      rightContent={<PageHeader name='John Smith' email="john.smith@gmail.com" style={{ alignSelf: 'flex-end' }} />}
+      username="John Smith"
     >
       <Switch>
         <Route path="/global">

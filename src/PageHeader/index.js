@@ -49,7 +49,7 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    margin: `0 ${theme.spacing(2)}px`,
+    margin: `0 ${theme.spacing(1)}px`,
   },
   text_name: {
     color: theme.palette.grey[900],
@@ -189,9 +189,11 @@ class PageHeader extends Component {
                 <div className={classes.text_name}>
                   {name}
                 </div>
-                <div className={classes.text_email}>
-                  Profile Menu
-                </div>
+                {email && (
+                  <div className={classes.text_email}>
+                    {email}
+                  </div>
+                )}
               </div>
             </Hidden>
 
