@@ -34,6 +34,7 @@ const styles = theme => ({
     fontSize: '1em',
   },
   menu_button: {
+    marginLeft: theme.spacing(1),
     borderRadius: '50px',
     '&:hover': {
       backgroundColor: `${colors.lightblue} !important`,
@@ -64,7 +65,6 @@ const styles = theme => ({
   notification_button: {
     color: theme.palette.primary.main,
     backgroundColor: theme.palette.common.white,
-    marginRight: theme.spacing(1),
   },
   notification_button_highlight: {
     color: theme.palette.common.white,
