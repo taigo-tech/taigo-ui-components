@@ -5,91 +5,115 @@ import colors from '../utils/colors';
 import CloseIcon from '@material-ui/icons/Close';
 import CheckIcon from '@material-ui/icons/Check';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
-import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Card from '@material-ui/core/Card';
+import Card from '../Card';
 import EditableContext from '../context/EditableContext';
+import clsx from 'clsx';
+
+const useStyles = makeStyles(theme => ({
+  close: {
+    position: 'absolute',
+    top: `${theme.spacing(1)}px`,
+    right: `${theme.spacing(1)}px`,
+    color: theme.palette.grey[300],
+    padding: 0,
+  },
+  center: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  edit: {
+    color: theme.palette.secondary.main,
+  },
+  cancel: {
+    color: theme.palette.error.main,
+  },
+  accept: {
+    color: theme.palette.success.main,
+  },
+  iconButton: {
+    padding: 0,
+    justifyContent: 'center',
+    "&:hover": {
+      backgroundColor: "transparent"
+    }
+  },
+  card: {
+    color: theme.palette.primary.main,
+    padding: '40px',
+  },
+  title: {
+    fontWeight: 'bold'
+  },
+  row: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  divider: {
+    height: 1,
+    width: '100%',
+    borderBottom: `2px solid ${theme.palette.primary.main}`,
+    margin: '20px 0',
+  },
+  hidden: {
+    visibility: 'hidden'
+  },
+  smallSpacing: {
+    margin: '.1em'
+  },
+  mediumSpacing: {
+    margin: '.5em'
+  }
+}))
 
 const EditableCard = props => {
-  const { onAccept, title, children, ...inputProps } = props;
+  const { onAccept, editIcon, cancelIcon, acceptIcon, editLabel, cancelLabel, acceptLabel, children, ...inputProps } = props;
   const theme = useTheme();
   const [editable, setEditable] = useState(false);
-
-  const useStyles = makeStyles(theme => ({
-    close: {
-      position: 'absolute',
-      top: `${theme.spacing(1)}px`,
-      right: `${theme.spacing(1)}px`,
-      color: theme.palette.grey[300],
-      padding: 0,
-    },
-    editIcon: {
-      color: theme.palette.secondary.main,
-    },
-    closeIcon: {
-      color: theme.palette.error.main,
-    },
-    checkIcon: {
-      color: theme.palette.success.main,
-    },
-    iconButton: {
-      padding: 0,
-      "&:hover": {
-        backgroundColor: "transparent"
-      }
-    },
-    card: {
-      color: theme.palette.primary.main,
-      padding: '40px',
-    },
-    title: {
-      fontWeight: 'bold'
-    },
-    row: {
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-    },
-    divider: {
-      height: 1,
-      width: '100%',
-      borderBottom: `2px solid ${theme.palette.primary.main}`,
-      margin: '20px 0',
-    }
-  }))
 
   const styles = useStyles();
 
   return (
-    <Card {...inputProps} className={styles.card}>
-      <div className={styles.row}>
-        <Typography component="h4" className={styles.title}>
-          {title}
-        </Typography>
+    <Card {...inputProps} className={styles.card}
+      actions={
+        <div className={styles.row}>
+          {
+            <div className={styles.row} style={{ position: 'relative' }}>
+              <div className={clsx(styles.row, editable ? '' : styles.hidden)}>
+                <Button className={styles.iconButton} disableRipple onClick={() => { onAccept && onAccept(() => { setEditable(false) }) }}>
+                  <div className={clsx(styles.center, styles.accept)}>
+                    <CheckIcon />
+                    <div className={styles.smallSpacing} />
+                    <div>{acceptLabel}</div>
+                  </div>
+                </Button>
 
-        <div style={{ flexGrow: 1 }} />
+                <div className={styles.mediumSpacing} />
 
-        {
-          editable ?
-            <div>
-              <IconButton className={styles.iconButton} disableRipple onClick={() => { setEditable(false); }}>
-                <CloseIcon className={styles.closeIcon} />
-              </IconButton>
+                <Button className={styles.iconButton} disableRipple onClick={() => { setEditable(false); }}>
+                  <div className={clsx(styles.center, styles.cancel)} style={{ display: 'flex' }}>
+                    <CloseIcon />
+                    <div className={styles.smallSpacing} />
+                    <div>{cancelLabel}</div>
+                  </div>
+                </Button>
+              </div>
 
-              <IconButton className={styles.iconButton} disableRipple onClick={() => { onAccept && onAccept(() => { setEditable(false) }) }}>
-                <CheckIcon className={styles.checkIcon} />
-              </IconButton>
+              <Button className={clsx(styles.iconButton, !editable ? '' : styles.hidden)} disableRipple onClick={() => { setEditable(true); }} style={{ position: 'absolute', right: 0 }}>
+                <div className={clsx(styles.center, styles.edit)} style={{ display: 'flex' }}>
+                  <EditOutlinedIcon />
+                  <div className={styles.smallSpacing} />
+                  <div>{editLabel}</div>
+                </div>
+              </Button>
             </div>
-            :
-            <IconButton className={styles.iconButton} disableRipple onClick={() => { setEditable(true); }}>
-              <EditOutlinedIcon className={styles.editIcon} />
-            </IconButton>
-        }
-
-      </div>
-
-      <div className={styles.divider} />
-
+          }
+        </div>
+      }>
       <EditableContext.Provider value={editable}>
         {children}
       </EditableContext.Provider>
