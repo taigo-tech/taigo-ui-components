@@ -1,7 +1,7 @@
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import React from 'react';
 import { Link, Route, Switch, useLocation } from 'react-router-dom';
-import { AppLayout, AuthLayout } from 'taigo-ui-components';
+import { AppLayout, AuthLayout, PageHeader } from 'taigo-ui-components';
 import GlobalComponents from './demo-views/GlobalComponents';
 import CardComponents from './demo-views/CardComponents';
 import logo from './assets/taigo_logo_white.png';
@@ -64,6 +64,7 @@ export default () => {
       ]}
       menuItemComponent={Link}
       location={location}
+      rightContent={<PageHeader name='John Smith' email="john.smith@gmail.com" style={{ alignSelf: 'flex-end' }} />}
     >
       <Switch>
         <Route path="/global">

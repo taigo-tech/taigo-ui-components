@@ -15,9 +15,8 @@ const styles = theme => ({
   main: {
     display: 'flex',
     flexDirection: 'row',
-    height: '100px',
     alignItems: 'center',
-    padding: theme.spacing(1),
+    padding: `${theme.spacing(1)}px 0`,
     borderColor: theme.palette.grey[500],
     borderBottom: '1px',
   },
@@ -65,6 +64,7 @@ const styles = theme => ({
   notification_button: {
     color: theme.palette.primary.main,
     backgroundColor: theme.palette.common.white,
+    marginRight: theme.spacing(1),
   },
   notification_button_highlight: {
     color: theme.palette.common.white,
