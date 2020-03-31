@@ -36,6 +36,7 @@ const useStyles = makeStyles(theme => ({
   },
   iconButton: {
     padding: 0,
+    minWidth: 0,
     justifyContent: 'center',
     "&:hover": {
       backgroundColor: "transparent"
