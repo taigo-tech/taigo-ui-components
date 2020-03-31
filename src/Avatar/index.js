@@ -3,13 +3,16 @@ import IconButton from '@material-ui/core/IconButton';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import CloseIcon from '@material-ui/icons/Close';
 import EditIcon from '@material-ui/icons/Edit';
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import colors from '../utils/colors';
 import { Icon } from '@material-ui/core';
 import EditableCard from '../Card';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import clsx from 'clsx';
+import _ from 'lodash';
+import EditableContext from '../context/EditableContext';
+import LoadingContext from '../context/LoadingContext';
 
 const stringToHslColor = (str, s, l) => {
   var hash = 0;
@@ -24,8 +27,7 @@ const stringToHslColor = (str, s, l) => {
 const useStyles = makeStyles(theme => ({
   main: {
     position: 'relative',
-    backgroundColor: ({ color }) => color,
-    borderRadius: '50%'
+    width: '98px',
   },
   avatar: {
     backgroundColor: ({ color }) => color,
@@ -79,15 +81,37 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Avatar = props => {
-  const { isLoading, onDeletePress, onEditPress, editable, children, name, ...inputProps } = props;
+  const contextEditable = useContext(EditableContext);
+  const contextLoading = useContext(LoadingContext);
+
+  var { isLoading, onDeletePress, onEditPress, editable, children, name, ...inputProps } = props;
   const theme = useTheme();
   const color = name ? stringToHslColor(name, 60, 50) : theme.palette.secondary.main;
   const styles = useStyles({ color });
 
+  if (_.isNil(editable)) {
+    editable = false;
+
+    if (!_.isNil(contextEditable)) {
+      editable = contextEditable;
+    }
+  }
+
+  if (_.isNil(isLoading)) {
+    isLoading = false;
+
+    if (!_.isNil(contextLoading)) {
+      isLoading = contextLoading;
+    }
+  }
+
   return (
     <div className={styles.main}>
-      <MuiAvatar alt={name} {...inputProps} className={clsx(styles.avatar, isLoading ? styles.fadeout : styles.fadein)}>
-        {name.substring(0, 2).toUpperCase()}
+      <MuiAvatar alt={name} {...inputProps} className={clsx(styles.avatar)} src={!isLoading && props.src}>
+        {!isLoading && name.substring(0, 2).toUpperCase()}
+        <div className={clsx(styles.load, isLoading ? styles.fadein : styles.fadeout)}>
+          <CircularProgress size={20} className={styles.progress} />
+        </div>
       </MuiAvatar>
       <IconButton onClick={onDeletePress} className={clsx(styles.iconButton, styles.cancel, editable && !isLoading ? styles.fadein : styles.fadeout)}>
         <CloseIcon />
@@ -96,17 +120,11 @@ const Avatar = props => {
       <IconButton onClick={onEditPress} className={clsx(styles.iconButton, styles.edit, editable && !isLoading ? styles.fadein : styles.fadeout)}>
         <EditIcon />
       </IconButton>
-
-      <div className={clsx(styles.load, isLoading ? styles.fadein : styles.fadeout)}>
-        <CircularProgress size={20} className={styles.progress} />
-      </div>
     </div>
   );
 }
 
 Avatar.defaultProps = {
-  editable: false,
-  size: 'large'
 }
 
 Avatar.propTypes = {
