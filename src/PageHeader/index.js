@@ -15,9 +15,8 @@ const styles = theme => ({
   main: {
     display: 'flex',
     flexDirection: 'row',
-    height: '100px',
     alignItems: 'center',
-    padding: theme.spacing(1),
+    padding: `${theme.spacing(1)}px 0`,
     borderColor: theme.palette.grey[500],
     borderBottom: '1px',
   },
@@ -35,6 +34,7 @@ const styles = theme => ({
     fontSize: '1em',
   },
   menu_button: {
+    marginLeft: theme.spacing(1),
     borderRadius: '50px',
     '&:hover': {
       backgroundColor: `${colors.lightblue} !important`,
@@ -50,7 +50,7 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    margin: `0 ${theme.spacing(2)}px`,
+    margin: `0 ${theme.spacing(1)}px`,
   },
   text_name: {
     color: theme.palette.grey[900],
@@ -189,9 +189,11 @@ class PageHeader extends Component {
                 <div className={classes.text_name}>
                   {name}
                 </div>
-                <div className={classes.text_email}>
-                  Profile Menu
-                </div>
+                {email && (
+                  <div className={classes.text_email}>
+                    {email}
+                  </div>
+                )}
               </div>
             </Hidden>
 

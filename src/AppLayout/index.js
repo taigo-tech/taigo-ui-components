@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
 import Hidden from '@material-ui/core/Hidden';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -24,21 +25,36 @@ const useStyles = makeStyles(theme => ({
   },
   menuButton: {
     color: theme.palette.primary.main,
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(1),
     [theme.breakpoints.up('md')]: {
       display: 'none',
     },
   },
   toolbar: {
     width: '100%',
+    height: '100px',
     backgroundColor: theme.palette.common.white,
     display: 'flex',
     flexDirection: 'row',
+    [theme.breakpoints.down('sm')]: {
+      height: 'auto',
+    },
+  },
+  pageInfo: {
+    flexGrow: 1,
+    display: 'flex',
+    alignItems: 'center',
   },
   pageTitle: {
     fontWeight: 'bold',
     color: theme.palette.primary.main,
     margin: 0,
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '18px',
+    },
   },
   content: {
     flexGrow: 1,
@@ -56,7 +72,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function AppLayout(props) {
-  const { logo, menuData, drawerWidth = 300, menuItemComponent, onMenuItemClick, footerMenu, children, location, getPageTitle } = props;
+  const { logo, menuData, drawerWidth = 300, menuItemComponent, onMenuItemClick, footerMenu, children, location, getPageTitle, rightContent, username, email } = props;
   const classes = useStyles({ drawerWidth });
   const theme = useTheme();
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -115,17 +131,20 @@ function AppLayout(props) {
       <div className={classes.contentWithAppbar}>
         <AppBar position="static" className={classes.appBar}>
           <Toolbar className={classes.toolbar}>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerToggle}
-              className={classes.menuButton}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h2" className={classes.pageTitle}>{getPageTitle ? getPageTitle(pageTitle) : pageTitle}</Typography>
-            <div style={{ flexGrow: 1 }} />
-            <PageHeader name='John Smith' email='johnsmith@taigo.com.my' style={{ alignSelf: 'flex-end' }} />
+            <Box className={classes.pageInfo}>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerToggle}
+                className={classes.menuButton}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h2" className={classes.pageTitle}>{getPageTitle ? getPageTitle(pageTitle) : pageTitle}</Typography>
+            </Box>
+            {rightContent || (username && (
+              <PageHeader name={username} email={email} style={{ alignSelf: 'flex-end' }} />
+            ))}
           </Toolbar>
         </AppBar>
         <main className={classes.content}>
@@ -144,6 +163,9 @@ AppLayout.propTypes = {
   menuItemComponent: PropTypes.elementType,
   onMenuItemClick: PropTypes.func,
   getPageTitle: PropTypes.func,
+  rightContent: PropTypes.element,
+  username: PropTypes.string,
+  email: PropTypes.string,
 };
 
 AppLayout.defaultProps = {

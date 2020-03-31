@@ -64,6 +64,7 @@ export default () => {
       ]}
       menuItemComponent={Link}
       location={location}
+      username="John Smith"
     >
       <Switch>
         <Route path="/global">
