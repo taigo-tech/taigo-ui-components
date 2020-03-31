@@ -43,11 +43,11 @@ const useStyles = makeStyles(theme => ({
     }
   },
   card: {
-    color: theme.palette.primary.main,
     padding: '40px',
   },
   title: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    color: theme.palette.primary.main,
   },
   row: {
     display: 'flex',
