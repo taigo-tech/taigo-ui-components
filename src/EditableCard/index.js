@@ -9,6 +9,8 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Card from '../Card';
 import EditableContext from '../context/EditableContext';
+import LoadingContext from '../context/LoadingContext';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import clsx from 'clsx';
 
 const useStyles = makeStyles(theme => ({
@@ -24,6 +26,15 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  load: {
+    position: 'absolute',
+    right: 0,
+    top: '50%',
+    transform: 'translate(-50%, -50%)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   edit: {
     color: theme.palette.secondary.main,
@@ -60,8 +71,15 @@ const useStyles = makeStyles(theme => ({
     borderBottom: `2px solid ${theme.palette.primary.main}`,
     margin: '20px 0',
   },
-  hidden: {
-    visibility: 'hidden'
+  fadeout: {
+    visibility: 'hidden',
+    opacity: 0,
+    transition: 'visibility 0s .1s, opacity .1s linear',
+  },
+  fadein: {
+    visibility: 'visible',
+    opacity: 1,
+    transition: 'opacity .2s .2s linear',
   },
   smallSpacing: {
     margin: '.1em'
@@ -72,7 +90,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const EditableCard = props => {
-  const { onAccept, editIcon, cancelIcon, acceptIcon, editLabel, cancelLabel, acceptLabel, children, ...inputProps } = props;
+  const { onAccept, onCancel, isLoading, editIcon, cancelIcon, acceptIcon, editLabel, cancelLabel, acceptLabel, children, ...inputProps } = props;
   const theme = useTheme();
   const [editable, setEditable] = useState(false);
 
@@ -84,7 +102,7 @@ const EditableCard = props => {
         <div className={styles.row}>
           {
             <div className={styles.row} style={{ position: 'relative' }}>
-              <div className={clsx(styles.row, editable ? '' : styles.hidden)}>
+              <div className={clsx(styles.row, editable && !isLoading ? styles.fadein : styles.fadeout)}>
                 <Button className={styles.iconButton} disableRipple onClick={() => { onAccept && onAccept(() => { setEditable(false) }) }}>
                   <div className={clsx(styles.center, styles.accept)}>
                     <CheckIcon />
@@ -95,7 +113,7 @@ const EditableCard = props => {
 
                 <div className={styles.mediumSpacing} />
 
-                <Button className={styles.iconButton} disableRipple onClick={() => { setEditable(false); }}>
+                <Button className={styles.iconButton} disableRipple onClick={() => { onCancel ? onCancel(() => { setEditable(false) }) : setEditable(false) }}>
                   <div className={clsx(styles.center, styles.cancel)} style={{ display: 'flex' }}>
                     <CloseIcon />
                     <div className={styles.smallSpacing} />
@@ -104,20 +122,26 @@ const EditableCard = props => {
                 </Button>
               </div>
 
-              <Button className={clsx(styles.iconButton, !editable ? '' : styles.hidden)} disableRipple onClick={() => { setEditable(true); }} style={{ position: 'absolute', right: 0 }}>
+              <Button className={clsx(styles.iconButton, !editable && !isLoading ? styles.fadein : styles.fadeout)} disableRipple onClick={() => { setEditable(true); }} style={{ position: 'absolute', right: 0 }}>
                 <div className={clsx(styles.center, styles.edit)} style={{ display: 'flex' }}>
                   <EditOutlinedIcon />
                   <div className={styles.smallSpacing} />
                   <div>{editLabel}</div>
                 </div>
               </Button>
+
+              <div className={clsx(styles.load, isLoading ? styles.fadein : styles.fadeout)}>
+                <CircularProgress size={20} className={styles.progress} />
+              </div>
             </div>
           }
         </div>
       }>
-      <EditableContext.Provider value={editable}>
-        {children}
-      </EditableContext.Provider>
+      <LoadingContext.Provider value={isLoading}>
+        <EditableContext.Provider value={editable}>
+          {children}
+        </EditableContext.Provider>
+      </LoadingContext.Provider>
     </Card>
   );
 }

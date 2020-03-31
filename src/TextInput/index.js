@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import EditableContext from '../context/EditableContext';
+import LoadingContext from '../context/LoadingContext';
 
 const useStyles = makeStyles(theme => ({
   label: {
@@ -39,9 +40,10 @@ const useStyles = makeStyles(theme => ({
 
 const TextInput = props => {
   const contextEditable = useContext(EditableContext);
+  const contextLoading = useContext(LoadingContext);
 
   const { onChange, value, error, label, ...inputProps } = props;
-  var { editable } = props;
+  var { editable, disabled } = props;
   const styles = useStyles();
 
   const [stateValue, setValue] = useState('');
@@ -51,6 +53,14 @@ const TextInput = props => {
 
     if (!_.isNil(contextEditable)) {
       editable = contextEditable;
+    }
+  }
+
+  if (_.isNil(disabled)) {
+    disabled = false;
+
+    if (!_.isNil(contextLoading)) {
+      disabled = contextLoading;
     }
   }
 
@@ -65,6 +75,7 @@ const TextInput = props => {
           value={value ? value : stateValue}
           onChange={onChange ? onChange : (e) => { setValue(e.target.value) }}
           error={error}
+          disabled={disabled}
           InputProps={{ classes: { input: styles.input } }}
           {...inputProps}
           variant="outlined"
