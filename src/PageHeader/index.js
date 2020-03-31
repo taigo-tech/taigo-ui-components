@@ -7,7 +7,8 @@ import Button from '@material-ui/core/Button';
 import Badge from '@material-ui/core/Badge';
 import Menu from '@material-ui/core/Menu';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import _ from 'lodash';
+import map from 'lodash/map';
+import clsx from 'clsx';
 import ProfileMenuItem from '../ProfileMenuItem';
 import colors from '../utils/colors';
 
@@ -67,8 +68,7 @@ const styles = theme => ({
     backgroundColor: theme.palette.common.white,
   },
   notification_button_highlight: {
-    color: theme.palette.common.white,
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.palette.grey[200],
   },
 });
 
@@ -77,8 +77,8 @@ class PageHeader extends Component {
     super(props);
 
     this.state = {
-      notificationAnchorEl: undefined,
-      notificationCount: 0,
+      notificationMenuAnchorEl: null,
+      profileMenuAnchorEl: null,
     }
   }
 
@@ -87,6 +87,7 @@ class PageHeader extends Component {
     email: PropTypes.string,
     profilePic: PropTypes.string,
     profileMenuData: PropTypes.arrayOf(PropTypes.object),
+    notificationCount: PropTypes.number,
   }
 
   handleNotificationMenuOpen = (e) => {
@@ -112,12 +113,12 @@ class PageHeader extends Component {
       email,
       profilePic,
       profileMenuData,
+      notificationCount = 99,
     } = this.props;
 
     const {
       profileMenuAnchorEl,
       notificationMenuAnchorEl,
-      notificationCount
     } = this.state;
 
     const isProfileMenuOpen = Boolean(profileMenuAnchorEl);
@@ -150,7 +151,7 @@ class PageHeader extends Component {
         disableAutoFocusItem={true}
       >
         {
-          _.map(profileMenuData, (data, index) => {
+          map(profileMenuData, (data, index) => {
             const { label, to } = data;
 
             return <ProfileMenuItem key={index} label={label} to={to} handleProfileMenuClose={this.handleProfileMenuClose} />
@@ -163,9 +164,9 @@ class PageHeader extends Component {
       <div className={classes.main}>
         <Hidden smDown implementation="css">
           <IconButton color="inherit" onClick={this.handleNotificationMenuOpen}
-            className={isNotificationMenuOpen ? classes.notification_button_highlight : classes.notification_button}
+            className={clsx(classes.notification_button, { [classes.notification_button_highlight]: isNotificationMenuOpen })}
           >
-            <Badge className="badge" color="secondary" badgeContent={notificationCount > 0 ? notificationCount : ''}>
+            <Badge color="error" badgeContent={notificationCount > 0 ? notificationCount : null}>
               <NotificationsIcon />
             </Badge>
           </IconButton>
