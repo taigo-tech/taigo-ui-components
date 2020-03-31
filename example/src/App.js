@@ -4,6 +4,7 @@ import { Link, Route, Switch, useLocation } from 'react-router-dom';
 import { AppLayout, AuthLayout } from 'taigo-ui-components';
 import GlobalComponents from './demo-views/GlobalComponents';
 import CardComponents from './demo-views/CardComponents';
+import Notification from './demo-views/Notification';
 import logo from './assets/taigo_logo_white.png';
 import logoPurple from './assets/taigo_logo_purple.png';
 import signInBg from './assets/login_bg.jpg';
@@ -31,13 +32,15 @@ export default () => {
       menuData={[
         {
           title: 'Global Components',
-          icon: InboxIcon,
           path: '/global',
         },
         {
           title: 'Card Components',
-          icon: InboxIcon,
           path: '/card',
+        },
+        {
+          title: 'Notification',
+          path: '/notification',
         },
       ]}
       footerMenu={[
@@ -62,11 +65,8 @@ export default () => {
         <Route path="/card">
           <CardComponents />
         </Route>
-        <Route path="/others/trash">
-          <div>Trash</div>
-        </Route>
-        <Route path="/others/Spam">
-          <div>Spam</div>
+        <Route path="/notification">
+          <Notification />
         </Route>
       </Switch>
     </AppLayout>

@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import Badge from '@material-ui/core/Badge';
 import Menu from '@material-ui/core/Menu';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import map from 'lodash/map';
+import _ from 'lodash';
 import clsx from 'clsx';
 import ProfileMenuItem from '../ProfileMenuItem';
 import colors from '../utils/colors';
@@ -113,7 +113,7 @@ class PageHeader extends Component {
       email,
       profilePic,
       profileMenuData,
-      notificationCount = 99,
+      notificationCount,
     } = this.props;
 
     const {
@@ -151,7 +151,7 @@ class PageHeader extends Component {
         disableAutoFocusItem={true}
       >
         {
-          map(profileMenuData, (data, index) => {
+          _.map(profileMenuData, (data, index) => {
             const { label, to } = data;
 
             return <ProfileMenuItem key={index} label={label} to={to} handleProfileMenuClose={this.handleProfileMenuClose} />
