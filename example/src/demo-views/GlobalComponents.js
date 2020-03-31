@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { RoundedButton, TextInput, Checkbox, Dialog, ErrorDialog } from 'taigo-ui-components';
+import { RoundedButton, TextInput, Checkbox, Dialog, ErrorDialog, Avatar } from 'taigo-ui-components';
+import MenuItem from '@material-ui/core/MenuItem';
 import { useTheme } from '@material-ui/core/styles';
 
 export default () => {
@@ -12,6 +13,9 @@ export default () => {
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+            <Avatar name="J" src='https://www.gstatic.com/webp/gallery/4.jpg' editable={isEditable} isLoading={isLoading}
+                onDeletePress={() => { console.log('delete press') }}
+                onEditPress={() => { console.log('edit press') }} />
             <Checkbox onChange={(event) => { setIsLoading(event.target.checked); }} />
 
             <div style={{ margin: '1em' }} />
@@ -44,11 +48,19 @@ export default () => {
 
             <div style={{ margin: '1em' }} />
 
-            <TextInput id="text-input" label="Label" value={inputValue} onChange={(event) => { setInputValue(event.target.value) }} editable={isEditable} />
+            <TextInput multiline rows={4} rowsMax={4} id="text-input" label="Label" value={inputValue} onChange={(event) => { setInputValue(event.target.value) }} editable={isEditable} />
 
             <div style={{ margin: '1em' }} />
 
-            <TextInput id="text-error-input" label="Error" defaultValue="Error" error helperText={"Error sample"} />
+            <TextInput id="text-error-input" label="Error" error helperText={"Error sample"} />
+
+            <div style={{ margin: '1em' }} />
+
+            <TextInput id="text-select-input" label="Select" helperText={"Select sample"} select>
+                <MenuItem value={0}>1</MenuItem>
+                <MenuItem value={1}>2</MenuItem>
+                <MenuItem value={2}>3</MenuItem>
+            </TextInput>
 
             <div style={{ margin: '1em' }} />
 

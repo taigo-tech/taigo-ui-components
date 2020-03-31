@@ -18,8 +18,7 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.error.main,
   },
   input: {
-    height: '36px',
-    padding: '0px 14px',
+    padding: '10px 14px',
     color: theme.palette.grey[900],
     fontSize: 14
   },
@@ -30,11 +29,13 @@ const useStyles = makeStyles(theme => ({
     visibility: 'hidden'
   },
   text: {
-    display: 'flex',
-    alignItems: 'center',
     fontSize: 14,
     position: 'absolute',
-    top: 0
+    top: 0,
+    height: '100%',
+    wordWrap: 'break-word',
+    wordBreak: 'break-all',
+    overflow: 'auto'
   }
 }));
 
@@ -42,8 +43,7 @@ const TextInput = props => {
   const contextEditable = useContext(EditableContext);
   const contextLoading = useContext(LoadingContext);
 
-  const { onChange, value, error, label, ...inputProps } = props;
-  var { editable, disabled } = props;
+  var { editable, disabled, onChange, value, error, label, ...inputProps } = props;
   const styles = useStyles();
 
   const [stateValue, setValue] = useState('');
@@ -84,7 +84,7 @@ const TextInput = props => {
         />
 
         <div className={clsx(styles.input, styles.text, editable && styles.hidden)}>
-          <span>{value ? value : stateValue}</span>
+          {value ? value : stateValue}
         </div>
       </div>
     </div >
