@@ -39,21 +39,6 @@ export default () => {
           icon: InboxIcon,
           path: '/card',
         },
-        {
-          title: 'Others',
-          path: '/others',
-          routes: [
-            {
-              title: 'Trash',
-              path: '/others/trash',
-            },
-            {
-              title: 'Spam',
-              icon: InboxIcon,
-              path: '/others/spam',
-            }
-          ]
-        },
       ]}
       footerMenu={[
         {
