@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.background.paper,
     },
     loading: {
-        minWidth: 200,
+        padding: theme.spacing(2),
         textAlign: 'center',
     },
     listWrapper: {
@@ -77,6 +77,9 @@ const NotificationPopup = ({ linkComponent: Link, initialCount = 0, retrieveQuer
             
             <Menu
                 anchorEl={anchorEl}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                transformOrigin={{ vertical: -20, horizontal: 'right' }}
+                getContentAnchorEl={null}
                 open={!!anchorEl}
                 onClose={() => setAnchorEl(null)}
                 classes={{ list: classes.menu }}
