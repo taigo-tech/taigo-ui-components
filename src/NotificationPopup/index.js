@@ -90,7 +90,7 @@ const NotificationPopup = ({ linkComponent: Link, initialCount = 0, retrieveQuer
                         <Box className={classes.loading}><CircularProgress size={20} /></Box>
                     )}
                     <Box className={classes.listWrapper}>
-                        <NotificationList items={items} listItemComponent={Link} />
+                        <NotificationList items={items} listItemComponent={Link} onItemClick={() => setAnchorEl(null)} />
                     </Box>
                     {!loading && (
                         <Box className={classes.viewAll} component={viewAllComponent} onClick={() => setAnchorEl(null)}>

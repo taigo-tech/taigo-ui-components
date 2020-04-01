@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const NotificationList = ({ items = [], listItemComponent: Link }) => {
+const NotificationList = ({ items = [], listItemComponent: Link, onItemClick }) => {
     const classes = useStyles();
 
     const itemComponent = path => Link && forwardRef((props, ref) => <Link to={path} {...props} ref={ref} />);
@@ -42,7 +42,10 @@ const NotificationList = ({ items = [], listItemComponent: Link }) => {
                     component={itemComponent(item.path)}
                     divider={i < items.length - 1}
                     className={clsx({ [classes.notRead]: !item.isRead }) }
-                    onClick={item.onClick}
+                    onClick={() => {
+                        if (onItemClick) onItemClick();
+                        if (typeof item.onClick === 'function') item.onClick();
+                    }}
                 >
                     {item.icon && (
                         <ListItemIcon>
@@ -72,6 +75,7 @@ const NotificationList = ({ items = [], listItemComponent: Link }) => {
 NotificationList.propTypes = {
     items: PropTypes.array,
     listItemComponent: PropTypes.elementType,
+    onItemClick: PropTypes.func,
 }
 
 export default NotificationList;
