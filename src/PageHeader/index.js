@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
 import Hidden from '@material-ui/core/Hidden';
 import Button from '@material-ui/core/Button';
-import Badge from '@material-ui/core/Badge';
 import Menu from '@material-ui/core/Menu';
-import NotificationsIcon from '@material-ui/icons/Notifications';
+import Box from '@material-ui/core/Box';
 import _ from 'lodash';
 import ProfileMenuItem from '../ProfileMenuItem';
 import colors from '../utils/colors';
@@ -62,14 +60,6 @@ const styles = theme => ({
   menu: {
     padding: theme.spacing(1),
   },
-  notification_button: {
-    color: theme.palette.primary.main,
-    backgroundColor: theme.palette.common.white,
-  },
-  notification_button_highlight: {
-    color: theme.palette.common.white,
-    backgroundColor: theme.palette.primary.main,
-  },
 });
 
 class PageHeader extends Component {
@@ -77,8 +67,7 @@ class PageHeader extends Component {
     super(props);
 
     this.state = {
-      notificationAnchorEl: undefined,
-      notificationCount: 0,
+      profileMenuAnchorEl: null,
     }
   }
 
@@ -87,14 +76,7 @@ class PageHeader extends Component {
     email: PropTypes.string,
     profilePic: PropTypes.string,
     profileMenuData: PropTypes.arrayOf(PropTypes.object),
-  }
-
-  handleNotificationMenuOpen = (e) => {
-    this.setState({ notificationMenuAnchorEl: e.currentTarget });
-  }
-
-  handleNotificationMenuClose = () => {
-    this.setState({ notificationMenuAnchorEl: null });
+    extraNavigations: PropTypes.array,
   }
 
   handleProfileMenuOpen = (e) => {
@@ -112,31 +94,14 @@ class PageHeader extends Component {
       email,
       profilePic,
       profileMenuData,
+      extraNavigations,
     } = this.props;
 
     const {
       profileMenuAnchorEl,
-      notificationMenuAnchorEl,
-      notificationCount
     } = this.state;
 
     const isProfileMenuOpen = Boolean(profileMenuAnchorEl);
-    const isNotificationMenuOpen = Boolean(notificationMenuAnchorEl);
-
-    const renderNotificationMenu = (children) => {
-      return <Menu
-        anchorEl={notificationMenuAnchorEl}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'left' }}
-        getContentAnchorEl={null}
-        open={isNotificationMenuOpen}
-        onClose={this.handleNotificationMenuClose}
-        className={classes.menu}
-        disableAutoFocusItem={true}
-      >
-        {children}
-      </Menu>
-    }
 
     const renderProfileMenu = () => {
       return <Menu
@@ -162,15 +127,8 @@ class PageHeader extends Component {
     return (
       <div className={classes.main}>
         <Hidden smDown implementation="css">
-          <IconButton color="inherit" onClick={this.handleNotificationMenuOpen}
-            className={isNotificationMenuOpen ? classes.notification_button_highlight : classes.notification_button}
-          >
-            <Badge className="badge" color="secondary" badgeContent={notificationCount > 0 ? notificationCount : ''}>
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
+          {extraNavigations.map((nav, i) => <Box component="span" key={i}>{nav}</Box>)}
         </Hidden>
-
         <Button color="inherit" onClick={this.handleProfileMenuOpen} className={classes.menu_button}>
           <div className={classes.button_inner}>
             <div className={classes.avatar_container}>
@@ -201,7 +159,6 @@ class PageHeader extends Component {
         </Button>
 
         {renderProfileMenu()}
-        {renderNotificationMenu()}
       </div>
     )
   }

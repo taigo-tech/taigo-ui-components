@@ -143,7 +143,7 @@ function AppLayout(props) {
               <Typography variant="h2" className={classes.pageTitle}>{getPageTitle ? getPageTitle(pageTitle) : pageTitle}</Typography>
             </Box>
             {rightContent || (username && (
-              <PageHeader name={username} email={email} style={{ alignSelf: 'flex-end' }} />
+              <PageHeader name={username} email={email} />
             ))}
           </Toolbar>
         </AppBar>
