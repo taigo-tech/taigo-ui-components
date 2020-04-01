@@ -5,6 +5,8 @@ import Box from '@material-ui/core/Box';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Typography from '@material-ui/core/Typography';
+import colors from '../utils/colors';
+import clsx from 'clsx';
 
 const useStyles = makeStyles((theme) => ({
     title: {
@@ -20,7 +22,9 @@ const useStyles = makeStyles((theme) => ({
     },
     datetime: {
         color: theme.palette.text.secondary,
-
+    },
+    notRead: {
+        backgroundColor: colors.lightblue,
     }
 }));
 
@@ -32,7 +36,14 @@ const NotificationList = ({ items = [], listItemComponent: Link }) => {
     return (
         <List disablePadding>
             {items.map((item, i) => (
-                <ListItem key={item.id} button={!!item.path} component={itemComponent(item.path)} divider={i < items.length - 1}>
+                <ListItem
+                    key={item.id}
+                    button={!!item.path}
+                    component={itemComponent(item.path)}
+                    divider={i < items.length - 1}
+                    className={clsx({ [classes.notRead]: !item.isRead }) }
+                    onClick={item.onClick}
+                >
                     {item.icon && (
                         <ListItemIcon>
                             {item.icon}

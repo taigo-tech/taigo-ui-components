@@ -9,7 +9,9 @@ const exampleData = [
         title: 'Upload Documents',
         ref: 'CONTAINER NO. 1585714816080',
         subtitle: 'is now active. \nPlease update the e-Gate Pass and other relevant documents.',
+        isRead: false,
         createdAt: '01/04/2020 12:28:52',
+        onClick: () => console.log('update isRead'),
     },
     {
         id: 'CON2',
@@ -17,6 +19,7 @@ const exampleData = [
         title: 'Make Payment',
         ref: 'CONTAINER NO. 3212333212332',
         subtitle: 'has been accepted. Please make payment(s) right away.',
+        isRead: false,
         createdAt: '01/04/2020 12:28:52',
     },
     {
@@ -25,6 +28,7 @@ const exampleData = [
         title: 'Make Payment',
         ref: 'CONTAINER NO. 3123323360801',
         subtitle: 'has been accepted. Please make payment(s) right away.',
+        isRead: true,
         createdAt: '01/04/2020 12:28:52',
     },
     {
@@ -33,6 +37,7 @@ const exampleData = [
         title: 'Upload Documents',
         ref: 'CONTAINER NO. 9238848233311',
         subtitle: 'is now active. Please update the e-Gate Pass and other relevant documents.',
+        isRead: true,
         createdAt: '01/04/2020 12:28:52',
     },
     {
@@ -41,6 +46,7 @@ const exampleData = [
         title: 'Upload Documents',
         ref: 'CONTAINER NO. 2387723766534',
         subtitle: 'is now active. Please update the e-Gate Pass and other relevant documents.',
+        isRead: true,
         createdAt: '01/04/2020 12:28:52',
     },
     {
@@ -49,6 +55,7 @@ const exampleData = [
         title: 'Upload Documents',
         ref: 'CONTAINER NO. 7028466623773',
         subtitle: 'is now active. Please update the e-Gate Pass and other relevant documents.',
+        isRead: true,
         createdAt: '01/04/2020 12:28:52',
     },
 ];
