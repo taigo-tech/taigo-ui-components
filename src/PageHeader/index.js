@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Hidden from '@material-ui/core/Hidden';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
+import Box from '@material-ui/core/Box';
 import _ from 'lodash';
 import ProfileMenuItem from '../ProfileMenuItem';
 import colors from '../utils/colors';
@@ -75,7 +76,7 @@ class PageHeader extends Component {
     email: PropTypes.string,
     profilePic: PropTypes.string,
     profileMenuData: PropTypes.arrayOf(PropTypes.object),
-    notificationCount: PropTypes.number,
+    extraNavigations: PropTypes.array,
   }
 
   handleProfileMenuOpen = (e) => {
@@ -93,6 +94,7 @@ class PageHeader extends Component {
       email,
       profilePic,
       profileMenuData,
+      extraNavigations,
     } = this.props;
 
     const {
@@ -125,9 +127,8 @@ class PageHeader extends Component {
     return (
       <div className={classes.main}>
         <Hidden smDown implementation="css">
-
+          {extraNavigations.map((nav, i) => <Box component="span" key={i}>{nav}</Box>)}
         </Hidden>
-
         <Button color="inherit" onClick={this.handleProfileMenuOpen} className={classes.menu_button}>
           <div className={classes.button_inner}>
             <div className={classes.avatar_container}>

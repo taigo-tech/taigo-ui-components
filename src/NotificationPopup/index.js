@@ -90,7 +90,7 @@ const NotificationPopup = ({ linkComponent: Link, initialCount = 0, retrieveQuer
                         <NotificationList items={items} listItemComponent={Link} />
                     </Box>
                     {!loading && (
-                        <Box className={classes.viewAll} component={viewAllComponent}>
+                        <Box className={classes.viewAll} component={viewAllComponent} onClick={() => setAnchorEl(null)}>
                             <MenuIcon />
                         </Box>
                     )}

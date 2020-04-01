@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { NotificationList, NotificationPopup } from 'taigo-ui-components';
+import { NotificationList } from 'taigo-ui-components';
 
-const data = [
+const exampleData = [
     {
         id: 'CON1',
         path: '/global',
@@ -53,18 +53,20 @@ const data = [
     },
 ];
 
+export const getExampleNotifications = () => {
+    return new Promise((resolve) => setTimeout(() => resolve({ items: exampleData, count: 2 }), 3000));
+}
+
 export default () => {
-    const loadNotifications = () => {
-        return new Promise((resolve) => setTimeout(() => resolve({ items: data, count: 2 }), 3000));
-    }
+    
 
     return (
         <Fragment>
             <div style={{ marginBottom: 48 }}>
-                <NotificationList items={data} listItemComponent={Link} />
+                <NotificationList items={exampleData} listItemComponent={Link} />
             </div>
             <div style={{ marginBottom: 48 }}>
-                <NotificationPopup retrieveQuery={loadNotifications} linkComponent={Link} viewAllPath="/global" />
+                
             </div>
         </Fragment>
     );
