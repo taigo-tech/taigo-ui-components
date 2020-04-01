@@ -19,8 +19,9 @@ const useStyles = makeStyles(theme => ({
   },
   input: {
     padding: '10px 14px',
+    height: '100%',
     color: theme.palette.grey[900],
-    fontSize: 14
+    fontSize: 14,
   },
   visible: {
     visibility: 'visible'
@@ -29,13 +30,20 @@ const useStyles = makeStyles(theme => ({
     visibility: 'hidden'
   },
   text: {
-    fontSize: 14,
     position: 'absolute',
     top: 0,
     height: '100%',
+    width: '100%',
     wordWrap: 'break-word',
-    wordBreak: 'break-all',
-    overflow: 'auto'
+    wordBreak: ({ multiline }) => multiline ? 'break-all' : 'unset',
+    overflowY: ({ multiline }) => multiline ? 'auto' : 'hidden',
+    overflowX: ({ multiline }) => !multiline ? 'auto' : 'hidden',
+    display: 'flex',
+    alignItems: ({ multiline }) => multiline ? 'flex-start' : 'center'
+  },
+  inputMultiline: {
+    padding: 0,
+    lineHeight: 1.43
   }
 }));
 
@@ -44,7 +52,7 @@ const TextInput = props => {
   const contextLoading = useContext(LoadingContext);
 
   var { editable, disabled, onChange, value, error, label, ...inputProps } = props;
-  const styles = useStyles();
+  const styles = useStyles({ multiline: props.multiline });
 
   const [stateValue, setValue] = useState('');
 
@@ -76,7 +84,7 @@ const TextInput = props => {
           onChange={onChange ? onChange : (e) => { setValue(e.target.value) }}
           error={error}
           disabled={disabled}
-          InputProps={{ classes: { input: styles.input } }}
+          InputProps={{ classes: { input: styles.input, multiline: styles.inputMultiline } }}
           {...inputProps}
           variant="outlined"
           className={!editable ? styles.hidden : ''}
