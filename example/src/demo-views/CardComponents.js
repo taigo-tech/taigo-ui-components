@@ -9,7 +9,7 @@ export default () => {
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
             <EditableCard title='EDITABLE CARD' onAccept={(done) => { done() }} editLabel='Edit' cancelLabel='Cancel' acceptLabel='label'>
                 <div>
-                    <Avatar name="J" src='https://www.gstatic.com/webp/gallery/4.jpg'
+                    <Avatar src='https://www.gstatic.com/webp/gallery/4.jpg'
                         onDeletePress={() => { console.log('delete press') }}
                         onEditPress={() => { console.log('edit press') }} />
                 </div>
