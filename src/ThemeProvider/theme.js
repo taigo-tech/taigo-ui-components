@@ -36,13 +36,13 @@ export const taigoTheme = {
             fontSize: 24,
         },
         h4: {
-            fontSize: 28,
+            fontSize: 18,
         },
         h5: {
-            fontSize: 16,
+            fontSize: 15,
         },
         h6: {
-            fontSize: 14,
+            fontSize: 13,
         },
     },
     spacing: 10,

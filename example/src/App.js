@@ -1,15 +1,21 @@
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import React from 'react';
 import { Link, Route, Switch, useLocation } from 'react-router-dom';
-import { AppLayout, AuthLayout } from 'taigo-ui-components';
+import { AppLayout, AuthLayout, PageHeader, NotificationPopup } from 'taigo-ui-components';
 import GlobalComponents from './demo-views/GlobalComponents';
 import CardComponents from './demo-views/CardComponents';
+import Notification from './demo-views/Notification';
+import { getExampleNotifications } from './demo-views/Notification';
 import logo from './assets/taigo_logo_white.png';
 import logoPurple from './assets/taigo_logo_purple.png';
 import signInBg from './assets/login_bg.jpg';
 
 export default () => {
   const location = useLocation();
+
+  const notificationPopup = <NotificationPopup retrieveQuery={getExampleNotifications} linkComponent={Link} viewAllPath="/notification" />;
+
+  const pageHeader = <PageHeader name="John Smith" extraNavigations={[notificationPopup]} />;
 
   if (location.pathname === '/signIn') {
     return (
@@ -31,13 +37,15 @@ export default () => {
       menuData={[
         {
           title: 'Global Components',
-          icon: InboxIcon,
           path: '/global',
         },
         {
           title: 'Card Components',
-          icon: InboxIcon,
           path: '/card',
+        },
+        {
+          title: 'Notification',
+          path: '/notification',
         },
       ]}
       footerMenu={[
@@ -49,7 +57,7 @@ export default () => {
       ]}
       menuItemComponent={Link}
       location={location}
-      username="John Smith"
+      rightContent={pageHeader}
     >
       <Switch>
         <Route path="/global">
@@ -62,11 +70,8 @@ export default () => {
         <Route path="/card">
           <CardComponents />
         </Route>
-        <Route path="/others/trash">
-          <div>Trash</div>
-        </Route>
-        <Route path="/others/Spam">
-          <div>Spam</div>
+        <Route path="/notification">
+          <Notification />
         </Route>
       </Switch>
     </AppLayout>
