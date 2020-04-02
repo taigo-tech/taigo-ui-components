@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { RoundedButton, TextInput, Checkbox, Dialog, ErrorDialog, Avatar } from 'taigo-ui-components';
+import { RoundedButton, TextInput, Checkbox, ConfirmDialog, ErrorDialog, Avatar } from 'taigo-ui-components';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useTheme } from '@material-ui/core/styles';
 
@@ -78,9 +78,11 @@ export default () => {
                 Open Confirmation Dialog
             </RoundedButton>
 
-            <Dialog type="confirm" open={isConfirmDialogOpen} onClose={() => { setConfirmDialogOpen(false) }}>
+            <ConfirmDialog open={isConfirmDialogOpen} onClose={() => { setConfirmDialogOpen(false) }}
+                onCancel={() => { setConfirmDialogOpen(false); }}
+                onConfirm={() => { setConfirmDialogOpen(false); console.log("confirmed"); }}>
                 Confirmation Dialog
-            </Dialog>
+            </ConfirmDialog>
         </div>
     )
 }

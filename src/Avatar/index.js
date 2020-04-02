@@ -107,7 +107,7 @@ const Avatar = props => {
 
   return (
     <div className={styles.main}>
-      <MuiAvatar alt={name} {...inputProps} className={clsx(styles.avatar)} src={!isLoading && props.src}>
+      <MuiAvatar alt={name} {...inputProps} className={clsx(styles.avatar)} src={!isLoading ? props.src : ''}>
         {(!isLoading && name) && name.substring(0, 2).toUpperCase()}
         <div className={clsx(styles.load, isLoading ? styles.fadein : styles.fadeout)}>
           <CircularProgress size={20} className={styles.progress} />

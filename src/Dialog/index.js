@@ -6,7 +6,7 @@ import colors from '../utils/colors';
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    border: ({ color, type }) => `2px solid ${color ? color : (type === 'confirm' ? theme.palette.success.main : theme.palette.error.main)}`,
+    border: ({ color }) => `2px solid ${color}`,
     padding: '40px',
     backgroundColor: colors.lightblue,
   }
@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
 
 const Dialog = props => {
   const { children, type, color, ...inputProps } = props;
-  const styles = useStyles({ color, type });
+  const styles = useStyles({ color });
 
   return (
     <MuiDialog {...inputProps} PaperProps={{ classes: { root: styles.paper } }}>
@@ -24,11 +24,9 @@ const Dialog = props => {
 }
 
 Dialog.defaultProps = {
-  type: 'confirm'
 }
 
 Dialog.propTypes = {
-  type: PropTypes.oneOf(['alert', 'confirm'])
 };
 
 export default Dialog;

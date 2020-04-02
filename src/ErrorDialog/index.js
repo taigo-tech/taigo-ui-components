@@ -8,8 +8,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 
 const ErrorDialog = props => {
-  const { children, type, color, ...inputProps } = props;
-  const theme = useTheme();
+  const { children, type, color, ...inputProps } = props;  
 
   const useStyles = makeStyles(theme => ({
     close: {
@@ -33,9 +32,10 @@ const ErrorDialog = props => {
   }))
 
   const styles = useStyles();
+  const theme = useTheme();
 
   return (
-    <Dialog {...inputProps} type="alert">
+    <Dialog {...inputProps} color={theme.palette.error.main}>
       <IconButton className={styles.close} onClick={inputProps.onClose}>
         <CloseIcon />
       </IconButton>

@@ -9,9 +9,10 @@ import clsx from 'clsx';
 const RoundedButton = props => {
   const { isLoading, size, text, color, children, ...buttonProps } = props;
   const theme = useTheme();
-  
+
   const useStyles = makeStyles(theme => ({
     root: {
+      textTransform: 'none',
       borderRadius: '500px',
       fontWeight: 'bold',
     },
@@ -49,7 +50,7 @@ const RoundedButton = props => {
       opacity: 1,
       transition: 'opacity .5s linear',
     },
-    text: {
+    text: {      
       color: color || theme.palette.secondary.main,
       '&:hover': {
         backgroundColor: color || theme.palette.secondary.main,

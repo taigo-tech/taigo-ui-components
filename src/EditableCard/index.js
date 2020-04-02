@@ -103,21 +103,21 @@ const EditableCard = props => {
           {
             <div className={styles.row} style={{ position: 'relative' }}>
               <div className={clsx(styles.row, editable && !isLoading ? styles.fadein : styles.fadeout)}>
-                <Button className={styles.iconButton} disableRipple onClick={() => { onAccept && onAccept(() => { setEditable(false) }) }}>
-                  <div className={clsx(styles.center, styles.accept)}>
-                    <CheckIcon />
-                    <div className={styles.smallSpacing} />
-                    <div>{acceptLabel}</div>
-                  </div>
-                </Button>
-
-                <div className={styles.mediumSpacing} />
-
                 <Button className={styles.iconButton} disableRipple onClick={() => { onCancel ? onCancel(() => { setEditable(false) }) : setEditable(false) }}>
                   <div className={clsx(styles.center, styles.cancel)} style={{ display: 'flex' }}>
                     <CloseIcon />
                     <div className={styles.smallSpacing} />
                     <div>{cancelLabel}</div>
+                  </div>
+                </Button>
+
+                <div className={styles.mediumSpacing} />
+
+                <Button className={styles.iconButton} disableRipple onClick={() => { onAccept && onAccept(() => { setEditable(false) }) }}>
+                  <div className={clsx(styles.center, styles.accept)}>
+                    <CheckIcon />
+                    <div className={styles.smallSpacing} />
+                    <div>{acceptLabel}</div>
                   </div>
                 </Button>
               </div>
