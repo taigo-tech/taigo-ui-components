@@ -58,7 +58,7 @@ const TextInput = props => {
   var selectText = '';
 
   if (inputProps.select) {
-    if (inputProps.children) {
+    if (_.isArray(inputProps.children)) {
       const selectChildren = inputProps.children;
       const selected = _.find(selectChildren, (c) => { return c.props.value === stateValue });
 
