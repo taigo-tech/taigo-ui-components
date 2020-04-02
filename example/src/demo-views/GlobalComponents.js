@@ -56,7 +56,7 @@ export default () => {
 
             <div style={{ margin: '1em' }} />
 
-            <TextInput id="text-select-input" label="Select" helperText={"Select sample"} select>
+            <TextInput id="text-select-input" label="Select" helperText={"Select sample"} select editable={isEditable} value={0}>
                 <MenuItem value={0}>1</MenuItem>
                 <MenuItem value={1}>2</MenuItem>
                 <MenuItem value={2}>3</MenuItem>

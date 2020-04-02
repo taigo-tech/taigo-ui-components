@@ -54,7 +54,19 @@ const TextInput = props => {
   var { editable, disabled, onChange, value, error, label, ...inputProps } = props;
   const styles = useStyles({ multiline: props.multiline });
 
-  const [stateValue, setValue] = useState('');
+  const [stateValue, setValue] = useState(_.isNil(value) ? '' : value);
+  var selectText = '';
+
+  if (inputProps.select) {
+    if (inputProps.children) {
+      const selectChildren = inputProps.children;
+      const selected = _.find(selectChildren, (c) => { return c.props.value === stateValue });
+
+      if (selected) {
+        selectText = selected.props.children;
+      }
+    }
+  }
 
   if (_.isNil(editable)) {
     editable = true;
@@ -81,7 +93,9 @@ const TextInput = props => {
       <div style={{ position: 'relative' }}>
         <TextField
           value={value ? value : stateValue}
-          onChange={onChange ? onChange : (e) => { setValue(e.target.value) }}
+          onChange={onChange ? onChange : (e) => {
+            setValue(e.target.value);
+          }}
           error={error}
           disabled={disabled}
           InputProps={{ classes: { input: styles.input, multiline: styles.inputMultiline } }}
@@ -92,7 +106,7 @@ const TextInput = props => {
         />
 
         <div className={clsx(styles.input, styles.text, editable && styles.hidden)}>
-          {value ? value : stateValue}
+          {inputProps.select ? selectText : value}
         </div>
       </div>
     </div >

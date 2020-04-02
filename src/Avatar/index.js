@@ -2,7 +2,7 @@ import MuiAvatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import CloseIcon from '@material-ui/icons/Close';
-import EditIcon from '@material-ui/icons/Edit';
+import EditIcon from '@material-ui/icons/CropOriginal';
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import colors from '../utils/colors';
@@ -35,25 +35,28 @@ const useStyles = makeStyles(theme => ({
     width: '98px',
   },
   edit: {
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.grey[300],
+    color: theme.palette.secondary.main,
     bottom: 0,
     right: 0,
     '&:hover': {
-      backgroundColor: theme.palette.secondary.main
+      backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.grey[300],
     }
   },
   cancel: {
-    backgroundColor: theme.palette.error.main,
+    backgroundColor: theme.palette.grey[300],
+    color: theme.palette.error.main,
     top: 0,
-    right: 0,
+    left: 0,
     '&:hover': {
-      backgroundColor: theme.palette.error.main
+      backgroundColor: theme.palette.error.main,
+      color: theme.palette.grey[300],
     }
   },
   iconButton: {
     padding: 5,
     position: 'absolute',
-    color: theme.palette.common.white,
     border: '1px solid white'
   },
   fadeout: {

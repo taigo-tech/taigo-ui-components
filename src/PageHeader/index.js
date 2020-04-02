@@ -127,7 +127,7 @@ class PageHeader extends Component {
     return (
       <div className={classes.main}>
         <Hidden smDown implementation="css">
-          {extraNavigations.map((nav, i) => <Box component="span" key={i}>{nav}</Box>)}
+          {extraNavigations && extraNavigations.map((nav, i) => <Box component="span" key={i}>{nav}</Box>)}
         </Hidden>
         <Button color="inherit" onClick={this.handleProfileMenuOpen} className={classes.menu_button}>
           <div className={classes.button_inner}>
