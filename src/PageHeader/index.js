@@ -93,8 +93,8 @@ class PageHeader extends Component {
       name,
       email,
       profilePic,
-      profileMenuData,
-      extraNavigations,
+      profileMenuData = [],
+      extraNavigations = [],
     } = this.props;
 
     const {
