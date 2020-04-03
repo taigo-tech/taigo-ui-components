@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import clsx from 'clsx';
-import PropTypes from 'prop-types';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
+import React, { useContext, useState } from 'react';
 import EditableContext from '../context/EditableContext';
 import LoadingContext from '../context/LoadingContext';
 
@@ -54,19 +54,21 @@ const TextInput = props => {
   var { editable, disabled, onChange, value, error, label, ...inputProps } = props;
   const styles = useStyles({ multiline: props.multiline });
 
-  const [stateValue, setValue] = useState(_.isNil(value) ? '' : value);
-  var selectText = '';
+  const getSelectText = (value) => {
+    if (inputProps.select) {
+      if (_.isArray(inputProps.children)) {
+        const selectChildren = inputProps.children;
+        const selected = _.find(selectChildren, (c) => { return c.props.value === value });
 
-  if (inputProps.select) {
-    if (_.isArray(inputProps.children)) {
-      const selectChildren = inputProps.children;
-      const selected = _.find(selectChildren, (c) => { return c.props.value === stateValue });
-
-      if (selected) {
-        selectText = selected.props.children;
+        if (selected && selected.props) {
+          return selected.props.children;
+        }
       }
     }
+    return '';
   }
+
+  const [stateValue, setStateValue] = useState(value);
 
   if (_.isNil(editable)) {
     editable = true;
@@ -92,9 +94,9 @@ const TextInput = props => {
 
       <div style={{ position: 'relative' }}>
         <TextField
-          value={value ? value : stateValue}
+          value={inputProps.select ? stateValue : value}
           onChange={onChange ? onChange : (e) => {
-            setValue(e.target.value);
+            setStateValue(e.target.value);
           }}
           error={error}
           disabled={disabled}
@@ -106,7 +108,7 @@ const TextInput = props => {
         />
 
         <div className={clsx(styles.input, styles.text, editable && styles.hidden)}>
-          {inputProps.select ? selectText : value}
+          {inputProps.select ? getSelectText(stateValue) : value}
         </div>
       </div>
     </div >
