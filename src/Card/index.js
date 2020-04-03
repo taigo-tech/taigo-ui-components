@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 
 const useStyles = makeStyles(theme => ({
-  card: {    
+  card: {
     padding: '40px',
   },
   title: {
@@ -27,9 +27,9 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const EditableCard = props => {
-  const { onAccept, title, children, actions, ...inputProps } = props;
+  const { onAccept, title, children, actions, hideActions = false, ...inputProps } = props;
   const theme = useTheme();
-  const [editable, setEditable] = useState(false);  
+  const [editable, setEditable] = useState(false);
 
   const styles = useStyles();
 
@@ -42,7 +42,7 @@ const EditableCard = props => {
 
         <div style={{ flexGrow: 1 }} />
 
-        {actions && <div style={{ marginLeft: '2em' }}>
+        {(actions && !hideActions) && <div style={{ marginLeft: '2em' }}>
           {actions}
         </div>}
       </div>
