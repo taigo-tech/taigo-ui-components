@@ -4,6 +4,7 @@ import { Link, Route, Switch, useLocation } from 'react-router-dom';
 import { AppLayout, AuthLayout, PageHeader, NotificationPopup } from 'taigo-ui-components';
 import GlobalComponents from './demo-views/GlobalComponents';
 import CardComponents from './demo-views/CardComponents';
+import FormikExample from './demo-views/FormikExample';
 import Notification from './demo-views/Notification';
 import { getExampleNotifications } from './demo-views/Notification';
 import logo from './assets/taigo_logo_white.png';
@@ -44,6 +45,10 @@ export default () => {
           path: '/card',
         },
         {
+          title: 'Formik Use Example',
+          path: '/formik',
+        },
+        {
           title: 'Notification',
           path: '/notification',
         },
@@ -70,6 +75,11 @@ export default () => {
         <Route path="/card">
           <CardComponents />
         </Route>
+
+        <Route path="/formik">
+          <FormikExample />
+        </Route>
+
         <Route path="/notification">
           <Notification />
         </Route>

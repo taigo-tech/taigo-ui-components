@@ -10,6 +10,7 @@ export default () => {
     const [isErrorDialogOpen, setErrorDialogOpen] = useState(false);
     const [isEditable, setEditable] = useState(false);
     const [inputValue, setInputValue] = useState('Value');
+    const [selectValue, setSelectValue] = useState(0);
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
@@ -56,7 +57,8 @@ export default () => {
 
             <div style={{ margin: '1em' }} />
 
-            <TextInput id="text-select-input" label="Select" helperText={"Select sample"} select editable={isEditable} value={0}>
+            <TextInput id="text-select-input" label="Select" helperText={"Select sample"} select editable={isEditable} value={selectValue}
+                onChange={(e) => { setSelectValue(e.target.value) }}>
                 <MenuItem value={0}>1</MenuItem>
                 <MenuItem value={1}>2</MenuItem>
                 <MenuItem value={2}>3</MenuItem>
@@ -70,6 +72,7 @@ export default () => {
 
             <ErrorDialog open={isErrorDialogOpen} onClose={() => { setErrorDialogOpen(false) }}>
                 Error Dialog
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
             </ErrorDialog>
 
             <div style={{ margin: '1em' }} />

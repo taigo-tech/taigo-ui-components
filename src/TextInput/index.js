@@ -3,7 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import clsx from 'clsx';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import EditableContext from '../context/EditableContext';
 import LoadingContext from '../context/LoadingContext';
 
@@ -51,7 +51,7 @@ const TextInput = props => {
   const contextEditable = useContext(EditableContext);
   const contextLoading = useContext(LoadingContext);
 
-  var { editable, disabled, onChange, value, error, label, ...inputProps } = props;
+  var { editable, disabled, error, label, ...inputProps } = props;
   const styles = useStyles({ multiline: props.multiline });
 
   const getSelectText = (value) => {
@@ -67,8 +67,6 @@ const TextInput = props => {
     }
     return '';
   }
-
-  const [stateValue, setStateValue] = useState(value);
 
   if (_.isNil(editable)) {
     editable = true;
@@ -94,10 +92,6 @@ const TextInput = props => {
 
       <div style={{ position: 'relative' }}>
         <TextField
-          value={inputProps.select ? stateValue : value}
-          onChange={onChange ? onChange : (e) => {
-            setStateValue(e.target.value);
-          }}
           error={error}
           disabled={disabled}
           InputProps={{ classes: { input: styles.input, multiline: styles.inputMultiline } }}
@@ -108,7 +102,7 @@ const TextInput = props => {
         />
 
         <div className={clsx(styles.input, styles.text, editable && styles.hidden)}>
-          {inputProps.select ? getSelectText(stateValue) : value}
+          {props.select ? getSelectText(props.value) : props.value}
         </div>
       </div>
     </div >

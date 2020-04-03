@@ -20,6 +20,7 @@ const ConfirmDialog = props => {
       flexDirection: 'column',
       alignItems: 'center',
       fontWeight: '600',
+      textAlign: 'center',
       color: theme.palette.grey[900]
     },
     row: {
