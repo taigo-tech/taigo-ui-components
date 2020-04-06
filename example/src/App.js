@@ -39,6 +39,7 @@ export default () => {
         {
           title: 'Global Components',
           path: '/global',
+          // hideInMenu: true,
         },
         {
           title: 'Card Components',

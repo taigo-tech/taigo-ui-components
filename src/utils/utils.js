@@ -14,7 +14,7 @@ export const isBrowser = () =>
 export const getFlatMenus = (menuData = []) => {
   let menus = {};
   menuData.forEach(item => {
-    if (!item || item.hideInMenu) {
+    if (!item) {
       return;
     }
     menus[item.path || '/'] = item;
