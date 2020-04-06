@@ -18,7 +18,7 @@ export const getFlatMenus = (menuData = []) => {
       return;
     }
     menus[item.path || '/'] = item;
-    if (item.routes && !item.hideChildrenInMenu) {
+    if (item.routes) {
       menus = { ...menus, ...getFlatMenus(item.routes) };
     }
   });
