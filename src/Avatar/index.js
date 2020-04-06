@@ -24,7 +24,6 @@ const stringToHslColor = (str, s, l) => {
 const useStyles = makeStyles(theme => ({
   main: {
     position: 'relative',
-    width: '98px',
   },
   avatar: {
     backgroundColor: ({ color }) => color,
