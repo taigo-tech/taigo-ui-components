@@ -46,31 +46,19 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const NotificationPopup = ({ linkComponent: Link, initialCount = 0, retrieveQuery, viewAllPath }) => {
+const NotificationPopup = ({ linkComponent: Link, loading = false, count = 0, items = [], viewAllPath }) => {
     const classes = useStyles();
 
-    const [loading, setLoading] = useState(true);
     const [anchorEl, setAnchorEl] = useState(null);
-    const [alertCount, setAlertCount] = useState(initialCount);
-    const [items, setItems] = useState([]);
 
-    useEffect(() => {
-        (async () => {
-            const { items, count } = await retrieveQuery();
-            setItems(items);
-            setAlertCount(count);
-            setLoading(false);
-        })();
-    }, []);
+    const viewAllComponent = Link && viewAllPath && forwardRef((props, ref) => <Link to={viewAllPath} {...props} ref={ref} />);
 
-    const viewAllComponent = Link && forwardRef((props, ref) => <Link to={viewAllPath} {...props} ref={ref} />);
-
-    return !!retrieveQuery && (
+    return (
         <Fragment>
             <IconButton color="inherit" onClick={e => setAnchorEl(e.currentTarget)}
                 className={clsx(classes.notification_button, { [classes.notification_button_highlight]: !!anchorEl })}
             >
-                <Badge color="error" badgeContent={alertCount > 0 ? alertCount : null}>
+                <Badge color="error" badgeContent={count > 0 ? count : null}>
                 <NotificationsIcon />
                 </Badge>
             </IconButton>
@@ -92,7 +80,7 @@ const NotificationPopup = ({ linkComponent: Link, initialCount = 0, retrieveQuer
                     <Box className={classes.listWrapper}>
                         <NotificationList items={items} listItemComponent={Link} onItemClick={() => setAnchorEl(null)} />
                     </Box>
-                    {!loading && (
+                    {!loading && viewAllComponent && (
                         <Box className={classes.viewAll} component={viewAllComponent} onClick={() => setAnchorEl(null)}>
                             <MenuIcon />
                         </Box>
@@ -104,8 +92,10 @@ const NotificationPopup = ({ linkComponent: Link, initialCount = 0, retrieveQuer
 }
 
 NotificationPopup.propTypes = {
-    retrieveQuery: PropTypes.func.isRequired,
-    viewAllPath: PropTypes.string.isRequired,
+    items: PropTypes.array,
+    loading: PropTypes.bool,
+    count: PropTypes.number,
+    viewAllPath: PropTypes.string,
     listItemComponent: PropTypes.elementType,
 }
 

@@ -1,5 +1,4 @@
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, Route, Switch, useLocation } from 'react-router-dom';
 import { AppLayout, AuthLayout, PageHeader, NotificationPopup } from 'taigo-ui-components';
 import GlobalComponents from './demo-views/GlobalComponents';
@@ -14,7 +13,20 @@ import signInBg from './assets/login_bg.jpg';
 export default () => {
   const location = useLocation();
 
-  const notificationPopup = <NotificationPopup retrieveQuery={getExampleNotifications} linkComponent={Link} viewAllPath="/notification" />;
+  const [loading, setLoading] = useState(true);
+  const [notifications, setNotifications] = useState([]);
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    (async () => {
+      const { items, count } = await getExampleNotifications();
+      setLoading(false);
+      setNotifications(items);
+      setCount(count);
+    })();
+  }, []);
+
+  const notificationPopup = <NotificationPopup loading={loading} items={notifications} count={count} linkComponent={Link} viewAllPath="/notification" />;
 
   const pageHeader = <PageHeader name="John Smith" extraNavigations={[notificationPopup]} />;
 
@@ -57,7 +69,6 @@ export default () => {
       footerMenu={[
         {
           title: 'Sign out',
-          icon: InboxIcon,
           path: '/signIn',
         },
       ]}

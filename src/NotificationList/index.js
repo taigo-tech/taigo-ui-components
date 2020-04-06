@@ -43,7 +43,7 @@ const NotificationList = ({ items = [], listItemComponent: Link, onItemClick }) 
                     divider={i < items.length - 1}
                     className={clsx({ [classes.notRead]: !item.isRead }) }
                     onClick={() => {
-                        if (onItemClick) onItemClick();
+                        if (onItemClick) onItemClick(item);
                         if (typeof item.onClick === 'function') item.onClick();
                     }}
                 >
