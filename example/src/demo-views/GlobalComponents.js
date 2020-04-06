@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { RoundedButton, TextInput, Checkbox, ConfirmDialog, ErrorDialog, Avatar } from 'taigo-ui-components';
+import { RoundedButton, TextInput, Checkbox, ConfirmDialog, ErrorDialog, Avatar, Switch } from 'taigo-ui-components';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useTheme } from '@material-ui/core/styles';
 
@@ -14,6 +14,10 @@ export default () => {
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+            <Switch onClick={({ proceed, current }) => { proceed(); console.log('c', current) }} onLabel="Activated" />
+
+            <div style={{ margin: '1em' }} />
+
             <Avatar name="J" src='https://www.gstatic.com/webp/gallery/4.jpg' editable={isEditable} isLoading={isLoading}
                 onDeletePress={() => { console.log('delete press') }}
                 onEditPress={() => { console.log('edit press') }} />
