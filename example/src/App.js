@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Route, Switch, useLocation } from 'react-router-dom';
 import { AppLayout, AuthLayout, PageHeader, NotificationPopup } from 'taigo-ui-components';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import GlobalComponents from './demo-views/GlobalComponents';
 import CardComponents from './demo-views/CardComponents';
 import FormikExample from './demo-views/FormikExample';
