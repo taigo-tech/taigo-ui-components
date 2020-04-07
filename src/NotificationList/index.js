@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
     },
     content: {
         marginBottom: 8,
+        color: theme.palette.text.primary,
     },
     ref: {
         fontWeight: 'bold',
