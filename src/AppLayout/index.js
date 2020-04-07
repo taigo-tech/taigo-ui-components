@@ -59,6 +59,7 @@ const useStyles = makeStyles(theme => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
+    position: 'relative',
   },
   contentWithAppbar: {
     flexGrow: 1,
@@ -143,7 +144,7 @@ function AppLayout(props) {
               <Typography variant="h2" className={classes.pageTitle}>{getPageTitle ? getPageTitle(pageTitle) : pageTitle}</Typography>
             </Box>
             {rightContent || (username && (
-              <PageHeader name={username} email={email} />
+              <PageHeader name={username} email={email} linkComponent={menuItemComponent} />
             ))}
           </Toolbar>
         </AppBar>

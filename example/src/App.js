@@ -31,7 +31,18 @@ export default () => {
 
   const notificationPopup = <NotificationPopup loading={loading} items={notifications} count={count} linkComponent={Link} viewAllPath="/notification" footer={footer} header={header} />;
 
-  const pageHeader = <PageHeader name="John Smith" extraNavigations={[notificationPopup]} />;
+  const profileNavs = [
+    [
+      { label: 'Global', to: '/global' },
+      { label: 'Card', to: '/card' },
+      { label: 'Formik', to: '/formik' },
+      { label: 'Notifications', to: '/notification' },
+    ],
+    [
+      { label: 'Sign out', to: '/signIn' },
+    ]
+  ]
+  const pageHeader = <PageHeader name="John Smith" extraNavigations={[notificationPopup]} profileMenuData={profileNavs} linkComponent={Link} />;
 
   if (location.pathname === '/signIn') {
     return (

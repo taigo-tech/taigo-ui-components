@@ -4,7 +4,9 @@ import { withStyles } from '@material-ui/core/styles';
 import Hidden from '@material-ui/core/Hidden';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
+import MenuList from '@material-ui/core/MenuList';
 import Box from '@material-ui/core/Box';
+import Divider from '@material-ui/core/Divider';
 import _ from 'lodash';
 import ProfileMenuItem from '../ProfileMenuItem';
 import colors from '../utils/colors';
@@ -75,8 +77,16 @@ class PageHeader extends Component {
     name: PropTypes.string,
     email: PropTypes.string,
     profilePic: PropTypes.string,
-    profileMenuData: PropTypes.arrayOf(PropTypes.object),
+    profileMenuData: PropTypes.arrayOf(PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.arrayOf(PropTypes.object),
+    ])),
     extraNavigations: PropTypes.array,
+    linkComponent: function(props, propName) {
+      if (typeof props.profileMenuData !== 'undefined' && typeof props[propName] === 'undefined') {
+        return new Error(`Prop ${propName} is required if prop 'profileMenuData' is provided`);
+      }
+    },
   }
 
   handleProfileMenuOpen = (e) => {
@@ -95,6 +105,7 @@ class PageHeader extends Component {
       profilePic,
       profileMenuData = [],
       extraNavigations = [],
+      linkComponent,
     } = this.props;
 
     const {
@@ -102,27 +113,6 @@ class PageHeader extends Component {
     } = this.state;
 
     const isProfileMenuOpen = Boolean(profileMenuAnchorEl);
-
-    const renderProfileMenu = () => {
-      return <Menu
-        anchorEl={profileMenuAnchorEl}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'left' }}
-        getContentAnchorEl={null}
-        open={isProfileMenuOpen}
-        onClose={this.handleProfileMenuClose}
-        className={classes.menu}
-        disableAutoFocusItem={true}
-      >
-        {
-          _.map(profileMenuData, (data, index) => {
-            const { label, to } = data;
-
-            return <ProfileMenuItem key={index} label={label} to={to} handleProfileMenuClose={this.handleProfileMenuClose} />
-          })
-        }
-      </Menu>
-    }
 
     return (
       <div className={classes.main}>
@@ -158,7 +148,47 @@ class PageHeader extends Component {
           </div>
         </Button>
 
-        {renderProfileMenu()}
+        {profileMenuData.length > 0 && (
+          <Menu
+            anchorEl={profileMenuAnchorEl}
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+            transformOrigin={{ vertical: -20, horizontal: 'left' }}
+            getContentAnchorEl={null}
+            open={isProfileMenuOpen}
+            onClose={this.handleProfileMenuClose}
+            className={classes.menu}
+            disableAutoFocusItem={true}
+          >
+            {
+              _.map(profileMenuData, (data, i) => {
+                const renderMenuItem = item => {
+                  const { label, to } = item;
+    
+                  return (
+                    <ProfileMenuItem
+                      key={to}
+                      to={to}
+                      label={label}
+                      handleProfileMenuClose={this.handleProfileMenuClose}
+                      linkComponent={linkComponent}
+                    />
+                  );
+                }
+
+                if (_.isArray(data)) {
+                  return (
+                    <div key={i}>
+                      {_.map(data, renderMenuItem)}
+                      {i < profileMenuData.length - 1 && <Divider />}
+                    </div>
+                  );
+                } else {
+                  return renderMenuItem(data);
+                }
+              })
+            }
+          </Menu>
+        )}
       </div>
     )
   }
