@@ -84,6 +84,7 @@ export default () => {
         {
           title: 'Sign out',
           path: '/signIn',
+          icon: ExitToAppIcon,
         },
       ]}
       menuItemComponent={Link}

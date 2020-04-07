@@ -6,9 +6,6 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
 const useStyles = makeStyles(theme => ({
-    nested: {
-        paddingLeft: level => theme.spacing(9 * level),
-    },
     icon: {
         color: theme.palette.common.white,
     },
@@ -24,7 +21,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default ({ item, level, onClick, menuItemComponent: MenuLink, selected }) => {
-    const styles = useStyles(level);
+    const styles = useStyles();
 
     const listItemComponent = MenuLink && forwardRef((props, ref) => <MenuLink to={item.path} {...props} ref={ref} />);
 
@@ -42,17 +39,16 @@ export default ({ item, level, onClick, menuItemComponent: MenuLink, selected })
             onClick={onItemClick}
             component={listItemComponent}
             classes={{
-                root: clsx({ [styles.nested]: level > 0 }),
                 selected: styles.selected,
             }}
             selected={selected}
         >
-            {item.icon && !item.hideIcon && (
+            {!!item.icon && !item.hideIcon && (
                 <ListItemIcon className={styles.icon}>
                     {createElement(item.icon)}
                 </ListItemIcon>
             )}
-            <ListItemText primary={item.title} className={styles.text} />
+            <ListItemText inset={level > 0} primary={item.title} className={styles.text} />
         </ListItem>
     );
 }
