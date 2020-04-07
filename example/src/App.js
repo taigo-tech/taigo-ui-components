@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, Route, Switch, useLocation } from 'react-router-dom';
 import { AppLayout, AuthLayout, PageHeader, NotificationPopup } from 'taigo-ui-components';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import StarIcon from '@material-ui/icons/Star';
 import GlobalComponents from './demo-views/GlobalComponents';
 import CardComponents from './demo-views/CardComponents';
 import FormikExample from './demo-views/FormikExample';
@@ -34,13 +35,13 @@ export default () => {
 
   const profileNavs = [
     [
-      { label: 'Global', to: '/global' },
-      { label: 'Card', to: '/card' },
-      { label: 'Formik', to: '/formik' },
-      { label: 'Notifications', to: '/notification' },
+      { label: 'Global', to: '/global', icon: StarIcon },
+      { label: 'Card', to: '/card', icon: StarIcon },
+      { label: 'Formik', to: '/formik', icon: StarIcon },
+      { label: 'Notifications', to: '/notification', icon: StarIcon },
     ],
     [
-      { label: 'Sign out', to: '/signIn' },
+      { label: 'Sign out', to: '/signIn', icon: ExitToAppIcon },
     ]
   ]
   const pageHeader = <PageHeader name="John Smith" extraNavigations={[notificationPopup]} profileMenuData={profileNavs} linkComponent={Link} onProfileClicked={() => console.log('onProfileClicked')} />;

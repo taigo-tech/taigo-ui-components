@@ -173,13 +173,14 @@ class PageHeader extends Component {
             {
               _.map(profileMenuData, (data, i) => {
                 const renderMenuItem = item => {
-                  const { label, to } = item;
+                  const { label, to, icon } = item;
     
                   return (
                     <ProfileMenuItem
                       key={to}
                       to={to}
                       label={label}
+                      icon={icon}
                       handleProfileMenuClose={this.handleProfileMenuClose}
                       linkComponent={linkComponent}
                     />
