@@ -26,7 +26,10 @@ export default () => {
     })();
   }, []);
 
-  const notificationPopup = <NotificationPopup loading={loading} items={notifications} count={count} linkComponent={Link} viewAllPath="/notification" />;
+  const header = <div>Notifications</div>;
+  const footer = <Link to="/notification">View all notifications</Link>;
+
+  const notificationPopup = <NotificationPopup loading={loading} items={notifications} count={count} linkComponent={Link} viewAllPath="/notification" footer={footer} header={header} />;
 
   const pageHeader = <PageHeader name="John Smith" extraNavigations={[notificationPopup]} />;
 

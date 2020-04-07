@@ -35,6 +35,14 @@ const useStyles = makeStyles((theme) => ({
         maxHeight: 480,
         overflowY: 'auto',
     },
+    header: {
+        padding: theme.spacing(1),
+        borderBottom: `1px solid ${theme.palette.grey[300]}`,
+    },
+    footer: {
+        padding: theme.spacing(1),
+        borderTop: `1px solid ${theme.palette.grey[300]}`,
+    },
     viewAll: {
         display: 'flex',
         justifyContent: 'center',
@@ -46,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const NotificationPopup = ({ linkComponent: Link, loading = false, count = 0, items = [], viewAllPath }) => {
+const NotificationPopup = ({ linkComponent: Link, loading = false, count = 0, items = [], viewAllPath, header, footer }) => {
     const classes = useStyles();
 
     const [anchorEl, setAnchorEl] = useState(null);
@@ -74,13 +82,23 @@ const NotificationPopup = ({ linkComponent: Link, loading = false, count = 0, it
                 disableAutoFocusItem={true}
             >
                 <Box className={classes.popup}>
+                    {header && (
+                        <Box className={classes.header}>
+                            {header}
+                        </Box>
+                    )}
                     {loading && (
                         <Box className={classes.loading}><CircularProgress size={20} /></Box>
                     )}
                     <Box className={classes.listWrapper}>
                         <NotificationList items={items} listItemComponent={Link} onItemClick={() => setAnchorEl(null)} />
                     </Box>
-                    {!loading && viewAllComponent && (
+                    {!loading && footer && (
+                        <Box className={classes.footer} onClick={() => setAnchorEl(null)}>
+                            {footer}
+                        </Box>
+                    )}
+                    {!loading && !footer && viewAllComponent && (
                         <Box className={classes.viewAll} component={viewAllComponent} onClick={() => setAnchorEl(null)}>
                             <MenuIcon />
                         </Box>
@@ -97,6 +115,8 @@ NotificationPopup.propTypes = {
     count: PropTypes.number,
     viewAllPath: PropTypes.string,
     listItemComponent: PropTypes.elementType,
+    header: PropTypes.element,
+    footer: PropTypes.element,
 }
 
 export default NotificationPopup;
