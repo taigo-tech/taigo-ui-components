@@ -4,11 +4,10 @@ import { withStyles } from '@material-ui/core/styles';
 import Hidden from '@material-ui/core/Hidden';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
-import MenuList from '@material-ui/core/MenuList';
 import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 import _ from 'lodash';
-import ProfileMenuItem from '../ProfileMenuItem';
+import ProfileMenuItem from './ProfileMenuItem';
 import colors from '../utils/colors';
 
 const styles = theme => ({
