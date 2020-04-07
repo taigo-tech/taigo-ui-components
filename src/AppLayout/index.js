@@ -63,6 +63,7 @@ const useStyles = makeStyles(theme => ({
   },
   contentWithAppbar: {
     flexGrow: 1,
+    maxWidth: '100%',
   },
   drawer: {
     [theme.breakpoints.up('md')]: {

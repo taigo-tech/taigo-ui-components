@@ -6,6 +6,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import CheckIcon from '@material-ui/icons/Check';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import Button from '@material-ui/core/Button';
+import Hidden from '@material-ui/core/Hidden';
 import Typography from '@material-ui/core/Typography';
 import Card from '../Card';
 import EditableContext from '../context/EditableContext';
@@ -106,8 +107,10 @@ const EditableCard = props => {
                 <Button className={styles.iconButton} disableRipple onClick={() => { onCancel ? onCancel(() => { setEditable(false) }) : setEditable(false) }}>
                   <div className={clsx(styles.center, styles.cancel)} style={{ display: 'flex' }}>
                     <CloseIcon />
-                    <div className={styles.smallSpacing} />
-                    <div>{cancelLabel}</div>
+                    <Hidden smDown implementation="css">
+                      <div className={styles.smallSpacing} />
+                      <div>{cancelLabel}</div>
+                    </Hidden>
                   </div>
                 </Button>
 
@@ -116,8 +119,10 @@ const EditableCard = props => {
                 <Button className={styles.iconButton} disableRipple onClick={() => { onAccept && onAccept(() => { setEditable(false) }) }}>
                   <div className={clsx(styles.center, styles.accept)}>
                     <CheckIcon />
-                    <div className={styles.smallSpacing} />
-                    <div>{acceptLabel}</div>
+                    <Hidden smDown implementation="css">
+                      <div className={styles.smallSpacing} />
+                      <div>{acceptLabel}</div>
+                    </Hidden>
                   </div>
                 </Button>
               </div>
@@ -125,8 +130,10 @@ const EditableCard = props => {
               <Button className={clsx(styles.iconButton, !editable && !isLoading ? styles.fadein : styles.fadeout)} disableRipple onClick={() => { setEditable(true); }} style={{ position: 'absolute', right: 0 }}>
                 <div className={clsx(styles.center, styles.edit)} style={{ display: 'flex' }}>
                   <EditOutlinedIcon />
-                  <div className={styles.smallSpacing} />
-                  <div>{editLabel}</div>
+                  <Hidden xsDown implementation="css">
+                    <div className={styles.smallSpacing} />
+                    <div>{editLabel}</div>
+                  </Hidden>
                 </div>
               </Button>
 
