@@ -7,7 +7,7 @@ import RoundedButton from '../RoundedButton';
 import CheckIcon from '@material-ui/icons/Check';
 
 const ConfirmDialog = props => {
-  const { children, type, color, onConfirm, onCancel, ...inputProps } = props;
+  const { children, icon, type, color, onConfirm, onCancel, ...inputProps } = props;
 
   const useStyles = makeStyles(theme => ({
     icon: {
@@ -36,17 +36,20 @@ const ConfirmDialog = props => {
   const theme = useTheme();
 
   return (
-    <Dialog {...inputProps} color={theme.palette.success.main}>
+    <Dialog {...inputProps} color={color ? color : theme.palette.success.main}>
       <div className={styles.content}>
-        <CheckIcon className={styles.icon} fontSize='large' />
+        {
+          icon ? icon : <CheckIcon className={styles.icon} fontSize='large' />
+        }
+
         <div className={styles.spacing} />
         {children}
       </div>
       <div className={styles.spacing} />
       <div className={styles.row}>
-        <RoundedButton variant="outlined" color={theme.palette.success.main} onClick={onCancel}>Cancel</RoundedButton>
+        <RoundedButton variant="outlined" color={color ? color : theme.palette.success.main} onClick={onCancel}>Cancel</RoundedButton>
         <div className={styles.spacing} />
-        <RoundedButton variant="contained" color={theme.palette.success.main} onClick={onConfirm}>Confirm</RoundedButton>
+        <RoundedButton variant="contained" color={color ? color : theme.palette.success.main} onClick={onConfirm}>Confirm</RoundedButton>
       </div>
     </Dialog>
   );
