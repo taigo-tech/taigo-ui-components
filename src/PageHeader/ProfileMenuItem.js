@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.text.primary,
   },
   label: {
-    width: 120,
+    maxWidth: 150,
   },
 }));
 
