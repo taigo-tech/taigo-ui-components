@@ -87,6 +87,18 @@ class PageHeader extends Component {
         return new Error(`Prop ${propName} is required if prop 'profileMenuData' is provided`);
       }
     },
+    onProfileClicked: PropTypes.func,
+  }
+
+  handleProfileMenuClick = e => {
+    const { onProfileClicked, profileMenuData =[] } = this.props;
+    if (typeof onProfileClicked === 'function') {
+      onProfileClicked(e);
+    }
+
+    if (profileMenuData.length > 0) {
+      this.handleProfileMenuOpen(e);
+    }
   }
 
   handleProfileMenuOpen = (e) => {
@@ -119,7 +131,7 @@ class PageHeader extends Component {
         <Hidden smDown implementation="css">
           {extraNavigations && extraNavigations.map((nav, i) => <Box component="span" key={i}>{nav}</Box>)}
         </Hidden>
-        <Button color="inherit" onClick={this.handleProfileMenuOpen} className={classes.menu_button}>
+        <Button color="inherit" onClick={this.handleProfileMenuClick} className={classes.menu_button}>
           <div className={classes.button_inner}>
             <div className={classes.avatar_container}>
               {

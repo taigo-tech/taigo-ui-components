@@ -42,7 +42,7 @@ export default () => {
       { label: 'Sign out', to: '/signIn' },
     ]
   ]
-  const pageHeader = <PageHeader name="John Smith" extraNavigations={[notificationPopup]} profileMenuData={profileNavs} linkComponent={Link} />;
+  const pageHeader = <PageHeader name="John Smith" extraNavigations={[notificationPopup]} profileMenuData={profileNavs} linkComponent={Link} onProfileClicked={() => console.log('onProfileClicked')} />;
 
   if (location.pathname === '/signIn') {
     return (
