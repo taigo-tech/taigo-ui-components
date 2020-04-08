@@ -36,6 +36,7 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     wordWrap: 'break-word',
     wordBreak: ({ multiline }) => multiline ? 'break-all' : 'unset',
+    whiteSpace: ({ multiline }) => multiline ? 'unset' : 'nowrap',
     overflowY: ({ multiline }) => multiline ? 'auto' : 'hidden',
     overflowX: ({ multiline }) => !multiline ? 'auto' : 'hidden',
     display: 'flex',
