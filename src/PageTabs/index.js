@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexDirection: 'row',
+        alignItems: 'center',
         overflowY: 'hidden',
         overflowX: 'auto',
         msOverflowStyle: 'none',  // IE 10+
@@ -28,6 +29,12 @@ const useStyles = makeStyles((theme) => ({
         cursor: 'pointer',
         '&.selected': {
             color: theme.palette.primary.main,
+        },
+        [theme.breakpoints.down('sm')]: {
+            paddingLeft: theme.spacing(2),
+            paddingRight: theme.spacing(2),
+            paddingTop: 0,
+            paddingBottom: 0,
         },
     },
 }));
