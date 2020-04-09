@@ -20,7 +20,7 @@ export default () => {
     return (
         <div>
 
-            <div style={{ paddingTop: 60, paddingBottom: 60, borderBottom: '1px solid #CCC' }}>
+            <div style={{ paddingBottom: 60, borderBottom: '1px solid #CCC' }}>
                 <h2>PageTabs</h2>
 
                 <PageTabs
@@ -36,7 +36,7 @@ export default () => {
             </div>
             
             <div style={{ paddingTop: 60, paddingBottom: 60, borderBottom: '1px solid #CCC' }}>
-                <h2>PageTabs</h2>
+                <h2>Snackbar</h2>
 
                 <RoundedButton variant="contained" color={Colors.green} onClick={() => snackbar.success({ message: 'It\'s a success!' })} size="small">
                     Success snackbar
