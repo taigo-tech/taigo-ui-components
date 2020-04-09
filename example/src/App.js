@@ -7,7 +7,6 @@ import GlobalComponents from './demo-views/GlobalComponents';
 import CardComponents from './demo-views/CardComponents';
 import FormikExample from './demo-views/FormikExample';
 import Notification from './demo-views/Notification';
-import LayoutComponents from './demo-views/Layout';
 import { getExampleNotifications } from './demo-views/Notification';
 import logo from './assets/taigo_logo_white.png';
 import logoPurple from './assets/taigo_logo_purple.png';
@@ -36,7 +35,7 @@ export default () => {
 
   const profileNavs = [
     [
-      { label: 'Global', to: '/global', icon: StarIcon },
+      { label: 'Global', to: '/', icon: StarIcon },
       { label: 'Card', to: '/card', icon: StarIcon },
       { label: 'Formik', to: '/formik', icon: StarIcon },
       { label: 'Notifications', to: '/notification', icon: StarIcon },
@@ -67,7 +66,7 @@ export default () => {
       menuData={[
         {
           title: 'Global Components',
-          path: '/global',
+          path: '/',
           // hideInMenu: true,
         },
         {
@@ -82,10 +81,6 @@ export default () => {
           title: 'Notification',
           path: '/notification',
         },
-        {
-          title: 'Layout Component',
-          path: '/layout',
-        },
       ]}
       footerMenu={[
         {
@@ -99,7 +94,7 @@ export default () => {
       rightContent={pageHeader}
     >
       <Switch>
-        <Route path="/global">
+        <Route path="/" exact>
           <GlobalComponents />
         </Route>
         <Route path="/signIn">
@@ -116,10 +111,6 @@ export default () => {
 
         <Route path="/notification">
           <Notification />
-        </Route>
-
-        <Route path="/layout">
-          <LayoutComponents />
         </Route>
       </Switch>
     </AppLayout>
