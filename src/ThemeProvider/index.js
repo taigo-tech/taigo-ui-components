@@ -1,7 +1,10 @@
 import React, { useMemo } from 'react';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { createMuiTheme, ThemeProvider, responsiveFontSizes } from '@material-ui/core/styles';
+import Snackbar from '../SnackBar';
 import { taigoTheme } from './theme';
+
+const { SnackbarProvider } = Snackbar;
 
 export default ({ children, darkMode = false }) => {
   // disable dark mode first
@@ -23,7 +26,9 @@ export default ({ children, darkMode = false }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      {children}
+      <SnackbarProvider>
+        {children}
+      </SnackbarProvider>
     </ThemeProvider>
   );
 }

@@ -15,6 +15,12 @@ export const taigoTheme = {
         success: {
             main: colors.green,
         },
+        info: {
+            main: colors.cyan,
+        },
+        warning: {
+            main: colors.orange,
+        },
         grey: {
             300: '#CCCCCC',
             500: '#A7A7A7',
