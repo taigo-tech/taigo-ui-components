@@ -33,21 +33,22 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const Component = ({ image, message, actions = [] }) => {
+const Component = ({ image, message, actions = [], content }) => {
     const styles = useStyles();
 
     return (
         <div className={styles.root}>
             <img src={image || defaultImage} alt="Empty" className={styles.image} />
-            <div>
-                <Typography variant="h4" className={styles.message}>{message}</Typography>
-
-                <div className={styles.actions}>
-                    {actions.map((action, i) => (
-                        <div key={i} className={styles.action}>{action}</div>
-                    ))}
+            {content || (
+                <div>
+                    <Typography variant="h4" className={styles.message}>{message}</Typography>
+                    <div className={styles.actions}>
+                        {actions.map((action, i) => (
+                            <div key={i} className={styles.action}>{action}</div>
+                        ))}
+                    </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 }
@@ -56,6 +57,7 @@ Component.propTypes = {
     image: PropTypes.string,
     message: PropTypes.string,
     actions: PropTypes.arrayOf(PropTypes.element),
+    content: PropTypes.element,
 };
 
 export default Component;
