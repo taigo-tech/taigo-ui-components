@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { SnackbarProvider, useSnackbar } from 'notistack';
-import colors from '../utils/colors';
 
 const useStyles = makeStyles((theme) => ({
     success: {

@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { createMuiTheme, ThemeProvider, responsiveFontSizes } from '@material-ui/core/styles';
-import Snackbar from '../SnackBar';
+import Snackbar from '../Snackbar';
 import { taigoTheme } from './theme';
 
 const { SnackbarProvider } = Snackbar;

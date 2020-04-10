@@ -23,6 +23,6 @@ export { default as Switch } from './Switch';
 export { default as EmptyState } from './EmptyState';
 
 export { default as PageTabs } from './PageTabs';
-export { default as Snackbar } from './SnackBar';
+export { default as Snackbar } from './Snackbar';
 
 export { default as Colors } from './utils/colors';
