@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { RoundedButton, TextInput, Checkbox, ConfirmDialog, ErrorDialog, Avatar, Switch, PageTabs, Snackbar, Colors } from 'taigo-ui-components';
+import { RoundedButton, TextInput, Checkbox, ConfirmDialog, ErrorDialog, Avatar, Switch, PageTabs, Snackbar, Colors, FiltersDropdown } from 'taigo-ui-components';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useTheme } from '@material-ui/core/styles';
 
@@ -14,7 +14,13 @@ export default () => {
     const [inputValue, setInputValue] = useState('Value');
     const [selectValue, setSelectValue] = useState(0);
 
+    // PageTabs
     const [selectedTab, setSelectedTab] = useState(null);
+
+    // FiltersDropdown
+    const [filter1, setFilter1] = useState(null);
+    const [filter2, setFilter2] = useState(null);
+
     const snackbar = useSnackbar();
 
     return (
@@ -52,6 +58,54 @@ export default () => {
                     Warning snackbar
                 </RoundedButton>
 
+            </div>
+
+            <div style={{ paddingTop: 60, paddingBottom: 60, borderBottom: '1px solid #CCC' }}>
+                <h2>Filters.SelectionDropdown</h2>
+
+                <FiltersDropdown
+                    label="Filter"
+                    onSubmit={values => { setFilter1(JSON.stringify(values))}}
+                    data={[
+                        { id: 'Paid', label: 'Paid' },
+                        { id: 'Pending', label: 'Pending' },
+                        { id: 'Failed', label: 'Failed' },
+                        { id: 'Pending_for_settlement', label: 'Pending for settlement' },
+                        { id: 'Cancelled', label: 'Cancelled' },
+                    ]}
+                />
+                <p>{filter1}</p>
+
+                <br/>
+
+                <FiltersDropdown
+                    multiple
+                    label="Filters (multiple)"
+                    onSubmit={values => { setFilter2(JSON.stringify(values))}}
+                    data={[
+                        {
+                            id: 'deliver',
+                            label: 'Deliver',
+                            selections: [
+                                { id: 'await', label: 'Await Driver' },
+                                { id: 'picked', label: 'Container Pickup' },
+                                { id: 'block', label: 'Gate Blocked' },
+                                { id: 'delivery', label: 'In Delivery' },
+                                { id: 'yard', label: 'Staging at Yard' },
+                            ],
+                        },
+                        {
+                            id: 'collection',
+                            label: 'Collection',
+                            selections: [
+                                { id: 'ready', label: 'Ready for Collection' },
+                                { id: 'delivered', label: 'Delivered to Customer' },
+                                { id: 'collection', label: 'Collection (Empty)' },
+                            ],
+                        },
+                    ]}
+                />
+                <p>{filter2}</p>
             </div>
 
             <div style={{ paddingTop: 60, paddingBottom: 60, borderBottom: '1px solid #CCC' }}>
