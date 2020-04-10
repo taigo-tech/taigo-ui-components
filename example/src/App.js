@@ -2,12 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { Link, Route, Switch, useLocation } from 'react-router-dom';
 import { AppLayout, AuthLayout, PageHeader, NotificationPopup } from 'taigo-ui-components';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import StarIcon from '@material-ui/icons/Star';
+import PublicIcon from '@material-ui/icons/Public';
+import CallToActionIcon from '@material-ui/icons/CallToAction';
+import ListAltIcon from '@material-ui/icons/ListAlt';
+import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
+import MoodBadIcon from '@material-ui/icons/MoodBad';
 import GlobalComponents from './demo-views/GlobalComponents';
 import CardComponents from './demo-views/CardComponents';
 import FormikExample from './demo-views/FormikExample';
-import Notification from './demo-views/Notification';
-import { getExampleNotifications } from './demo-views/Notification';
+import Notification, { getExampleNotifications } from './demo-views/Notification';
+import EmptyOrder from './demo-views/EmptyOrder';
+import EmptyChat from './demo-views/EmptyChat';
 import logo from './assets/taigo_logo_white.png';
 import logoPurple from './assets/taigo_logo_purple.png';
 import signInBg from './assets/login_bg.jpg';
@@ -35,10 +40,10 @@ export default () => {
 
   const profileNavs = [
     [
-      { label: 'Global', to: '/', icon: StarIcon },
-      { label: 'Card', to: '/card', icon: StarIcon },
-      { label: 'Formik', to: '/formik', icon: StarIcon },
-      { label: 'Notifications', to: '/notification', icon: StarIcon },
+      { label: 'Global', to: '/', icon: PublicIcon },
+      { label: 'Card', to: '/card', icon: CallToActionIcon },
+      { label: 'Formik', to: '/formik', icon: ListAltIcon },
+      { label: 'Notifications', to: '/notification', icon: NotificationsNoneIcon },
     ],
     [
       { label: 'Sign out', to: '/signIn', icon: ExitToAppIcon },
@@ -65,21 +70,40 @@ export default () => {
       logo={logo}
       menuData={[
         {
-          title: 'Global Components',
+          title: 'Global',
           path: '/',
+          icon: PublicIcon,
           // hideInMenu: true,
         },
         {
-          title: 'Card Components',
+          title: 'Card',
           path: '/card',
+          icon: CallToActionIcon,
         },
         {
           title: 'Formik Use Example',
           path: '/formik',
+          icon: ListAltIcon,
         },
         {
           title: 'Notification',
           path: '/notification',
+          icon: NotificationsNoneIcon,
+        },
+        {
+          title: 'Void',
+          path: '/empty',
+          icon: MoodBadIcon,
+          routes: [
+            {
+              title: 'Empty Order',
+              path: '/empty/order',
+            },
+            {
+              title: 'Empty Chat',
+              path: '/empty/chat',
+            }
+          ]
         },
       ]}
       footerMenu={[
@@ -111,6 +135,14 @@ export default () => {
 
         <Route path="/notification">
           <Notification />
+        </Route>
+
+        <Route path="/empty/order">
+          <EmptyOrder />
+        </Route>
+
+        <Route path="/empty/chat">
+          <EmptyChat />
         </Route>
       </Switch>
     </AppLayout>

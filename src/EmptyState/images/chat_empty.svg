@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="246.574" height="97.53" viewBox="0 0 246.574 97.53">
+  <g id="Group_1826" data-name="Group 1826" transform="translate(-4236.393 -3005.867)">
+    <rect id="Rectangle_2003" data-name="Rectangle 2003" width="227.57" height="97.53" rx="4" transform="translate(4255.396 3005.867)" fill="#c0e9f5"/>
+    <path id="Rectangle_2004" data-name="Rectangle 2004" d="M4,0H223.581a4,4,0,0,1,4,4V17.145a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V4A4,4,0,0,1,4,0Z" transform="translate(4255.385 3005.867)" fill="#a2d5e0"/>
+    <circle id="Ellipse_390" data-name="Ellipse 390" cx="3.456" cy="3.456" r="3.456" transform="translate(4263.059 3010.983)" fill="#f45145"/>
+    <circle id="Ellipse_391" data-name="Ellipse 391" cx="3.456" cy="3.456" r="3.456" transform="translate(4466.972 3010.983)" fill="#52c652"/>
+    <circle id="Ellipse_392" data-name="Ellipse 392" cx="3.456" cy="3.456" r="3.456" transform="translate(4455.464 3010.983)" fill="#7bdb7b"/>
+    <rect id="Rectangle_2005" data-name="Rectangle 2005" width="70.175" height="9.753" rx="3" transform="translate(4294.64 3084.444)" fill="#a4e4ea"/>
+    <rect id="Rectangle_2006" data-name="Rectangle 2006" width="59.966" height="9.753" rx="3" transform="translate(4304.85 3066.426)" fill="#a4e4ea"/>
+    <rect id="Rectangle_2007" data-name="Rectangle 2007" width="100.489" height="9.753" rx="3" transform="translate(4372.451 3047.164)" fill="#a4e4ea"/>
+    <rect id="Rectangle_2008" data-name="Rectangle 2008" width="100.489" height="9.753" rx="3" transform="translate(4372.451 3030.211)" fill="#a4e4ea"/>
+    <rect id="Rectangle_2009" data-name="Rectangle 2009" width="68.391" height="26.705" rx="1.972" transform="translate(4296.425 3031.366)" fill="#a3e8d6"/>
+    <rect id="Rectangle_2010" data-name="Rectangle 2010" width="100.489" height="26.705" rx="1.972" transform="translate(4372.451 3066.426)" fill="#a3e8d6"/>
+    <g id="Group_1825" data-name="Group 1825" transform="translate(4236.393 3032.683)">
+      <path id="Path_857" data-name="Path 857" d="M4261.464,3071.73l8.2-30.148a1.558,1.558,0,0,0-1.9-1.915l-30.207,7.973a1.558,1.558,0,0,0-.039,3l7.741,2.255a1.559,1.559,0,0,1,.661,2.6l-6,5.949a1.56,1.56,0,0,0-.008,2.2l5.554,5.595a1.559,1.559,0,0,0,2.2.01l5.993-5.951a1.559,1.559,0,0,1,2.6.683l2.2,7.755A1.558,1.558,0,0,0,4261.464,3071.73Z" transform="translate(-4236.393 -3011.574)" fill="#869fa3"/>
+      <rect id="Rectangle_2011" data-name="Rectangle 2011" width="6.907" height="17.922" rx="3.453" transform="matrix(0.704, 0.71, -0.71, 0.704, 50.283, 6.102)" fill="#e8d97c"/>
+      <rect id="Rectangle_2012" data-name="Rectangle 2012" width="6.907" height="17.922" rx="3.453" transform="translate(62.707 31.599) rotate(90.213)" fill="#e8d97c"/>
+      <rect id="Rectangle_2013" data-name="Rectangle 2013" width="6.907" height="17.922" rx="3.453" transform="translate(32.427 17.947) rotate(-179.787)" fill="#e8d97c"/>
+      <rect id="Rectangle_2014" data-name="Rectangle 2014" width="6.907" height="17.922" rx="3.453" transform="translate(17.761 20.274) rotate(135.213)" fill="#e8d97c"/>
+      <rect id="Rectangle_2015" data-name="Rectangle 2015" width="6.907" height="17.922" rx="3.453" transform="translate(53.595 56.375) rotate(135.213)" fill="#e8d97c"/>
+    </g>
+  </g>
+</svg>
