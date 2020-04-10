@@ -21,7 +21,7 @@ export default {
     }
   ],
   preserveModules: true,
-  external: Object.keys(pkg.dependencies).concat(['react', 'react-dom', 'lodash']),
+  external: Object.keys(pkg.dependencies).concat(['react', 'react-dom']),
   plugins: [
     external(),
     postcss({

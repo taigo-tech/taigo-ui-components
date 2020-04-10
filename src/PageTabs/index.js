@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexDirection: 'row',
+        flexWrap: 'wrap',
         alignItems: 'center',
         overflowY: 'hidden',
         overflowX: 'auto',
