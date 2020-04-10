@@ -29,6 +29,7 @@ export default () => {
                         { id: 'tab2', label: 'Import' },
                         { id: 'tab3', label: 'Export' },
                         { id: 'tab4', label: 'Inland Port' },
+                        { id: 'tab5', label: 'Temp Staging' },
                     ]}
                     selected={selectedTab}
                     onTabSelected={setSelectedTab}
