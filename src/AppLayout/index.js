@@ -18,10 +18,16 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     height: '100vh',
   },
+  contentWithAppbar: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+    overflowX: 'hidden',
+  },
   appBar: {
     boxShadow: 'unset',
     borderBottom: `1px solid ${theme.palette.grey[300]}`,
-    width: '100%',
   },
   menuButton: {
     color: theme.palette.primary.main,
@@ -31,7 +37,6 @@ const useStyles = makeStyles(theme => ({
     },
   },
   toolbar: {
-    width: '100%',
     height: '100px',
     backgroundColor: theme.palette.common.white,
     display: 'flex',
@@ -57,13 +62,12 @@ const useStyles = makeStyles(theme => ({
     },
   },
   content: {
-    flexGrow: 1,
+    flex: 1,
     padding: theme.spacing(3),
     position: 'relative',
-  },
-  contentWithAppbar: {
-    flexGrow: 1,
-    maxWidth: '100%',
+    [theme.breakpoints.down('xs')]: {
+      padding: theme.spacing(2),
+    },
   },
   drawer: {
     [theme.breakpoints.up('md')]: {
@@ -107,7 +111,7 @@ function AppLayout(props) {
     <div className={classes.root}>
       <CssBaseline />
 
-      <nav className={classes.drawer} aria-label="mailbox folders">
+      <nav className={classes.drawer} aria-label="navigations">
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Hidden mdUp implementation="css">
           <SideMenu
