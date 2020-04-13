@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { RoundedButton, PageTabs, Snackbar, Colors, FiltersDropdown } from 'taigo-ui-components';
+import { RoundedButton, PageTabs, Snackbar, Colors, FiltersDropdown, Searchbar } from 'taigo-ui-components';
 
 const { useSnackbar } = Snackbar;
 
@@ -10,6 +10,17 @@ export default () => {
     // FiltersDropdown
     const [filter1, setFilter1] = useState(null);
     const [filter2, setFilter2] = useState(null);
+
+    // Searchbar
+    const [searchLoading, setSearchLoading] = useState(false);
+    const onSearch = value => {
+        setSearchLoading(true);
+        console.log(value);
+        setTimeout(() => {
+            setSearchLoading(false);
+        }, 2000);
+    }
+
 
     const snackbar = useSnackbar();
 
@@ -96,6 +107,12 @@ export default () => {
                     ]}
                 />
                 <p>{filter2}</p>
+            </div>
+
+            <div style={{ paddingTop: 60, paddingBottom: 60, borderBottom: '1px solid #CCC' }}>
+                <h2>Searchbar</h2>
+
+                <Searchbar onSearch={onSearch} label="Search" loading={searchLoading} defaultValue="Cool" />
             </div>
         </div>
     );
