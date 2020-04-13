@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Route, Switch, useLocation } from 'react-router-dom';
 import { AppLayout, AuthLayout, PageHeader, NotificationPopup } from 'taigo-ui-components';
+
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import PublicIcon from '@material-ui/icons/Public';
 import CallToActionIcon from '@material-ui/icons/CallToAction';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import MoodBadIcon from '@material-ui/icons/MoodBad';
+import FindInPageIcon from '@material-ui/icons/FindInPage';
+
 import GlobalComponents from './demo-views/GlobalComponents';
+import PageElements from './demo-views/PageElements';
 import CardComponents from './demo-views/CardComponents';
 import FormikExample from './demo-views/FormikExample';
 import Notification, { getExampleNotifications } from './demo-views/Notification';
@@ -41,6 +45,7 @@ export default () => {
   const profileNavs = [
     [
       { label: 'Global', to: '/', icon: PublicIcon },
+      { label: 'Page Elements', to: '/page', icon: FindInPageIcon },
       { label: 'Card', to: '/card', icon: CallToActionIcon },
       { label: 'Formik', to: '/formik', icon: ListAltIcon },
       { label: 'Notifications', to: '/notification', icon: NotificationsNoneIcon },
@@ -74,6 +79,11 @@ export default () => {
           path: '/',
           icon: PublicIcon,
           // hideInMenu: true,
+        },
+        {
+          title: 'Page Elements',
+          path: '/page',
+          icon: FindInPageIcon,
         },
         {
           title: 'Card',
@@ -121,8 +131,13 @@ export default () => {
         <Route path="/" exact>
           <GlobalComponents />
         </Route>
+
         <Route path="/signIn">
           <GlobalComponents />
+        </Route>
+
+        <Route path="/page">
+          <PageElements />
         </Route>
 
         <Route path="/card">
