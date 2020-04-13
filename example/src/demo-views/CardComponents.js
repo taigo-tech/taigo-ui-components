@@ -11,8 +11,8 @@ export default () => {
                         onEditPress={() => { console.log('edit press') }} />
                 </div>
 
-                <TextInput id="input-name" label="Name" />
-                <TextInput id="input-name" label="Name" />
+                <TextInput id="input-name1" label="Name" />
+                <TextInput id="input-name2" label="Name" />
                 <Checkbox />
             </EditableCard>
 

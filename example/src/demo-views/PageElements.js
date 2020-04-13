@@ -118,7 +118,7 @@ export default () => {
             <div style={{ paddingTop: 60, paddingBottom: 60, borderBottom: '1px solid #CCC' }}>
                 <h2>Searchbar</h2>
 
-                <Searchbar onSearch={onSearch} label="Search" loading={searchLoading} defaultValue="Cool" />
+                <Searchbar onSearch={onSearch} label="Search" loading={searchLoading} defaultValue="" />
             </div>
 
             <div style={{ paddingTop: 60, paddingBottom: 60, borderBottom: '1px solid #CCC' }}>
