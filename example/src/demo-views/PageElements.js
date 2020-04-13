@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { RoundedButton, PageTabs, Snackbar, Colors, FiltersDropdown, Searchbar } from 'taigo-ui-components';
+import { useTheme } from '@material-ui/core/styles';
+import { RoundedButton, PageTabs, Snackbar, Colors, FiltersDropdown, Searchbar, Steps } from 'taigo-ui-components';
 
 const { useSnackbar } = Snackbar;
 
 export default () => {
+    const theme = useTheme();
+
     // PageTabs
     const [selectedTab, setSelectedTab] = useState(null);
 
@@ -21,7 +24,10 @@ export default () => {
         }, 2000);
     }
 
+    // Steps
+    const [activeStep, setActiveStep] = useState(0);
 
+    // Snackbar
     const snackbar = useSnackbar();
 
     return (
@@ -62,7 +68,7 @@ export default () => {
             </div>
 
             <div style={{ paddingTop: 60, paddingBottom: 60, borderBottom: '1px solid #CCC' }}>
-                <h2>Filters.SelectionDropdown</h2>
+                <h2>FiltersDropdown</h2>
 
                 <FiltersDropdown
                     label="Filter"
@@ -113,6 +119,23 @@ export default () => {
                 <h2>Searchbar</h2>
 
                 <Searchbar onSearch={onSearch} label="Search" loading={searchLoading} defaultValue="Cool" />
+            </div>
+
+            <div style={{ paddingTop: 60, paddingBottom: 60, borderBottom: '1px solid #CCC' }}>
+                <h2>Steps</h2>
+
+                <Steps
+                    activeStep={activeStep}
+                    steps={[
+                        { label: 'Enter general information about the order.' },
+                        { label: 'Enter your container information. Add more containers if needed.' },
+                        { label: 'Error Message', errorMsg: 'Error!!!' },
+                        { label: 'Confirm the pricing of each container in the order. Click the button to verify, complete and publish.' },
+                    ]}
+                />
+
+                <RoundedButton color={theme.palette.primary.main} onClick={() => setActiveStep(prev => prev - 1)}>Back</RoundedButton>
+                <RoundedButton variant="contained" color={theme.palette.primary.main} onClick={() => setActiveStep(prev => prev + 1)}>Next</RoundedButton>
             </div>
         </div>
     );

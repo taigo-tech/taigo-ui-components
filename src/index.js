@@ -26,5 +26,6 @@ export { default as PageTabs } from './PageTabs';
 export { default as Snackbar } from './Snackbar';
 export { default as Searchbar } from './Searchbar';
 export { default as FiltersDropdown } from './FiltersDropdown';
+export { default as Steps } from './Steps';
 
 export { default as Colors } from './utils/colors';
