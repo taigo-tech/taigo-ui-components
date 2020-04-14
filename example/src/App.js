@@ -9,6 +9,7 @@ import ListAltIcon from '@material-ui/icons/ListAlt';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import MoodBadIcon from '@material-ui/icons/MoodBad';
 import FindInPageIcon from '@material-ui/icons/FindInPage';
+import ListIcon from '@material-ui/icons/List';
 
 import GlobalComponents from './demo-views/GlobalComponents';
 import PageElements from './demo-views/PageElements';
@@ -17,6 +18,10 @@ import FormikExample from './demo-views/FormikExample';
 import Notification, { getExampleNotifications } from './demo-views/Notification';
 import EmptyOrder from './demo-views/EmptyOrder';
 import EmptyChat from './demo-views/EmptyChat';
+import TableList from './demo-views/lists/TableList';
+import ActionableList from './demo-views/lists/ActionableList';
+import InfiniteScrolling from './demo-views/lists/InfiniteScrolling';
+
 import logo from './assets/taigo_logo_white.png';
 import logoPurple from './assets/taigo_logo_purple.png';
 import signInBg from './assets/login_bg.jpg';
@@ -101,6 +106,25 @@ export default () => {
           icon: NotificationsNoneIcon,
         },
         {
+          title: 'Lists',
+          path: '/lists',
+          icon: ListIcon,
+          routes: [
+            {
+              title: 'Infinite Scrolling',
+              path: '/lists/infinite',
+            },
+            {
+              title: 'Table List',
+              path: '/lists/table',
+            },
+            {
+              title: 'Actionable List',
+              path: '/lists/actionable',
+            },
+          ]
+        },
+        {
           title: 'Void',
           path: '/empty',
           icon: MoodBadIcon,
@@ -158,6 +182,18 @@ export default () => {
 
         <Route path="/empty/chat">
           <EmptyChat />
+        </Route>
+
+        <Route path="/lists/table">
+          <TableList />
+        </Route>
+        
+        <Route path="/lists/actionable">
+          <ActionableList />
+        </Route>
+
+        <Route path="/lists/infinite">
+          <InfiniteScrolling />
         </Route>
       </Switch>
     </AppLayout>

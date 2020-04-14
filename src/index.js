@@ -28,4 +28,8 @@ export { default as Searchbar } from './Searchbar';
 export { default as FiltersDropdown } from './FiltersDropdown';
 export { default as Steps } from './Steps';
 
+export { default as TableList } from './List/TableList';
+export { default as ActionableList } from './List/ActionableList';
+export { default as InfiniteList } from './List/InfiniteList';
+
 export { default as Colors } from './utils/colors';
