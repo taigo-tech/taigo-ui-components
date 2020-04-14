@@ -63,7 +63,8 @@
     "@material-ui/lab": "^4.0.0-alpha.48",
     "clsx": "^1.1.0",
     "lodash": "^4.17.15",
-    "notistack": "^0.9.9"
+    "notistack": "^0.9.9",
+    "react-custom-scrollbars": "^4.2.1"
   },
   "sideEffects": false,
   "publishConfig": {
