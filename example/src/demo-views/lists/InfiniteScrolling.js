@@ -17,25 +17,27 @@ const getData = (start, count) => {
     return data.slice(start, start + count);
 }
 
-const itemPerLoad = 90;
+const itemPerLoad = 10;
 
 export default () => {
     const [scrollIndex, setScrollIndex] = useState(0);
     const [loading, setLoading] = useState(false);
     const listData = getData(0, scrollIndex + itemPerLoad - 1);
 
-    const loadMore = () => {
-        if (listData.length < data.length) {
+    const loadMore = ({ scrollIndex }) => {
+        if (listData.length < data.length && !loading) {
             setLoading(true);
             setTimeout(() => { setScrollIndex(scrollIndex + itemPerLoad); setLoading(false); }, 3000);
         }
     }
 
-    return <InfiniteList onLoadMore={loadMore} loading={loading}>
-        {
-            listData.map((data, index) => {
-                return <div key={index}>{data.message}</div>
-            })
-        }
-    </InfiniteList>
+    return <div>
+        <InfiniteList onLoadMore={loadMore} loadMoreStates={{ scrollIndex }} loading={loading}>
+            {
+                listData.map((data, index) => {
+                    return <div key={index}>{data.message}</div>
+                })
+            }
+        </InfiniteList>
+    </div>
 }

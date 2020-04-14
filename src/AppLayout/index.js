@@ -16,14 +16,12 @@ import { isBrowser, getFlatMenus } from '../utils/utils';
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
-    height: '100vh',
   },
   contentWithAppbar: {
     flex: 1,
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
-    overflowX: 'hidden',
   },
   appBar: {
     boxShadow: 'unset',
@@ -135,7 +133,7 @@ function AppLayout(props) {
         </Hidden>
       </nav>
       <div className={classes.contentWithAppbar}>
-        <AppBar position="static" className={classes.appBar}>
+        <AppBar position="sticky" className={classes.appBar}>
           <Toolbar className={classes.toolbar}>
             <Box className={classes.pageInfo}>
               <IconButton

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
@@ -7,10 +7,6 @@ import { Scrollbars } from 'react-custom-scrollbars';
 
 const useStyles = makeStyles(theme => ({
     loadContainer: {
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -22,30 +18,46 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
+var isBottom = false;
+
 const InfiniteList = (props) => {
     const muiStyles = useStyles();
-    const { children, onLoadMore, loading, stopLoad, ...scrollProps } = props;
+    const { children, onLoadMore, loadMoreStates, loading, stopLoad, ...scrollProps } = props;
 
-    const handleUpdate = (values) => {
-        const { scrollTop, scrollHeight, clientHeight } = values;
-        const pad = 100; // 100px of the bottom
-        // t will be greater than 1 if we are about to reach the bottom
-        const t = ((scrollTop + pad) / (scrollHeight - clientHeight));
+    const scrollHandle = (states) => {
+        const pad = 100;
+        const t = ((window.pageYOffset + pad) / (document.body.offsetHeight - window.innerHeight));
 
-        if (t > 1 && !loading && !stopLoad) {
-            onLoadMore();
+        if (t > 1) {
+            if (!loading && !stopLoad && !isBottom) {
+                onLoadMore(states);
+                isBottom = true;
+            }
+        } else {
+            isBottom = false;
         };
     }
 
+    useEffect(() => {
+        const _handler = () => { scrollHandle(loadMoreStates); }
+        window.addEventListener('scroll', _handler);
+
+        return () => window.removeEventListener('scroll', _handler)
+    }, [loadMoreStates])
+
+    useEffect(() => {
+        if (window.pageYOffset === 0 && window.innerHeight > document.body.offsetHeight) {
+            onLoadMore(loadMoreStates);
+        }        
+    }, [loadMoreStates])
+
     return (
-        <Scrollbars {...scrollProps} onUpdate={handleUpdate}>
-            <div className={muiStyles.root}>
-                {children}
-                {
-                    loading && <div className={muiStyles.loadContainer}><CircularProgress /></div>
-                }
-            </div>
-        </Scrollbars>
+        <div className={muiStyles.root}>
+            {children}
+            {
+                loading && <div className={muiStyles.loadContainer}><CircularProgress /></div>
+            }
+        </div>
     );
 }
 
