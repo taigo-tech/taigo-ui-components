@@ -14,6 +14,7 @@ export default () => {
                 <Button variant="outlined">Invoice</Button>,
                 <Button variant="outlined">Receipt</Button>,
             ]}
+            onClick={() => console.log('onclick')}
         >
             <div style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}>Content</div>
             <div style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}>Content 1</div>
