@@ -22,14 +22,14 @@ var isBottom = false;
 
 const InfiniteList = (props) => {
     const muiStyles = useStyles();
-    const { children, onLoadMore, loadMoreStates, loading, stopLoad, ...scrollProps } = props;
+    const { children, onLoadMore, loadMoreStates, loading, disabled, ...scrollProps } = props;
 
-    const scrollHandle = (states) => {
+    const scrollHandle = (states, scrollContainer) => {
         const pad = 100;
-        const t = ((window.pageYOffset + pad) / (document.body.offsetHeight - window.innerHeight));
-
+        const t = ((scrollContainer.scrollTop + pad) / (scrollContainer.scrollHeight - scrollContainer.clientHeight));
+        
         if (t > 1) {
-            if (!loading && !stopLoad && !isBottom) {
+            if (!loading && !disabled && !isBottom) {
                 onLoadMore(states);
                 isBottom = true;
             }
@@ -39,16 +39,20 @@ const InfiniteList = (props) => {
     }
 
     useEffect(() => {
-        const _handler = () => { scrollHandle(loadMoreStates); }
-        window.addEventListener('scroll', _handler);
+        const scrollContainer = document.getElementById('content-with-appbar');
 
-        return () => window.removeEventListener('scroll', _handler)
+        const _handler = () => { scrollHandle(loadMoreStates, scrollContainer); }
+        scrollContainer.addEventListener('scroll', _handler);
+
+        return () => scrollContainer.removeEventListener('scroll', _handler)
     }, [loadMoreStates])
 
     useEffect(() => {
-        if (window.pageYOffset === 0 && window.innerHeight > document.body.offsetHeight) {
+        const scrollContainer = document.getElementById('content-with-appbar');
+        
+        if (scrollContainer.scrollTop === 0 && scrollContainer.clientHeight >= scrollContainer.scrollHeight) {
             onLoadMore(loadMoreStates);
-        }        
+        }
     }, [loadMoreStates])
 
     return (
@@ -66,7 +70,7 @@ InfiniteList.propTypes = {
     data: PropTypes.arrayOf(PropTypes.element),
     loading: PropTypes.bool,
     //Used to force stop infinite loading if required
-    stopLoad: PropTypes.bool,
+    disabled: PropTypes.bool,
 };
 
 InfiniteList.defaultProps = {

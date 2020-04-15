@@ -17,7 +17,7 @@ const getData = (start, count) => {
     return data.slice(start, start + count);
 }
 
-const itemPerLoad = 10;
+const itemPerLoad = 40;
 
 export default () => {
     const [scrollIndex, setScrollIndex] = useState(0);
