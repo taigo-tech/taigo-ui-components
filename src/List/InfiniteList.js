@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { Scrollbars } from 'react-custom-scrollbars';
 
 const useStyles = makeStyles(theme => ({
     loadContainer: {
