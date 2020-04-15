@@ -21,6 +21,7 @@ import EmptyChat from './demo-views/EmptyChat';
 import TableList from './demo-views/lists/TableList';
 import ActionableList from './demo-views/lists/ActionableList';
 import InfiniteScrolling from './demo-views/lists/InfiniteScrolling';
+import DeliveryStatusList from './demo-views/lists/DeliveryStatusList';
 
 import logo from './assets/taigo_logo_white.png';
 import logoPurple from './assets/taigo_logo_purple.png';
@@ -122,6 +123,10 @@ export default () => {
               title: 'Actionable List Item',
               path: '/lists/actionable',
             },
+            {
+              title: 'Delivery Status List',
+              path: '/lists/deliveryStatus',
+            },
           ]
         },
         {
@@ -194,6 +199,10 @@ export default () => {
 
         <Route path="/lists/infinite">
           <InfiniteScrolling />
+        </Route>
+
+        <Route path="/lists/deliveryStatus">
+          <DeliveryStatusList />
         </Route>
       </Switch>
     </AppLayout>
