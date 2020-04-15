@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import TableListItem from './TableListItem';
@@ -6,8 +6,6 @@ import TableListItem from './TableListItem';
 const useStyles = makeStyles(theme => ({
     root: {
         overflowX: 'auto',
-        paddingBottom: theme.spacing(1),
-        paddingRight: theme.spacing(0.5),
         msOverflowStyle: 'none',  // IE 10+
         overflow: '-moz-scrollbars-none',
         '&::-webkit-scrollbar': {
@@ -16,22 +14,29 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const Component = ({ children }) => {
+const Component = ({ children, collapsible, defaultExpanded }) => {
     const styles = useStyles();
 
     return (
         <div className={styles.root}>
-            {children}
+            {React.Children.map(children, child =>
+                cloneElement(child, {
+                    collapsible,
+                    defaultExpanded,
+                }),
+            )}
         </div>
     );
 }
 
 Component.propTypes = {
-    
+    collapsible: PropTypes.bool,
+    defaultExpanded: PropTypes.bool,
 };
 
 Component.defaultProps = {
-    
+    collapsible: false,
+    defaultExpanded: false,
 }
 
 Component.TableListItem = TableListItem;
