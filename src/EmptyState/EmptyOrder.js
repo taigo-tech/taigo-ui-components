@@ -10,11 +10,6 @@ const useStyles = makeStyles(theme => ({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
     },
     image: {
         maxWidth: '80%',
@@ -33,11 +28,11 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const Component = ({ image, message, actions = [], content }) => {
+const Component = ({ image, message, actions = [], content, style }) => {
     const styles = useStyles();
 
     return (
-        <div className={styles.root}>
+        <div className={styles.root} style={style}>
             <img src={image || defaultImage} alt="Empty" className={styles.image} />
             {content || (
                 <div>
@@ -58,6 +53,7 @@ Component.propTypes = {
     message: PropTypes.string,
     actions: PropTypes.arrayOf(PropTypes.element),
     content: PropTypes.element,
+    style: PropTypes.object,
 };
 
 export default Component;

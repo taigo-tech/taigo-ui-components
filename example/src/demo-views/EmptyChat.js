@@ -11,6 +11,6 @@ export default () => {
     );
 
     return (
-        <EmptyChat content={content} />
+        <EmptyChat content={content} style={{ marginTop: 48 }} />
     );
 }

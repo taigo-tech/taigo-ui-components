@@ -11,5 +11,6 @@ export default () => (
             <Link to ="/">Home</Link>,
             <Link to ="/formik">Formik example</Link>,
         ]}
+        style={{ marginTop: 48 }}
     />
 );
