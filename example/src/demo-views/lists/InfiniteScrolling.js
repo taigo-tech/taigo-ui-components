@@ -1,43 +1,31 @@
 import React, { useState } from 'react';
 import { InfiniteList } from 'taigo-ui-components';
 
-const generateData = () => {
+const generateData = count => {
     const data = [];
 
-    for (var i = 0; i < 300; i++) {
+    for (var i = 0; i < count; i++) {
         data.push({ message: `item${i}` });
     }
 
     return data;
 }
 
-const data = generateData();
-
-const getData = (start, count) => {
-    return data.slice(start, start + count);
-}
-
-const itemPerLoad = 40;
-
 export default () => {
-    const [scrollIndex, setScrollIndex] = useState(0);
+    const [data, setData] = useState(generateData(20));
     const [loading, setLoading] = useState(false);
-    const listData = getData(0, scrollIndex + itemPerLoad - 1);
 
-    const loadMore = ({ scrollIndex }) => {
-        if (listData.length < data.length && !loading) {
-            setLoading(true);
-            setTimeout(() => { setScrollIndex(scrollIndex + itemPerLoad); setLoading(false); }, 3000);
-        }
+    const loadMore = () => {
+        setLoading(true);
+        setTimeout(() => {
+            setData(data => data.concat(generateData(20)));
+            setLoading(false); 
+        }, 3000);
     }
 
     return <div>
-        <InfiniteList onLoadMore={loadMore} loadMoreStates={{ scrollIndex }} loading={loading}>
-            {
-                listData.map((data, index) => {
-                    return <div key={index}>{data.message}</div>
-                })
-            }
+        <InfiniteList onLoadMore={loadMore} count={data.length} loading={loading}>
+            {data.map((item, index) => <div key={index}>{item.message}</div>)}
         </InfiniteList>
     </div>
 }

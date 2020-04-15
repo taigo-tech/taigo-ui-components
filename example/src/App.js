@@ -127,7 +127,7 @@ export default () => {
               path: '/lists/table',
             },
             {
-              title: 'Actionable List',
+              title: 'Actionable List Item',
               path: '/lists/actionable',
             },
             {

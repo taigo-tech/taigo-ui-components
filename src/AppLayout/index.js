@@ -133,7 +133,7 @@ function AppLayout(props) {
           />
         </Hidden>
       </nav>
-      <div id="content-with-appbar" className={classes.contentWithAppbar}>
+      <div id="scrollable-target" className={classes.contentWithAppbar}>
         <AppBar position="sticky" className={classes.appBar}>
           <Toolbar className={classes.toolbar}>
             <Box className={classes.pageInfo}>
