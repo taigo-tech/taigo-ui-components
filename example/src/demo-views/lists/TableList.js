@@ -10,8 +10,18 @@ export default () => {
         <TableList collapsible defaultExpanded>
             <TableListItem data={data1} showHeader />
             <TableListItem data={data2}>
-                <TableListItem data={data3} transparent showLabel />
-                <TableListItem data={data4} transparent showLabel />
+                <TableListItem
+                    data={data3}
+                    transparent
+                    showLabel
+                    tableHead={<div>Job No: CG202004100902771</div>}
+                />
+                <TableListItem
+                    data={data4}
+                    transparent
+                    showLabel
+                    tableHead={<div>Job No: CG202004100902771</div>}
+                />
             </TableListItem>
         </TableList>
     )

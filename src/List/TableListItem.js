@@ -20,9 +20,14 @@ const useStyles = makeStyles(theme => ({
     },
     wrapper: {
         position: 'relative',
+        borderBottom: `1px solid ${theme.palette.grey[300]}`,
     },
     paper: {
         marginBottom: theme.spacing(1),
+    },
+    tableHead: {
+        padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`,
+        backgroundColor: 'rgba(0, 0, 0, 0.03)',
     },
     tableRow: {
         marginTop: 0,
@@ -68,7 +73,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const Component = ({ data = [], showHeader, showLabel, transparent, children, collapsible, defaultExpanded }) => {
+const Component = ({ data = [], showHeader, showLabel, transparent, tableHead, children, collapsible, defaultExpanded }) => {
     const styles = useStyles({ showLabel, collapsible, transparent });
     const theme = useTheme();
 
@@ -153,6 +158,7 @@ const Component = ({ data = [], showHeader, showLabel, transparent, children, co
         <div className={styles.root}>
             {showHeader && headerElement}
             <TableRowWrapper>
+                {tableHead && <div className={styles.tableHead}>{tableHead}</div>}
                 {element}
                 {collapsible && children && (
                     <ExpandButton
@@ -178,6 +184,7 @@ Component.propTypes = {
         size: PropTypes.number,
         render: PropTypes.func,
     })).isRequired,
+    tableHead: PropTypes.element,
     showHeader: PropTypes.bool,
     showLabel: PropTypes.bool,
     transparent: PropTypes.bool,
