@@ -33,13 +33,13 @@ export const taigoTheme = {
         fontSize: 13,
         fontFamily: 'Ubuntu, sans-serif',
         h1: {
-            fontSize: 36,
+            fontSize: 32,
         },
         h2: {
-            fontSize: 28,
+            fontSize: 26,
         },
         h3: {
-            fontSize: 24,
+            fontSize: 22,
         },
         h4: {
             fontSize: 18,

@@ -45,7 +45,7 @@ const Component = ({ title, subtitle, titleElement, content, actions = [], defau
                 {titleElement || (
                     <Fragment>
                         <Typography variant="h3" className={styles.title}>{title}</Typography>
-                        <Typography variant="h4">{subtitle}</Typography>
+                        <Typography variant="h5">{subtitle}</Typography>
                     </Fragment>
                 )}
             </Grid>
