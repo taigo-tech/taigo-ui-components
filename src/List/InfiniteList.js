@@ -1,80 +1,92 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
+import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { Scrollbars } from 'react-custom-scrollbars';
+import _ from 'lodash';
 
 const useStyles = makeStyles(theme => ({
+    root: {
+        position: 'relative',
+        height: 'auto',
+    },
     loadContainer: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         padding: `${theme.spacing()}px`,
     },
-    root: {
-        position: 'relative',
-        height: 'auto',
-    }
 }));
 
-var isBottom = false;
+let actionTriggered = false;
 
-const InfiniteList = (props) => {
+const InfiniteList = ({ children, onLoadMore, count, scrollThreshold, disabled, scrollableTarget }) => {
     const muiStyles = useStyles();
-    const { children, onLoadMore, loadMoreStates, loading, disabled, ...scrollProps } = props;
+    const [loading, setLoading] = useState(false);
 
-    const scrollHandle = (states, scrollContainer) => {
-        const pad = 100;
-        const t = ((scrollContainer.scrollTop + pad) / (scrollContainer.scrollHeight - scrollContainer.clientHeight));
-        
-        if (t > 1) {
-            if (!loading && !disabled && !isBottom) {
-                onLoadMore(states);
-                isBottom = true;
-            }
-        } else {
-            isBottom = false;
-        };
-    }
-
-    useEffect(() => {
-        const scrollContainer = document.getElementById('content-with-appbar');
-
-        const _handler = () => { scrollHandle(loadMoreStates, scrollContainer); }
-        scrollContainer.addEventListener('scroll', _handler);
-
-        return () => scrollContainer.removeEventListener('scroll', _handler)
-    }, [loadMoreStates])
-
-    useEffect(() => {
-        const scrollContainer = document.getElementById('content-with-appbar');
-        
-        if (scrollContainer.scrollTop === 0 && scrollContainer.clientHeight >= scrollContainer.scrollHeight) {
-            onLoadMore(loadMoreStates);
+    const getScrollableTarget = () => {
+        let target = null;
+        if (scrollableTarget instanceof HTMLElement)
+            target = scrollableTarget;
+        if (typeof scrollableTarget === 'string') {
+            target = document.getElementById(scrollableTarget);
         }
-    }, [loadMoreStates])
+
+        if (!target) {
+            console.error('Error! You must pass scrollableTarget if there is not HTMLElement with id \'scrollable-target\'.');
+        }
+
+        return target;
+    };
+
+    const _scrollHandler = _.throttle(() => {
+        if (actionTriggered) return;
+
+        const target = getScrollableTarget();
+        if ((target.scrollTop + target.clientHeight >= scrollThreshold * target.scrollHeight) && !disabled) {
+            actionTriggered = true;
+            setLoading(true);
+            onLoadMore();
+        }
+    }, 500);
+
+    useEffect(() => {
+        const target = getScrollableTarget();
+        target.addEventListener('scroll', _scrollHandler);
+
+        return () => target.removeEventListener('scroll', _scrollHandler);
+    }, []);
+
+    useEffect(() => {
+        actionTriggered = false;
+        setLoading(false);
+
+        const target = getScrollableTarget();
+        if (target.scrollTop === 0) {
+            _scrollHandler();
+        }
+    }, [count]);
 
     return (
         <div className={muiStyles.root}>
             {children}
-            {
-                loading && <div className={muiStyles.loadContainer}><CircularProgress /></div>
-            }
+            <div className={muiStyles.loadContainer} style={{ visibility: loading ? 'visible' : 'hidden' }}>
+                <CircularProgress size={20} />
+            </div>
         </div>
     );
 }
 
 InfiniteList.propTypes = {
     onLoadMore: PropTypes.func.isRequired,
-    data: PropTypes.arrayOf(PropTypes.element),
-    loading: PropTypes.bool,
-    //Used to force stop infinite loading if required
+    count: PropTypes.number.isRequired,
+    scrollableTarget: PropTypes.node,
+    scrollThreshold: PropTypes.number,
     disabled: PropTypes.bool,
 };
 
 InfiniteList.defaultProps = {
-
+    scrollThreshold: 0.8,
+    scrollableTarget: 'scrollable-target',
 }
 
 export default InfiniteList;
