@@ -10,6 +10,7 @@ import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import MoodBadIcon from '@material-ui/icons/MoodBad';
 import FindInPageIcon from '@material-ui/icons/FindInPage';
 import ListIcon from '@material-ui/icons/List';
+import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 
 import GlobalComponents from './demo-views/GlobalComponents';
 import PageElements from './demo-views/PageElements';
@@ -22,6 +23,7 @@ import TableList from './demo-views/lists/TableList';
 import ActionableList from './demo-views/lists/ActionableList';
 import InfiniteScrolling from './demo-views/lists/InfiniteScrolling';
 import DeliveryStatusList from './demo-views/lists/DeliveryStatusList';
+import StatusBars from './demo-views/StatusBars';
 
 import logo from './assets/taigo_logo_white.png';
 import logoPurple from './assets/taigo_logo_purple.png';
@@ -95,6 +97,11 @@ export default () => {
           title: 'Card',
           path: '/card',
           icon: CallToActionIcon,
+        },
+        {
+          title: 'Status Bars',
+          path: '/statusBars',
+          icon: LocalHospitalIcon,
         },
         {
           title: 'Formik Use Example',
@@ -192,7 +199,7 @@ export default () => {
         <Route path="/lists/table">
           <TableList />
         </Route>
-        
+
         <Route path="/lists/actionable">
           <ActionableList />
         </Route>
@@ -203,6 +210,10 @@ export default () => {
 
         <Route path="/lists/deliveryStatus">
           <DeliveryStatusList />
+        </Route>
+
+        <Route path="/statusBars">
+          <StatusBars />
         </Route>
       </Switch>
     </AppLayout>
