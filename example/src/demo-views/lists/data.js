@@ -38,6 +38,7 @@ export const data1 = [
         value: 'Completed',
         render: value => <Chip label={value} color="primary" />,
         size: 1,
+        showLabel: false,
     },
 ];
 
@@ -78,6 +79,7 @@ export const data2 = [
         value: 'Active',
         render: value => <Chip label={value} color="secondary" />,
         size: 1,
+        showLabel: false,
     },
 ];
 
@@ -130,6 +132,7 @@ export const data3 = [
         value: 'Pending',
         render: value => <Chip label={value} />,
         size: 1,
+        showLabel: false,
     },
 ];
 
@@ -182,6 +185,7 @@ export const data4 = [
         value: 'Active',
         render: value => <Chip label={value} color="primary" />,
         size: 1,
+        showLabel: false,
     },
 ];
 

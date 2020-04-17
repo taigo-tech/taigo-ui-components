@@ -46,6 +46,8 @@ const useStyles = makeStyles(theme => ({
     content: {
         borderTop: `1px solid ${theme.palette.grey[300]}`,
         padding: `0 ${theme.spacing(2)}px ${theme.spacing(2)}px`,
+    },
+    contentWrapper: {
         backgroundColor: Colors.lightblue,
     },
     label: {
@@ -53,6 +55,9 @@ const useStyles = makeStyles(theme => ({
         marginBottom: theme.spacing(0.5),
         [theme.breakpoints.up('md')]: {
             display: ({ showLabel }) => showLabel ? 'inherit' : 'none',
+            '&.hide': {
+                display: 'none',
+            },
         },
     },
     expandButtonContainer: {
@@ -70,7 +75,7 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.down('sm')]: {
             margin: `${theme.spacing(1)}px 0`,
         },
-    }
+    },
 }));
 
 const Component = ({ data = [], showHeader, showLabel, transparent, tableHead, children, collapsible, defaultExpanded }) => {
@@ -115,7 +120,9 @@ const Component = ({ data = [], showHeader, showLabel, transparent, tableHead, c
                     md={Math.floor(item.size / totalSize * 12)} 
                     key={item.id}
                 >
-                    <Grid item md={12} xs={6} className={styles.label}>
+                    <Grid item md={12} xs={6} className={clsx(styles.label, {
+                        hide: {}.hasOwnProperty.call(item, 'showLabel') && !item.showLabel,
+                    })}>
                         <Typography noWrap
                             variant="body2"
                         >
@@ -168,7 +175,9 @@ const Component = ({ data = [], showHeader, showLabel, transparent, tableHead, c
                 )}
                 {expanded && children && (
                     <div className={styles.content}>
-                        {children}
+                        <div className={styles.contentWrapper}>
+                            {children}
+                        </div>
                     </div>
                 )}
             </TableRowWrapper>
@@ -183,6 +192,7 @@ Component.propTypes = {
         value: PropTypes.string,
         size: PropTypes.number,
         render: PropTypes.func,
+        showLabel: PropTypes.bool,
     })).isRequired,
     tableHead: PropTypes.element,
     showHeader: PropTypes.bool,
