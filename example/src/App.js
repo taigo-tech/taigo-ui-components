@@ -11,6 +11,7 @@ import MoodBadIcon from '@material-ui/icons/MoodBad';
 import FindInPageIcon from '@material-ui/icons/FindInPage';
 import ListIcon from '@material-ui/icons/List';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 
 import GlobalComponents from './demo-views/GlobalComponents';
 import PageElements from './demo-views/PageElements';
@@ -24,6 +25,7 @@ import ActionableList from './demo-views/lists/ActionableList';
 import InfiniteScrolling from './demo-views/lists/InfiniteScrolling';
 import DeliveryStatusList from './demo-views/lists/DeliveryStatusList';
 import StatusBars from './demo-views/StatusBars';
+import Formats from './demo-views/Formats';
 
 import logo from './assets/taigo_logo_white.png';
 import logoPurple from './assets/taigo_logo_purple.png';
@@ -151,6 +153,11 @@ export default () => {
             }
           ]
         },
+        {
+          title: 'Formats',
+          path: '/formats',
+          icon: AttachMoneyIcon,
+        },
       ]}
       footerMenu={[
         {
@@ -214,6 +221,10 @@ export default () => {
 
         <Route path="/statusBars">
           <StatusBars />
+        </Route>
+
+        <Route path="/formats">
+          <Formats />
         </Route>
       </Switch>
     </AppLayout>

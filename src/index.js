@@ -35,3 +35,4 @@ export { default as InfiniteList } from './List/InfiniteList';
 export { default as DeliveryStatusList } from './List/DeliveryStatusList';
 
 export { default as Colors } from './utils/colors';
+export { default as Formats } from './utils/formats';
