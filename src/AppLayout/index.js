@@ -22,7 +22,6 @@ const useStyles = makeStyles(theme => ({
     flex: 1,
     display: 'flex',
     flexDirection: 'column',
-    width: '100%',
     overflowX: 'hidden',
   },
   appBar: {
@@ -65,8 +64,11 @@ const useStyles = makeStyles(theme => ({
     flex: 1,
     padding: theme.spacing(3),
     position: 'relative',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('md')]: {
       padding: theme.spacing(2),
+    },
+    [theme.breakpoints.down('xs')]: {
+      padding: theme.spacing(1),
     },
   },
   drawer: {
@@ -134,8 +136,8 @@ function AppLayout(props) {
           />
         </Hidden>
       </nav>
-      <div className={classes.contentWithAppbar}>
-        <AppBar position="static" className={classes.appBar}>
+      <div id="scrollable-target" className={classes.contentWithAppbar}>
+        <AppBar position="sticky" className={classes.appBar}>
           <Toolbar className={classes.toolbar}>
             <Box className={classes.pageInfo}>
               <IconButton

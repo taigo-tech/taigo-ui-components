@@ -26,11 +26,10 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'center',
     display: 'flex',
     flexDirection: 'column',
-    maxHeight: '100px',
   },
   logo: {
     objectFit: 'contain',
-    height: '100%',
+    height: '100px',
   },
   navList: {
     flex: 1,
