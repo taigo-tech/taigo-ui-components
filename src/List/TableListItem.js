@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
     paper: {
         marginBottom: theme.spacing(1),
     },
-    tableHead: {
+    titleElement: {
         padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`,
         backgroundColor: 'rgba(0, 0, 0, 0.03)',
     },
@@ -46,9 +46,6 @@ const useStyles = makeStyles(theme => ({
     content: {
         borderTop: `1px solid ${theme.palette.grey[300]}`,
         padding: `0 ${theme.spacing(2)}px ${theme.spacing(2)}px`,
-    },
-    contentWrapper: {
-        backgroundColor: Colors.lightblue,
     },
     label: {
         color: theme.palette.text.hint,
@@ -78,7 +75,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const Component = ({ data = [], showHeader, showLabel, transparent, tableHead, children, collapsible, defaultExpanded }) => {
+const Component = ({ data = [], showHeader, showLabel, transparent, title, titleElement, children, collapsible, defaultExpanded }) => {
     const styles = useStyles({ showLabel, collapsible, transparent });
     const theme = useTheme();
 
@@ -165,7 +162,7 @@ const Component = ({ data = [], showHeader, showLabel, transparent, tableHead, c
         <div className={styles.root}>
             {showHeader && headerElement}
             <TableRowWrapper>
-                {tableHead && <div className={styles.tableHead}>{tableHead}</div>}
+                {titleElement || (title && <div className={styles.titleElement}>{title}</div>)}
                 {element}
                 {collapsible && children && (
                     <ExpandButton
@@ -175,9 +172,7 @@ const Component = ({ data = [], showHeader, showLabel, transparent, tableHead, c
                 )}
                 {expanded && children && (
                     <div className={styles.content}>
-                        <div className={styles.contentWrapper}>
-                            {children}
-                        </div>
+                        {children}
                     </div>
                 )}
             </TableRowWrapper>
@@ -194,7 +189,8 @@ Component.propTypes = {
         render: PropTypes.func,
         showLabel: PropTypes.bool,
     })).isRequired,
-    tableHead: PropTypes.element,
+    title: PropTypes.string,
+    titleElement: PropTypes.element,
     showHeader: PropTypes.bool,
     showLabel: PropTypes.bool,
     transparent: PropTypes.bool,
