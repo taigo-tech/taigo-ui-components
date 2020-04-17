@@ -64,8 +64,11 @@ const useStyles = makeStyles(theme => ({
     flex: 1,
     padding: theme.spacing(3),
     position: 'relative',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('md')]: {
       padding: theme.spacing(2),
+    },
+    [theme.breakpoints.down('xs')]: {
+      padding: theme.spacing(1),
     },
   },
   drawer: {
