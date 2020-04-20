@@ -70,7 +70,7 @@ const useStyles = makeStyles(theme => ({
     height: 1,
     width: '100%',
     borderBottom: `2px solid ${theme.palette.primary.main}`,
-    margin: '20px 0',
+    margin: '10px 0 20px',
   },
   fadeout: {
     visibility: 'hidden',

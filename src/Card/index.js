@@ -7,7 +7,10 @@ import Card from '@material-ui/core/Card';
 
 const useStyles = makeStyles(theme => ({
   card: {
-    padding: '40px',
+    padding: theme.spacing(4),
+    [theme.breakpoints.down('sm')]: {
+      padding: theme.spacing(2),
+    }
   },
   title: {
     fontWeight: 'bold',
@@ -22,7 +25,7 @@ const useStyles = makeStyles(theme => ({
     height: 1,
     width: '100%',
     borderBottom: `2px solid ${theme.palette.primary.main}`,
-    margin: '20px 0',
+    margin: '10px 0 20px',
   }
 }))
 
