@@ -7,6 +7,9 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles(theme => ({
+    root: {
+        backgroundColor: 'transparent',
+    },
     label: {
         textAlign: 'center',
         maxWidth: 220,
@@ -17,7 +20,14 @@ const Component = ({ activeStep, steps, orientation }) => {
     const styles = useStyles();
 
     return (
-        <Stepper alternativeLabel activeStep={activeStep} orientation={orientation}>
+        <Stepper
+            alternativeLabel
+            activeStep={activeStep}
+            orientation={orientation}
+            classes={{
+                root: styles.root,
+            }}
+        >
             {steps.map(step => {
                 const labelProps = {};
                 if (step.errorMsg) {
