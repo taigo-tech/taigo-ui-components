@@ -46,7 +46,7 @@ const ConfirmDialog = props => {
         {children}
       </div>
       <div className={styles.spacing} />
-      <div className={styles.row}>
+      <div className={styles.row} style={{justifyContent: 'center'}}>
         <RoundedButton variant="outlined" color={color ? color : theme.palette.success.main} onClick={onCancel}>Cancel</RoundedButton>
         <div className={styles.spacing} />
         <RoundedButton variant="contained" color={color ? color : theme.palette.success.main} onClick={onConfirm}>Confirm</RoundedButton>
