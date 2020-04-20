@@ -80,6 +80,10 @@ export default () => {
                     <MenuItem value={1}>2</MenuItem>
                     <MenuItem value={2}>3</MenuItem>
                 </TextInput>
+
+                <div style={{ margin: '1em' }} />
+
+                <TextInput label="Disabled" value="Not editabled" disabled />
             </div>
 
             <div style={{ paddingTop: 60, paddingBottom: 60, borderBottom: '1px solid #CCC' }}>

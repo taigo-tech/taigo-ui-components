@@ -45,6 +45,9 @@ const useStyles = makeStyles(theme => ({
   inputMultiline: {
     padding: 0,
     lineHeight: 1.43
+  },
+  disabled: {
+    backgroundColor: theme.palette.grey[300],
   }
 }));
 
@@ -95,7 +98,7 @@ const TextInput = props => {
         <TextField
           error={error}
           disabled={disabled}
-          InputProps={{ classes: { input: styles.input, multiline: styles.inputMultiline } }}
+          InputProps={{ classes: { input: styles.input, multiline: styles.inputMultiline, disabled: styles.disabled } }}
           {...inputProps}
           variant="outlined"
           className={!editable ? styles.hidden : ''}
