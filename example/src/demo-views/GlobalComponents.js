@@ -24,7 +24,7 @@ export default () => {
             <div style={{ paddingTop: 60, paddingBottom: 60, borderBottom: '1px solid #CCC' }}>
                 <h2>Checkbox</h2>
 
-                <Checkbox onChange={(event) => { setIsLoading(event.target.checked); }} />
+                <Checkbox onChange={(event) => { setIsLoading(event.target.checked); }} label="Try this checkbox!" />
             </div>
 
             <div style={{ paddingTop: 60, paddingBottom: 60, borderBottom: '1px solid #CCC' }}>

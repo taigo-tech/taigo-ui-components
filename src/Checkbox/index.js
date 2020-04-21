@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
-import MuiCheckbox from '@material-ui/core/Checkbox';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
+import MuiCheckbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import EditableContext from '../context/EditableContext';
 import _ from 'lodash';
 
@@ -16,7 +18,7 @@ const useStyles = makeStyles(theme => ({
 const Checkbox = props => {
   const contextEditable = useContext(EditableContext);
 
-  const { ...inputProps } = props;
+  const { label, ...inputProps } = props;
   var { disabled } = props;
   const styles = useStyles();
 
@@ -28,12 +30,24 @@ const Checkbox = props => {
     }
   }
 
-  return (
+  const checkboxComponent = (
     <MuiCheckbox {...inputProps} classes={{ root: styles.root, checked: styles.checked }} disabled={disabled} />
   );
+
+  if (label) {
+    return (
+      <FormControlLabel
+        control={checkboxComponent}
+        label={label}
+      />
+    );
+  }
+
+  return checkboxComponent;
 }
 
 Checkbox.propTypes = {
+  label: PropTypes.string,
 };
 
 export default Checkbox;
