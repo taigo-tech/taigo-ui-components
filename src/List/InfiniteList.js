@@ -18,6 +18,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 let actionTriggered = false;
+let _scrollHandler = null;
 
 const InfiniteList = ({ children, onLoadMore, count, scrollThreshold, disabled, scrollableTarget }) => {
     const muiStyles = useStyles();
@@ -38,7 +39,7 @@ const InfiniteList = ({ children, onLoadMore, count, scrollThreshold, disabled, 
         return target;
     };
 
-    const _scrollHandler = useCallback(_.throttle(() => {
+    _scrollHandler = _.throttle(() => {
         if (actionTriggered) return;
 
         const target = getScrollableTarget();
@@ -47,14 +48,14 @@ const InfiniteList = ({ children, onLoadMore, count, scrollThreshold, disabled, 
             setLoading(true);
             onLoadMore();
         }
-    }, 500), [scrollThreshold, disabled]);
+    }, 500);
 
     useEffect(() => {
         const target = getScrollableTarget();
         target.addEventListener('scroll', _scrollHandler);
 
         return () => target.removeEventListener('scroll', _scrollHandler);
-    }, [_scrollHandler]);
+    }, []);
 
     useEffect(() => {
         actionTriggered = false;
@@ -64,7 +65,7 @@ const InfiniteList = ({ children, onLoadMore, count, scrollThreshold, disabled, 
         if (target.scrollTop === 0) {
             _scrollHandler();
         }
-    }, [count, _scrollHandler]);
+    }, [count]);
 
     return (
         <div className={muiStyles.root}>
