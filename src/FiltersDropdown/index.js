@@ -106,7 +106,7 @@ const Component = ({ label, data = [], multiple, onSubmit, buttonProps }) => {
 };
 
 Component.propTypes = {
-    label: PropTypes.string.isRequired,
+    label: PropTypes.node.isRequired,
     onSubmit: PropTypes.func.isRequired,
     data: PropTypes.arrayOf((propValue, key) => {
         if ({}.hasOwnProperty.call(propValue[key], 'selections') && !propValue[key].id) {
