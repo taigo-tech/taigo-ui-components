@@ -45,7 +45,7 @@ const InfiniteList = ({ children, onLoadMore, count, scrollThreshold, disabled, 
         if ((target.scrollTop + target.clientHeight >= scrollThreshold * target.scrollHeight) && !disabled) {
             actionTriggered = true;
             setLoading(true);
-            onLoadMore();console.log('onLoadMore');
+            onLoadMore();
         }
     }, 500), [scrollThreshold, disabled]);
 
