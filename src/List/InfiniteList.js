@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -38,23 +38,23 @@ const InfiniteList = ({ children, onLoadMore, count, scrollThreshold, disabled, 
         return target;
     };
 
-    const _scrollHandler = _.throttle(() => {
+    const _scrollHandler = useCallback(_.throttle(() => {
         if (actionTriggered) return;
 
         const target = getScrollableTarget();
         if ((target.scrollTop + target.clientHeight >= scrollThreshold * target.scrollHeight) && !disabled) {
             actionTriggered = true;
             setLoading(true);
-            onLoadMore();
+            onLoadMore();console.log('onLoadMore');
         }
-    }, 500);
+    }, 500), [scrollThreshold, disabled]);
 
     useEffect(() => {
         const target = getScrollableTarget();
         target.addEventListener('scroll', _scrollHandler);
 
         return () => target.removeEventListener('scroll', _scrollHandler);
-    }, []);
+    }, [_scrollHandler]);
 
     useEffect(() => {
         actionTriggered = false;
@@ -64,14 +64,16 @@ const InfiniteList = ({ children, onLoadMore, count, scrollThreshold, disabled, 
         if (target.scrollTop === 0) {
             _scrollHandler();
         }
-    }, [count]);
+    }, [count, _scrollHandler]);
 
     return (
         <div className={muiStyles.root}>
             {children}
-            <div className={muiStyles.loadContainer} style={{ visibility: loading ? 'visible' : 'hidden' }}>
-                <CircularProgress size={20} />
-            </div>
+            {!disabled && (
+                <div className={muiStyles.loadContainer} style={{ visibility: loading ? 'visible' : 'hidden' }}>
+                    <CircularProgress size={20} />
+                </div>
+            )}
         </div>
     );
 }
