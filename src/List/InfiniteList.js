@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
 let actionTriggered = false;
 let _scrollHandler = null;
 
-const InfiniteList = ({ children, onLoadMore, count, scrollThreshold, disabled, scrollableTarget }) => {
+const InfiniteList = ({ children, onLoadMore, count, hasMore, scrollThreshold, disabled, scrollableTarget }) => {
     const muiStyles = useStyles();
     const [loading, setLoading] = useState(false);
 
@@ -65,7 +65,7 @@ const InfiniteList = ({ children, onLoadMore, count, scrollThreshold, disabled, 
         if (target.scrollTop === 0) {
             _scrollHandler();
         }
-    }, [count]);
+    }, [count, disabled]);
 
     return (
         <div className={muiStyles.root}>
