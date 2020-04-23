@@ -17,54 +17,50 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+let target;
 let actionTriggered = false;
-let _scrollHandler = null;
 
-const InfiniteList = ({ children, onLoadMore, count, hasMore, scrollThreshold, disabled, scrollableTarget }) => {
+const InfiniteList = ({ children, onLoadMore, count, scrollThreshold, disabled, scrollableTarget }) => {
     const muiStyles = useStyles();
+    // const [actionTriggered, setActionTriggered] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    const getScrollableTarget = () => {
-        let target = null;
-        if (scrollableTarget instanceof HTMLElement)
-            target = scrollableTarget;
-        if (typeof scrollableTarget === 'string') {
-            target = document.getElementById(scrollableTarget);
-        }
-
-        if (!target) {
-            console.error('Error! You must pass scrollableTarget if there is not HTMLElement with id \'scrollable-target\'.');
-        }
-
-        return target;
-    };
-
-    _scrollHandler = _.throttle(() => {
-        if (actionTriggered) return;
-
-        const target = getScrollableTarget();
-        if ((target.scrollTop + target.clientHeight >= scrollThreshold * target.scrollHeight) && !disabled) {
-            actionTriggered = true;
-            setLoading(true);
-            onLoadMore();
-        }
-    }, 500);
-
+    // set scrollTarget
     useEffect(() => {
-        const target = getScrollableTarget();
-        target.addEventListener('scroll', _scrollHandler);
-
-        return () => target.removeEventListener('scroll', _scrollHandler);
+        target = (() => {
+            if (scrollableTarget instanceof HTMLElement)
+                return scrollableTarget;
+            if (typeof scrollableTarget === 'string') {
+                return document.getElementById(scrollableTarget);
+            }
+    
+            console.error('Error! You must pass scrollableTarget if there is not HTMLElement with id \'scrollable-target\'.');
+            return document.body;
+        })();
     }, []);
 
     useEffect(() => {
         actionTriggered = false;
         setLoading(false);
 
-        const target = getScrollableTarget();
+        const handleLoadMore = _.throttle(() => {
+            if (actionTriggered) return;
+    
+            if ((target.scrollTop + target.clientHeight >= scrollThreshold * target.scrollHeight) && !disabled) {
+                actionTriggered = true;
+                setLoading(true);
+                onLoadMore();
+            }
+        }, 500);
+
+        // auto load more if less than a page
         if (target.scrollTop === 0) {
-            _scrollHandler();
+            handleLoadMore();
         }
+
+        // scrolling event
+        target.addEventListener('scroll', handleLoadMore);
+        return () => target.removeEventListener('scroll', handleLoadMore);
     }, [count, disabled]);
 
     return (
