@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const Component = ({ label, onSearch, placeholder, loading, defaultValue }) => {
+const Component = ({ label, onSearch, onClear, placeholder, loading, defaultValue }) => {
     const styles = useStyles();
     const theme = useTheme();
 
@@ -51,11 +51,12 @@ const Component = ({ label, onSearch, placeholder, loading, defaultValue }) => {
     const resetField = () => {
         if (loading) return;
         setValue('');
+        if (typeof onClear === 'function') onClear();
     }
 
     const handleSearch = () => {
         if (loading) return;
-        if(value) onSearch(value);
+        onSearch(value);
     }
 
     const showRoundedButton = useMediaQuery(theme.breakpoints.up('sm'));
@@ -119,6 +120,7 @@ const Component = ({ label, onSearch, placeholder, loading, defaultValue }) => {
 Component.propTypes = {
     label: PropTypes.string.isRequired,
     onSearch: PropTypes.func.isRequired,
+    onClear: PropTypes.func,
     defaultValue: PropTypes.string,
     placeholder: PropTypes.string,
     loading: PropTypes.bool,

@@ -18,7 +18,7 @@ export default () => {
     const [searchLoading, setSearchLoading] = useState(false);
     const onSearch = value => {
         setSearchLoading(true);
-        console.log(value);
+        console.log('search:', value);
         setTimeout(() => {
             setSearchLoading(false);
         }, 2000);
@@ -118,7 +118,7 @@ export default () => {
             <div style={{ paddingTop: 60, paddingBottom: 60, borderBottom: '1px solid #CCC' }}>
                 <h2>Searchbar</h2>
 
-                <Searchbar onSearch={onSearch} label="Search" loading={searchLoading} defaultValue="" />
+                <Searchbar onSearch={onSearch} label="Search" loading={searchLoading} defaultValue="" onClear={() => console.log('search onClear')} />
             </div>
 
             <div style={{ paddingTop: 60, paddingBottom: 60, borderBottom: '1px solid #CCC' }}>
