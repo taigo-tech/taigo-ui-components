@@ -72,6 +72,7 @@ export default () => {
 
                 <FiltersDropdown
                     label="Filter"
+                    defaultValue={['Pending']}
                     onSubmit={values => { setFilter1(JSON.stringify(values))}}
                     data={[
                         { id: 'Paid', label: 'Paid' },
@@ -88,6 +89,7 @@ export default () => {
                 <FiltersDropdown
                     multiple
                     label="Filters (multiple)"
+                    defaultValue={{ deliver: ['picked', 'delivery', 'yard'], collection: ['collection'] }}
                     onSubmit={values => { setFilter2(JSON.stringify(values))}}
                     data={[
                         {

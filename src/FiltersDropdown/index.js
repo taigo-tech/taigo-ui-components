@@ -8,6 +8,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Radio from '@material-ui/core/Radio';
 import { Typography } from '@material-ui/core';
+import _ from 'lodash';
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -22,10 +23,18 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const Component = ({ label, data = [], multiple, onSubmit, buttonProps }) => {
+const Component = ({ label, data = [], multiple, onSubmit, buttonProps, defaultValue }) => {
     const styles = useStyles();
     const [anchorEl, setAnchorEl] = useState(null);
-    const [values, setValues] = useState({});
+    const [values, setValues] = useState(() => {
+        if (_.isArray(defaultValue)) {
+            return { none: multiple ? defaultValue : _.take(defaultValue) }
+        } else {
+            return _.forIn(defaultValue, (value, key) => {
+                if (!multiple) defaultValue[key] = _.take(value);
+            })
+        }
+    });
 
     const handleClick = e => {
         setAnchorEl(e.currentTarget);
@@ -113,12 +122,14 @@ Component.propTypes = {
             return new Error('Categorized selections must have an ID!');
         }
     }).isRequired,
+    defaultValue: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
     multiple: PropTypes.bool,
     buttonProps: PropTypes.object,
 };
 
 Component.defaultProps = {
     multiple: false,
+    defaultValue: {},
 };
 
 export default Component;
