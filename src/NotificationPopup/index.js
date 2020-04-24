@@ -67,7 +67,7 @@ const NotificationPopup = ({ linkComponent: Link, loading = false, count = 0, it
                 className={clsx(classes.notification_button, { [classes.notification_button_highlight]: !!anchorEl })}
             >
                 <Badge color="error" badgeContent={count > 0 ? count : null}>
-                <NotificationsIcon />
+                    <NotificationsIcon />
                 </Badge>
             </IconButton>
             

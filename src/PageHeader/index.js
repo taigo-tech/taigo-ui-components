@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
+import Badge from '@material-ui/core/Badge';
 import _ from 'lodash';
 import ProfileMenuItem from './ProfileMenuItem';
 import colors from '../utils/colors';
@@ -61,6 +62,10 @@ const styles = theme => ({
   menu: {
     padding: theme.spacing(1),
   },
+  avatarBadge: {
+    top: 5,
+    right: 5,
+  }
 });
 
 class PageHeader extends Component {
@@ -114,6 +119,7 @@ class PageHeader extends Component {
       name,
       email,
       profilePic,
+      count,
       profileMenuData = [],
       extraNavigations = [],
       linkComponent,
@@ -132,16 +138,18 @@ class PageHeader extends Component {
         </Hidden>
         <Button color="inherit" onClick={this.handleProfileMenuClick} className={classes.menu_button}>
           <div className={classes.button_inner}>
-            <div className={classes.avatar_container}>
-              {
-                profilePic && profilePic !== 'null' ?
-                  <img className="avatar" src={profilePic} />
-                  :
-                  <div className={classes.text_avatar}>
-                    {name && name[0].toUpperCase()}
-                  </div>
-              }
-            </div>
+            <Badge color="error" badgeContent={count > 0 ? count : null} classes={{ badge: classes.avatarBadge }}>
+              <div className={classes.avatar_container}>
+                {
+                  profilePic && profilePic !== 'null' ?
+                    <img className="avatar" src={profilePic} />
+                    :
+                    <div className={classes.text_avatar}>
+                      {name && name[0].toUpperCase()}
+                    </div>
+                }
+              </div>
+            </Badge>
 
             <Hidden smDown implementation="css">
               <div className={classes.name_container}>
