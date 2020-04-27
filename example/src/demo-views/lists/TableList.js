@@ -17,7 +17,7 @@ export default () => {
 
     return (
         <TableList collapsible defaultExpanded>
-            <TableListItem data={data1} showHeader />
+            <TableListItem data={data1} showHeader onClick={() => console.log('onClick')} />
             <TableListItem data={data2}>
                 <TableListItem
                     data={data3}

@@ -16,11 +16,14 @@ const useStyles = makeStyles(theme => ({
     root: {
         [theme.breakpoints.up('md')]: {
             minWidth: ({ transparent }) => transparent ? 'fit-content' : 960,
-        }
+        },
     },
     wrapper: {
         position: 'relative',
         borderBottom: `1px solid ${theme.palette.grey[300]}`,
+        '&.clickable': {
+            cursor: 'pointer',
+        }
     },
     paper: {
         marginBottom: theme.spacing(1),
@@ -75,13 +78,20 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const Component = ({ data = [], showHeader, showLabel, transparent, title, titleElement, children, collapsible, defaultExpanded }) => {
+const Component = ({ data = [], showHeader, showLabel, transparent, title, titleElement, children, collapsible, defaultExpanded, onClick }) => {
     const styles = useStyles({ showLabel, collapsible, transparent });
     const theme = useTheme();
 
     const [expanded, setExpanded] = useState(defaultExpanded);
 
     const totalSize = _.sumBy(data, item => item.size || 0, 0);
+
+    const handleClick = e => {
+        if (typeof onClick === 'function') {
+            e.stopPropagation();
+            onClick();
+        }
+    }
 
     const headerElement = (
         <Grid container
@@ -153,15 +163,15 @@ const Component = ({ data = [], showHeader, showLabel, transparent, title, title
     );
 
     const TableRowWrapper = props => transparent ? (
-        <div {...props} className={styles.wrapper} />
+        <div {...props} className={clsx(styles.wrapper, { clickable: typeof onClick === 'function' })} />
     ) : (
-        <Paper {...props} className={clsx(styles.wrapper, styles.paper)} />
+        <Paper {...props} className={clsx(styles.wrapper, styles.paper, { clickable: typeof onClick === 'function' })} />
     );
 
     return (
         <div className={styles.root}>
             {showHeader && headerElement}
-            <TableRowWrapper>
+            <TableRowWrapper onClick={handleClick}>
                 {titleElement || (title && <div className={styles.titleElement}>{title}</div>)}
                 {element}
                 {collapsible && children && (
@@ -194,6 +204,7 @@ Component.propTypes = {
     showHeader: PropTypes.bool,
     showLabel: PropTypes.bool,
     transparent: PropTypes.bool,
+    onClick: PropTypes.func,
 };
 
 Component.defaultProps = {
