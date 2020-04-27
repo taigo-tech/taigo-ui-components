@@ -1,5 +1,6 @@
 import React, { createElement } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { pathToRegexp } from 'path-to-regexp';
 import SubMenu from './SubMenu';
 import MenuItem from './MenuItem';
 import { isUrl } from '../utils/utils';
@@ -54,7 +55,7 @@ export default class MenuUtil {
 				menuItemComponent={this.props.menuItemComponent}
 				onClick={this.props.onMenuItemClick}
 				level={level}
-				selected={item.path === pathname}
+				selected={pathToRegexp(item.path).test(pathname)}
 			/>
 		);
 	}

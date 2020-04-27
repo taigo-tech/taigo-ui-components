@@ -65,6 +65,7 @@
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "notistack": "^0.9.9",
+    "path-to-regexp": "^6.1.0",
     "react-custom-scrollbars": "^4.2.1"
   },
   "sideEffects": false,

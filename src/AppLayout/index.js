@@ -9,6 +9,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import _ from 'lodash';
+import { pathToRegexp } from 'path-to-regexp';
 import SideMenu from '../Drawer';
 import PageHeader from '../PageHeader';
 import { isBrowser, getFlatMenus } from '../utils/utils';
@@ -107,7 +109,8 @@ function AppLayout(props) {
   };
 
   const flatMenus = getFlatMenus(menuData);
-  const pageTitle = flatMenus[location.pathname] ? flatMenus[location.pathname].title : '';
+  const titleMenu = _.findKey(flatMenus, item => pathToRegexp(item.path).test(location.pathname));
+  const pageTitle = titleMenu ? flatMenus[titleMenu].title : '';
 
   return (
     <div className={classes.root}>

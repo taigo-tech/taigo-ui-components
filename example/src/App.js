@@ -92,7 +92,7 @@ export default () => {
         },
         {
           title: 'Page Elements',
-          path: '/page',
+          path: '/page/:id',
           icon: FindInPageIcon,
         },
         {
