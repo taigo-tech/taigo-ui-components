@@ -21,6 +21,7 @@ const useStyles = makeStyles(theme => ({
     padding: '10px 14px',
     height: '100%',
     color: theme.palette.grey[900],
+    backgroundColor: theme.palette.common.white,
     fontSize: 14,
   },
   visible: {
