@@ -56,7 +56,7 @@ const TextInput = props => {
   const contextEditable = useContext(EditableContext);
   const contextLoading = useContext(LoadingContext);
 
-  var { editable, disabled, error, label, ...inputProps } = props;
+  var { textFieldProps, labelProps, textProps, editable, disabled, error, label, ...inputProps } = props;
   const styles = useStyles({ multiline: props.multiline });
 
   const getSelectText = (value) => {
@@ -91,7 +91,7 @@ const TextInput = props => {
 
   return (
     <div>
-      <div className={clsx(styles.label, (error && editable) && styles.error)}>
+      <div className={clsx(styles.label, (error && editable) && styles.error)} {...labelProps}>
         {label}
       </div>
 
@@ -101,12 +101,13 @@ const TextInput = props => {
           disabled={disabled}
           InputProps={{ classes: { input: styles.input, multiline: styles.inputMultiline, disabled: styles.disabled } }}
           {...inputProps}
+          {...textFieldProps}
           variant="outlined"
           className={!editable ? styles.hidden : ''}
           fullWidth
         />
 
-        <div className={clsx(styles.input, styles.text, editable && styles.hidden)}>
+        <div className={clsx(styles.input, styles.text, editable && styles.hidden)} {...textProps}>
           {props.select ? getSelectText(props.value) : props.value}
         </div>
       </div>
@@ -115,7 +116,10 @@ const TextInput = props => {
 }
 
 TextInput.propTypes = {
-  editable: PropTypes.bool
+  editable: PropTypes.bool,
+  labelProps: PropTypes.object,
+  textProps: PropTypes.object,
+  textFieldProps: PropTypes.object,
 };
 
 export default TextInput;
