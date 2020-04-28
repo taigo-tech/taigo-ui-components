@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { RoundedButton, TextInput, Checkbox, ConfirmDialog, ErrorDialog, Avatar, Switch } from 'taigo-ui-components';
 import MenuItem from '@material-ui/core/MenuItem';
+import InputAdornment from '@material-ui/core/InputAdornment';
 import { useTheme } from '@material-ui/core/styles';
 
 export default () => {
@@ -70,7 +71,7 @@ export default () => {
 
                 <div style={{ margin: '1em' }} />
 
-                <TextInput id="text-error-input" label="Error" error helperText={"Error sample"} />
+                <TextInput id="text-error-input" label="Error" error helperText={"Error sample"} InputProps={{ startAdornment: <InputAdornment position="start">RM</InputAdornment> }} />
 
                 <div style={{ margin: '1em' }} />
 
