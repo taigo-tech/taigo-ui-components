@@ -91,9 +91,11 @@ const TextInput = props => {
 
   return (
     <div>
-      <div className={clsx(styles.label, (error && editable) && styles.error)} {...labelProps}>
-        {label}
-      </div>
+      {label && (
+        <div className={clsx(styles.label, (error && editable) && styles.error)} {...labelProps}>
+          {label}
+        </div>
+      )}
 
       <div style={{ position: 'relative' }}>
         <TextField
