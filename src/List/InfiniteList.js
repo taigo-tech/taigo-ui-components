@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
 let target;
 let actionTriggered = false;
 
-const InfiniteList = ({ children, onLoadMore, count, scrollThreshold, disabled, scrollableTarget }) => {
+const InfiniteList = ({ children, onLoadMore, count, scrollThreshold, disabled, scrollableTarget, listProps }) => {
     const muiStyles = useStyles();
     // const [actionTriggered, setActionTriggered] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -64,7 +64,7 @@ const InfiniteList = ({ children, onLoadMore, count, scrollThreshold, disabled, 
     }, [count, disabled]);
 
     return (
-        <div className={muiStyles.root}>
+        <div className={muiStyles.root} {...listProps}>
             {children}
             {!disabled && (
                 <div className={muiStyles.loadContainer} style={{ visibility: loading ? 'visible' : 'hidden' }}>
@@ -76,6 +76,7 @@ const InfiniteList = ({ children, onLoadMore, count, scrollThreshold, disabled, 
 }
 
 InfiniteList.propTypes = {
+    listProps: PropTypes.object,
     onLoadMore: PropTypes.func.isRequired,
     count: PropTypes.number.isRequired,
     scrollableTarget: PropTypes.node,
