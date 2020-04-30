@@ -56,7 +56,7 @@ const TextInput = props => {
   const contextEditable = useContext(EditableContext);
   const contextLoading = useContext(LoadingContext);
 
-  var { textFieldProps, labelProps, textProps, editable, disabled, error, label, ...inputProps } = props;
+  var { textFieldProps, labelProps, textProps, InputProps, editable, disabled, error, label, ...inputProps } = props;
   const styles = useStyles({ multiline: props.multiline });
 
   const getSelectText = (value) => {
@@ -91,15 +91,20 @@ const TextInput = props => {
 
   return (
     <div>
-      <div className={clsx(styles.label, (error && editable) && styles.error)} {...labelProps}>
-        {label}
-      </div>
+      {label && (
+        <div className={clsx(styles.label, (error && editable) && styles.error)} {...labelProps}>
+          {label}
+        </div>
+      )}
 
       <div style={{ position: 'relative' }}>
         <TextField
           error={error}
           disabled={disabled}
-          InputProps={{ classes: { input: styles.input, multiline: styles.inputMultiline, disabled: styles.disabled } }}
+          InputProps={{
+            classes: { input: styles.input, multiline: styles.inputMultiline, disabled: styles.disabled },
+            ...InputProps,
+          }}
           {...inputProps}
           {...textFieldProps}
           variant="outlined"
