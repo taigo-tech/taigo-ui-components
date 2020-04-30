@@ -1,5 +1,7 @@
 import React from 'react';
 import { EditableCard, TextInput, Checkbox, Card, RoundedButton, Avatar } from 'taigo-ui-components';
+import Typography from '@material-ui/core/Typography';
+
 
 export default () => {
     return (
@@ -18,7 +20,7 @@ export default () => {
 
             <div style={{ margin: '1em' }} />
 
-            <Card title='NORMAL CARD'>
+            <Card title={<Typography variant="h4">Custom title</Typography>}>
                 Normal Card
             </Card>
 

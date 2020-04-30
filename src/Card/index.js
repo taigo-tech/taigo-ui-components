@@ -39,9 +39,11 @@ const EditableCard = props => {
   return (
     <Card {...inputProps} className={styles.card}>
       <div className={styles.row}>
-        <Typography component="h4" className={styles.title}>
-          {title}
-        </Typography>
+        {typeof title === 'string' ? (
+          <Typography component="h4" className={styles.title}>
+            {title}
+          </Typography>
+        ) : title}
 
         <div style={{ flexGrow: 1 }} />
 
@@ -58,7 +60,8 @@ const EditableCard = props => {
 }
 
 EditableCard.propTypes = {
-  editable: PropTypes.bool
+  editable: PropTypes.bool,
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
 }
 
 export default EditableCard;
