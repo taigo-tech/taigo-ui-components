@@ -15,7 +15,7 @@ import Colors from '../utils/colors';
 const useStyles = makeStyles(theme => ({
     root: {
         [theme.breakpoints.up('md')]: {
-            minWidth: ({ transparent }) => transparent ? 'fit-content' : 960,
+            minWidth: ({ transparent, minWidth }) => transparent ? 'fit-content' : minWidth,
         },
     },
     wrapper: {
@@ -78,8 +78,8 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const Component = ({ data = [], showHeader, showLabel, transparent, title, titleElement, children, collapsible, defaultExpanded, onClick }) => {
-    const styles = useStyles({ showLabel, collapsible, transparent });
+const Component = ({ data = [], showHeader, showLabel, transparent, title, titleElement, children, collapsible, defaultExpanded, onClick, minWidth = 960 }) => {
+    const styles = useStyles({ showLabel, collapsible, transparent, minWidth });
     const theme = useTheme();
 
     const [expanded, setExpanded] = useState(defaultExpanded);

@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const Component = ({ children, collapsible, defaultExpanded }) => {
+const Component = ({ children, collapsible, defaultExpanded, minWidth }) => {
     const styles = useStyles();
 
     return (
@@ -23,6 +23,7 @@ const Component = ({ children, collapsible, defaultExpanded }) => {
                 cloneElement(child, {
                     collapsible,
                     defaultExpanded,
+                    minWidth,
                 }),
             )}
         </div>
@@ -32,11 +33,13 @@ const Component = ({ children, collapsible, defaultExpanded }) => {
 Component.propTypes = {
     collapsible: PropTypes.bool,
     defaultExpanded: PropTypes.bool,
+    minWidth: PropTypes.number,
 };
 
 Component.defaultProps = {
     collapsible: false,
     defaultExpanded: false,
+    minWidth: 960,
 }
 
 Component.TableListItem = TableListItem;
