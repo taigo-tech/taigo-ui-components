@@ -118,7 +118,7 @@ const StatusItem = ({ data }) => {
                     </div>
                 </div>
 
-                <div className={styles.column}>
+                <div className={styles.column} style={{ flexShrink: 0 }}>
                     <div className={styles.dateTimeSpacing} />
                     <div className={styles.column} style={{ alignItems: 'flex-end' }}>
                         <div className={styles.date}>

@@ -11,7 +11,7 @@ const data = [
     {
         index: 2,
         status: 'Delivered to Customer',
-        address: 'NORTHPOINT OFFICE,\nLINGKARAN SYED PUTRA\nMDI VALLEY CITY\nKUALA LUMPUR',
+        address: '39, Jalan Boginvila, Taman Bukit Belimbing, 43300 Seri Kembangan, Selangor, Malaysia',
         dateTime: new Date(),
     },
     {
@@ -24,5 +24,7 @@ const data = [
 ]
 
 export default () => {
-    return <DeliveryStatusList data={data} />
+    return <div style={{ width: '300px' }}>
+        <DeliveryStatusList data={data} />
+    </div>
 }
