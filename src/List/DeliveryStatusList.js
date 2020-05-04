@@ -48,11 +48,13 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         alignItems: 'center',
         marginBottom: `${theme.spacing()}px`,
+        wordBreak: 'break-word',
     },
     address: {
         color: theme.palette.grey[500],
         marginRight: `${theme.spacing()}px`,
         whiteSpace: 'pre-line',
+        wordBreak: 'break-word',
     },
     dateTimeSpacing: {
         marginBottom: `${theme.spacing(3)}px`,
