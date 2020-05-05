@@ -76,6 +76,10 @@ const RoundedButton = props => {
       color: props.variant === "contained" ?
         theme.palette.common.white :
         theme.palette.grey[500]
+    },
+    wrapper: {
+      display: 'flex',
+      alignItems: 'center',
     }
   }));
 
@@ -96,7 +100,7 @@ const RoundedButton = props => {
       }}
       {...buttonProps}
     >
-      <div className={isLoading ? styles.fadeout : styles.fadein}>
+      <div className={clsx(styles.wrapper, isLoading ? styles.fadeout : styles.fadein)}>
         {children}
       </div>
 

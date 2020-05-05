@@ -5,9 +5,10 @@ import colors from '../utils/colors';
 import Dialog from '../Dialog';
 import RoundedButton from '../RoundedButton';
 import CheckIcon from '@material-ui/icons/Check';
+import CloseIcon from '@material-ui/icons/Close';
 
 const ConfirmDialog = props => {
-  const { children, icon, type, color, onConfirm, onCancel, ...inputProps } = props;
+  const { children, icon, type, color, onConfirm, onCancel, okText, cancelText, ...inputProps } = props;
 
   const useStyles = makeStyles(theme => ({
     icon: {
@@ -47,12 +48,21 @@ const ConfirmDialog = props => {
       </div>
       <div className={styles.spacing} />
       <div className={styles.row} style={{justifyContent: 'center'}}>
-        <RoundedButton variant="outlined" color={color ? color : theme.palette.success.main} onClick={onCancel}>Cancel</RoundedButton>
+        <RoundedButton variant="outlined" color={color ? color : theme.palette.success.main} onClick={onCancel}>
+          {cancelText || <CloseIcon/>}
+        </RoundedButton>
         <div className={styles.spacing} />
-        <RoundedButton variant="contained" color={color ? color : theme.palette.success.main} onClick={onConfirm}>Confirm</RoundedButton>
+        <RoundedButton variant="contained" color={color ? color : theme.palette.success.main} onClick={onConfirm}>
+          {okText || <CheckIcon />}
+        </RoundedButton>
       </div>
     </Dialog>
   );
 }
+
+ConfirmDialog.propTypes = {
+  okText: PropTypes.string,
+  cancelText: PropTypes.string,
+};
 
 export default ConfirmDialog;
