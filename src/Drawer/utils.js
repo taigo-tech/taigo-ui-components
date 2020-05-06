@@ -28,7 +28,7 @@ export default class MenuUtil {
 
 		if (Array.isArray(item.routes) && !item.hideChildrenInMenu && item.routes.some(child => child && !!child.title)) {
 			return (
-				<SubMenu key={item.key || item.path} item={item} defaultOpen={item.routes.some(child => child && child.path === pathname)}>
+				<SubMenu key={item.key || item.path} item={item} defaultOpen={item.routes.some(child => child && pathToRegexp(child.path).test(pathname))}>
 					{this.getNavMenuItems(item.routes, level + 1)}
 				</SubMenu>
 			)
