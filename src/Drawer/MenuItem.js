@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
 export default ({ item, level, onClick, menuItemComponent: MenuLink, selected }) => {
     const styles = useStyles();
 
-    const listItemComponent = MenuLink && forwardRef((props, ref) => <MenuLink to={item.path} {...props} ref={ref} />);
+    const listItemComponent = MenuLink && forwardRef((props, ref) => <MenuLink to={item.navPath || item.path} {...props} ref={ref} />);
 
     const onItemClick = () => {
         if (typeof item.onClick === 'function') {
