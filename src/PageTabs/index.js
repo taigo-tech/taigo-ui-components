@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     },
     text: {
         fontWeight: 'bold',
-        fontSize: theme.typography.h3.fontSize,
+        fontSize: theme.typography.h2.fontSize,
         color: theme.palette.grey[400],
         textTransform: 'none',
         paddingLeft: theme.spacing(4),
