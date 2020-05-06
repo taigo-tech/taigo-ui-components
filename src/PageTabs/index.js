@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import clsx from 'clsx';
+import _ from 'lodash';
 
 const useStyles = makeStyles((theme) => ({
     tabsIndicator: {
@@ -61,7 +62,7 @@ const Component = ({ tabs = [], selected, onTabSelected }) => {
 
 Component.propTypes = {
     tabs: PropTypes.arrayOf((propValue, key) => {
-        if (!(propValue[key] && propValue[key].id && propValue[key].label)) return new Error('Tab object must have id and label as keys');
+        if (!(propValue[key] && _.has(propValue[key], 'id') && _.has(propValue[key], 'label'))) return new Error('Tab object must have id and label as keys');
     }).isRequired,
     onTabSelected: PropTypes.func.isRequired,
     selected: PropTypes.string,
