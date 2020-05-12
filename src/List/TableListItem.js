@@ -194,7 +194,7 @@ Component.propTypes = {
     data: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.string.isRequired,
         label: PropTypes.string.isRequired,
-        value: PropTypes.string,
+        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         size: PropTypes.number,
         render: PropTypes.func,
         showLabel: PropTypes.bool,
