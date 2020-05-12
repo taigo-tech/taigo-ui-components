@@ -14,13 +14,13 @@ import Colors from '../utils/colors';
 
 const useStyles = makeStyles(theme => ({
     root: {
+        borderBottom: ({ transparent, borderless }) => transparent && !borderless ? `1px solid ${theme.palette.grey[200]}` : 0,
         [theme.breakpoints.up('md')]: {
             minWidth: ({ transparent, minWidth }) => transparent ? 'fit-content' : minWidth,
         },
     },
     wrapper: {
         position: 'relative',
-        borderBottom: `1px solid ${theme.palette.grey[300]}`,
         '&.clickable': {
             cursor: 'pointer',
         }
@@ -78,8 +78,8 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const Component = ({ data = [], showHeader, showLabel, transparent, title, titleElement, children, collapsible, defaultExpanded, onClick, compact, minWidth = 960 }) => {
-    const styles = useStyles({ showLabel, collapsible, transparent, minWidth, compact });
+const Component = ({ data = [], showHeader, showLabel, transparent, title, titleElement, children, collapsible, defaultExpanded, onClick, compact, borderless, minWidth = 960 }) => {
+    const styles = useStyles({ showLabel, collapsible, transparent, minWidth, compact, borderless });
     const theme = useTheme();
 
     const [expanded, setExpanded] = useState(defaultExpanded);
@@ -207,6 +207,7 @@ Component.propTypes = {
     onClick: PropTypes.func,
     minWidth: PropTypes.number,
     compact: PropTypes.bool,
+    borderless: PropTypes.bool,
 };
 
 Component.defaultProps = {
@@ -214,6 +215,7 @@ Component.defaultProps = {
     showLabel: false,
     transparent: false,
     compact: false,
+    borderless: false,
 }
 
 export default Component;
