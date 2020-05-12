@@ -21,6 +21,7 @@ const useStyles = makeStyles(theme => ({
         borderRadius: 500,
     },
     button: {
+        marginTop: 4,
         marginLeft: theme.spacing(1),
     },
     clear: {
