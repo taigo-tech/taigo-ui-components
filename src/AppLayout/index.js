@@ -66,6 +66,7 @@ const useStyles = makeStyles(theme => ({
     flex: 1,
     padding: theme.spacing(3),
     position: 'relative',
+    backgroundColor: '#f9fafc',
     [theme.breakpoints.down('md')]: {
       padding: theme.spacing(2),
     },

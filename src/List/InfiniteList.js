@@ -66,11 +66,9 @@ const InfiniteList = ({ children, onLoadMore, count, scrollThreshold, disabled, 
     return (
         <div className={muiStyles.root} {...listProps}>
             {children}
-            {!disabled && (
-                <div className={muiStyles.loadContainer} style={{ visibility: loading ? 'visible' : 'hidden' }}>
-                    <CircularProgress size={20} />
-                </div>
-            )}
+            <div className={muiStyles.loadContainer} style={{ visibility: !disabled || loading ? 'visible' : 'hidden' }}>
+                <CircularProgress size={20} />
+            </div>
         </div>
     );
 }
