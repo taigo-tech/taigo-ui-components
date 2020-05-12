@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
         }
     },
     paper: {
-        marginBottom: theme.spacing(1),
+        marginBottom: theme.spacing(2),
     },
     titleElement: {
         padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`,
@@ -194,7 +194,7 @@ Component.propTypes = {
     data: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.string.isRequired,
         label: PropTypes.string.isRequired,
-        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        value: PropTypes.node,
         size: PropTypes.number,
         render: PropTypes.func,
         showLabel: PropTypes.bool,
