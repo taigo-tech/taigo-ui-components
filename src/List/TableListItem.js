@@ -150,16 +150,16 @@ const Component = ({ data = [], showHeader, showLabel, transparent, title, title
         </Grid>
     );
 
-    const ExpandButton = props => useMediaQuery(theme.breakpoints.up('md')) ? (
-        <IconButton edge="end" {...props}>
-            <ExpandMoreIcon />
-        </IconButton>
-    ) : (
+    const ExpandButton = props => useMediaQuery(theme.breakpoints.down('sm')) ? (
         <div className={styles.expandButtonContainer}>
             <Button variant="contained" color="primary" size="small" fullWidth {...props}>
                 <ExpandMoreIcon />
             </Button>
         </div>
+    ) : (
+        <IconButton edge="end" {...props}>
+            <ExpandMoreIcon />
+        </IconButton>
     );
 
     const TableRowWrapper = props => transparent ? (
