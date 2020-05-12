@@ -23,17 +23,20 @@ export default () => {
                     data={data3}
                     transparent
                     showLabel
+                    compact
                     title="Job No: CG202004100902771"
                 />
                 <TableListItem
                     data={data3}
                     transparent
                     showLabel
+                    compact
                 />
                 <TableListItem
                     data={data4}
                     transparent
                     showLabel
+                    compact
                     titleElement={<div className={styles.title}>Job No: CG202004100902771</div>}
                 />
             </TableListItem>

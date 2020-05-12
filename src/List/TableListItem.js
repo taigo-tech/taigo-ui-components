@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
     },
     tableRow: {
         marginTop: 0,
-        padding: theme.spacing(2),
+        padding: ({ compact }) => compact ? theme.spacing(1) : theme.spacing(2),
         [theme.breakpoints.up('md')]: {
             paddingRight: ({ collapsible }) => collapsible ? theme.spacing(8) : theme.spacing(2),
         },
@@ -78,8 +78,8 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const Component = ({ data = [], showHeader, showLabel, transparent, title, titleElement, children, collapsible, defaultExpanded, onClick, minWidth = 960 }) => {
-    const styles = useStyles({ showLabel, collapsible, transparent, minWidth });
+const Component = ({ data = [], showHeader, showLabel, transparent, title, titleElement, children, collapsible, defaultExpanded, onClick, compact, minWidth = 960 }) => {
+    const styles = useStyles({ showLabel, collapsible, transparent, minWidth, compact });
     const theme = useTheme();
 
     const [expanded, setExpanded] = useState(defaultExpanded);
@@ -206,12 +206,14 @@ Component.propTypes = {
     transparent: PropTypes.bool,
     onClick: PropTypes.func,
     minWidth: PropTypes.number,
+    compact: PropTypes.bool,
 };
 
 Component.defaultProps = {
     showHeader: false,
     showLabel: false,
     transparent: false,
+    compact: false,
 }
 
 export default Component;
