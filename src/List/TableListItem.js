@@ -205,6 +205,7 @@ Component.propTypes = {
     showLabel: PropTypes.bool,
     transparent: PropTypes.bool,
     onClick: PropTypes.func,
+    minWidth: PropTypes.number,
 };
 
 Component.defaultProps = {

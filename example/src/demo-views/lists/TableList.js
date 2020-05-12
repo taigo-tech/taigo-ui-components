@@ -26,6 +26,11 @@ export default () => {
                     title="Job No: CG202004100902771"
                 />
                 <TableListItem
+                    data={data3}
+                    transparent
+                    showLabel
+                />
+                <TableListItem
                     data={data4}
                     transparent
                     showLabel

@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 export default {
     formatDateTime: (momentObj, format, uppercase = true) => {
-        const mm = moment.isMoment(momentObj) ? momentObj : moment(parameter);
+        const mm = moment.isMoment(momentObj) ? momentObj : moment(momentObj);
         const fm = format || 'D MMM YYYY H:mma';
 
         const dateTime = mm.format(fm);
