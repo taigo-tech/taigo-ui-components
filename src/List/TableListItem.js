@@ -95,7 +95,6 @@ const Component = ({ data = [], showHeader, showLabel, transparent, title, title
 
     const headerElement = (
         <Grid container
-            spacing={1}
             alignItems="flex-start"
             className={clsx(styles.tableRow, styles.header)}
         >
@@ -118,7 +117,6 @@ const Component = ({ data = [], showHeader, showLabel, transparent, title, title
     
     const element = (
         <Grid container
-            spacing={1}
             alignItems="flex-start"
             className={styles.tableRow}
         >
