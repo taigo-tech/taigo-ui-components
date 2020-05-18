@@ -191,7 +191,7 @@ const Component = ({ data = [], showHeader, showLabel, transparent, title, title
 Component.propTypes = {
     data: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.string.isRequired,
-        label: PropTypes.string.isRequired,
+        label: PropTypes.node.isRequired,
         value: PropTypes.node,
         size: PropTypes.number,
         render: PropTypes.func,
