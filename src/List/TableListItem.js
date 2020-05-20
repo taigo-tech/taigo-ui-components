@@ -93,6 +93,11 @@ const Component = ({ data = [], showHeader, showLabel, transparent, title, title
         }
     }
 
+    const toggleExpanded = e => {
+        e.stopPropagation();
+        setExpanded(prev => !prev);
+    }
+
     const headerElement = (
         <Grid container
             alignItems="flex-start"
@@ -174,7 +179,7 @@ const Component = ({ data = [], showHeader, showLabel, transparent, title, title
                 {element}
                 {collapsible && children && (
                     <ExpandButton
-                        onClick={() => setExpanded(prev => !prev)}
+                        onClick={toggleExpanded}
                         className={clsx(styles.expandButton, { expanded })}
                     />
                 )}

@@ -18,7 +18,7 @@ export default () => {
     return (
         <TableList collapsible defaultExpanded minWidth={1200}>
             <TableListItem data={data1} showHeader onClick={() => console.log('onClick')} />
-            <TableListItem data={data2}>
+            <TableListItem data={data2} onClick={() => console.log('onClick')}>
                 <TableListItem
                     data={data3}
                     transparent
