@@ -146,10 +146,12 @@ export default () => {
             {
               title: 'Empty Order',
               path: '/empty/order',
+              backable: true,
             },
             {
               title: 'Empty Chat',
               path: '/empty/chat',
+              backable: false,
             }
           ]
         },

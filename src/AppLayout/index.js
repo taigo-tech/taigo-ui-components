@@ -6,6 +6,7 @@ import Hidden from '@material-ui/core/Hidden';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -36,6 +37,10 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('md')]: {
       display: 'none',
     },
+  },
+  backButton: {
+    color: theme.palette.primary.main,
+    marginRight: theme.spacing(1),
   },
   toolbar: {
     height: '100px',
@@ -83,7 +88,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function AppLayout(props) {
-  const { logo, menuData, drawerWidth = 300, menuItemComponent, onMenuItemClick, footerMenu, children, location, getPageTitle, rightContent, username, email } = props;
+  const { logo, menuData, drawerWidth = 300, menuItemComponent, onMenuItemClick, footerMenu, children, location, getPageTitle, rightContent, username, email, history } = props;
   const classes = useStyles({ drawerWidth });
   const theme = useTheme();
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -96,6 +101,12 @@ function AppLayout(props) {
     handleDrawerToggle();
     if (typeof onMenuItemClick === 'function') {
       onMenuItemClick(item);
+    }
+  }
+
+  const handleBack = () => {
+    if (typeof history !== 'undefined') {
+      history.back();
     }
   }
 
@@ -112,6 +123,7 @@ function AppLayout(props) {
   const flatMenus = getFlatMenus(menuData);
   const titleMenu = _.findKey(flatMenus, item => pathToRegexp(item.path).test(location.pathname));
   const pageTitle = titleMenu ? flatMenus[titleMenu].title : '';
+  const isBackable = history && titleMenu && !!flatMenus[titleMenu].backable;
 
   return (
     <div className={classes.root}>
@@ -152,6 +164,15 @@ function AppLayout(props) {
               >
                 <MenuIcon />
               </IconButton>
+              {isBackable && (
+                <IconButton
+                  aria-label="Go back"
+                  onClick={handleBack}
+                  className={classes.backButton}
+                >
+                  <ArrowBackIcon />
+                </IconButton>
+              )}
               <Typography variant="h2" className={classes.pageTitle}>{getPageTitle ? getPageTitle(pageTitle) : pageTitle}</Typography>
             </Box>
             {rightContent || (username && (
@@ -182,6 +203,7 @@ AppLayout.propTypes = {
 
 AppLayout.defaultProps = {
   location: isBrowser() ? window.location : undefined,
+  history: isBrowser() ? window.history : undefined,
 };
 
 export default AppLayout;
