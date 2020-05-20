@@ -23,6 +23,9 @@ const useStyles = makeStyles(theme => ({
         position: 'relative',
         '&.clickable': {
             cursor: 'pointer',
+            '&:hover': {
+                backgroundColor: theme.palette.action.hover,
+            }
         }
     },
     paper: {
