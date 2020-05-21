@@ -51,15 +51,15 @@ const colors = [
 ];
 
 const StatusBar = props => {
-  const { label, fixedWidth, color, rounded, small, subLabels } = props;
+  const { label, fixedWidth, color, rounded, small, subLabels, rootProps, labelProps, subLabelProps } = props;
   const styles = useStyles({ fixedWidth, rounded, small });
 
   return (
-    <div className={styles.root}>
-      <div className={clsx(styles.bar, styles.main)} style={{ backgroundColor: Colors[color] }}>{label}</div>
+    <div className={styles.root} {...rootProps}>
+      <div className={clsx(styles.bar, styles.main)} style={{ backgroundColor: Colors[color] }} {...labelProps}>{label}</div>
       {
         subLabels.map((sub, index) => {
-          return <div key={index} className={clsx(styles.bar, styles.sub)} style={{ backgroundColor: Colors[sub.color] }}>{sub.label}</div>
+          return <div key={index} className={clsx(styles.bar, styles.sub)} style={{ backgroundColor: Colors[sub.color] }} {...subLabelProps}>{sub.label}</div>
         })
       }
     </div>
