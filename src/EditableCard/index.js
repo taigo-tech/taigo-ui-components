@@ -91,7 +91,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const EditableCard = props => {
-  const { onAccept, onCancel, isLoading, editIcon, cancelIcon, acceptIcon, editLabel, cancelLabel, acceptLabel, children, ...inputProps } = props;
+  const { onAccept, onCancel, isLoading, editIcon, cancelIcon, acceptIcon, editLabel, cancelLabel, acceptLabel, children, disabled, ...inputProps } = props;
   const theme = useTheme();
   const [editable, setEditable] = useState(false);
 
@@ -99,7 +99,7 @@ const EditableCard = props => {
 
   return (
     <Card {...inputProps} className={styles.card}
-      actions={
+      actions={disabled ? null : (
         <div className={styles.row}>
           {
             <div className={styles.row} style={{ position: 'relative' }}>
@@ -143,7 +143,7 @@ const EditableCard = props => {
             </div>
           }
         </div>
-      }>
+      )}>
       <LoadingContext.Provider value={isLoading}>
         <EditableContext.Provider value={editable}>
           {children}
@@ -154,7 +154,11 @@ const EditableCard = props => {
 }
 
 EditableCard.propTypes = {
-  editable: PropTypes.bool
+  disabled: PropTypes.bool,
+};
+
+EditableCard.defaultProps = {
+  disabled: false,
 }
 
 export default EditableCard;
