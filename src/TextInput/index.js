@@ -56,7 +56,7 @@ const TextInput = props => {
   const contextEditable = useContext(EditableContext);
   const contextLoading = useContext(LoadingContext);
 
-  var { textFieldProps, labelProps, textProps, InputProps, editable, disabled, error, label, ...inputProps } = props;
+  var { textFieldProps, labelProps, textProps, InputProps, editable, disabled, error, label, renderText, ...inputProps } = props;
   const styles = useStyles({ multiline: props.multiline });
 
   const getSelectText = (value) => {
@@ -113,7 +113,7 @@ const TextInput = props => {
         />
 
         <div className={clsx(styles.input, styles.text, editable && styles.hidden)} {...textProps}>
-          {props.select ? getSelectText(props.value) : props.value}
+          {props.select ? getSelectText(props.value) : (typeof renderText === 'function' ? renderText(props.value) : props.value)}
         </div>
       </div>
     </div >
@@ -125,6 +125,7 @@ TextInput.propTypes = {
   labelProps: PropTypes.object,
   textProps: PropTypes.object,
   textFieldProps: PropTypes.object,
+  renderText: PropTypes.func,
 };
 
 export default TextInput;

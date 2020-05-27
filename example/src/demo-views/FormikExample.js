@@ -10,7 +10,7 @@ export default () => {
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
             <Formik
                 enableReinitialize={true}
-                initialValues={{ select: 0, text: 'Text', switch: false }}
+                initialValues={{ select: 0, text: 'Text', number: 100, switch: false }}
                 onSubmit={(values, { setSubmitting }) => {
                     console.log(values);
                     setTimeout(() => {
@@ -33,6 +33,8 @@ export default () => {
                             </Field>
                             <br />
                             <Field name="text" label="Text" component={textInput} />
+                            <br />
+                            <Field name="number" label="Number" component={textInput} renderText={value => value.toFixed(2)} />
                             <br />
                             <Field name="switch" component={({ field, form, ...props }) => <Switch {...field} {...props} />} />
                         </Form>
