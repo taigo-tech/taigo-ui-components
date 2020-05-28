@@ -105,6 +105,7 @@ const Component = ({ data = [], showHeader, showLabel, transparent, title, title
         <Grid container
             alignItems="flex-start"
             className={clsx(styles.tableRow, styles.header)}
+            spacing={1}
         >
             {data.map(item => (
                 <Grid item container
@@ -127,6 +128,7 @@ const Component = ({ data = [], showHeader, showLabel, transparent, title, title
         <Grid container
             alignItems="flex-start"
             className={styles.tableRow}
+            spacing={1}
         >
             {data.map(item => (
                 <Grid item container
