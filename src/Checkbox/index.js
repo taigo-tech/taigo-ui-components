@@ -16,18 +16,14 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const Checkbox = props => {
+  const styles = useStyles();
   const contextEditable = useContext(EditableContext);
 
   const { label, ...inputProps } = props;
-  var { disabled } = props;
-  const styles = useStyles();
+  let { disabled } = props;
 
-  if (_.isNil(disabled)) {
-    disabled = false;
-
-    if (!_.isNil(contextEditable)) {
-      disabled = !contextEditable;
-    }
+  if (!_.isNil(contextEditable)) {
+    disabled = !contextEditable;
   }
 
   const checkboxComponent = (

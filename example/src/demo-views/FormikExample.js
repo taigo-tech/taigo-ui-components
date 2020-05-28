@@ -1,16 +1,17 @@
 import MenuItem from '@material-ui/core/MenuItem';
 import { Field, Formik, Form } from 'formik';
-import { fieldToTextField } from 'formik-material-ui';
+import { fieldToTextField, fieldToCheckbox } from 'formik-material-ui';
 import React from 'react';
-import { TextInput, EditableCard, Switch } from 'taigo-ui-components';
+import { TextInput, EditableCard, Switch, Checkbox } from 'taigo-ui-components';
 export default () => {
     const textInput = props => <TextInput {...fieldToTextField(props)} />;
+    const checkbox = props => <Checkbox {...fieldToCheckbox(props)} />;
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
             <Formik
                 enableReinitialize={true}
-                initialValues={{ select: 0, text: 'Text', number: 100, switch: false }}
+                initialValues={{ select: 0, text: 'Text', number: 100, switch: false, check: true }}
                 onSubmit={(values, { setSubmitting }) => {
                     console.log(values);
                     setTimeout(() => {
@@ -33,6 +34,8 @@ export default () => {
                             </Field>
                             <br />
                             <Field name="text" label="Text" component={textInput} />
+                            <br />
+                            <Field name="check" label="Checkbox" type="checkbox" component={checkbox} />
                             <br />
                             <Field name="number" label="Number" component={textInput} renderText={value => value.toFixed(2)} />
                             <br />
