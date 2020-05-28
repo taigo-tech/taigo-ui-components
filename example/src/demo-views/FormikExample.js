@@ -25,6 +25,7 @@ export default () => {
                         isLoading={isSubmitting}
                         onAccept={done => { submitForm(); done(); }}
                         onCancel={done => { resetForm(); done(); }}
+                        onFormToggle={canEdit => { console.log(`Form is ${canEdit ? 'ON' : 'OFF'}`) }}
                     >
                         <Form>
                             <Field name="select" label="Select" as="select" select component={textInput}>

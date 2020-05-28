@@ -91,11 +91,18 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const EditableCard = props => {
-  const { onAccept, onCancel, isLoading, editIcon, cancelIcon, acceptIcon, editLabel, cancelLabel, acceptLabel, children, disabled, ...inputProps } = props;
+  const { onAccept, onCancel, isLoading, editIcon, cancelIcon, acceptIcon, editLabel, cancelLabel, acceptLabel, children, disabled, onFormToggle, ...inputProps } = props;
   const theme = useTheme();
+  const styles = useStyles();
   const [editable, setEditable] = useState(false);
 
-  const styles = useStyles();
+  const handleToggle = canEdit => {
+    if (typeof onFormToggle === 'function') {
+      onFormToggle(canEdit);
+    }
+
+    setEditable(canEdit);
+  }
 
   return (
     <Card {...inputProps} className={styles.card}
@@ -104,7 +111,7 @@ const EditableCard = props => {
           {
             <div className={styles.row} style={{ position: 'relative' }}>
               <div className={clsx(styles.row, editable && !isLoading ? styles.fadein : styles.fadeout)}>
-                <Button className={styles.iconButton} disableRipple onClick={() => { onCancel ? onCancel(() => { setEditable(false) }) : setEditable(false) }}>
+                <Button className={styles.iconButton} disableRipple onClick={() => { onCancel ? onCancel(() => { handleToggle(false) }) : handleToggle(false) }}>
                   <div className={clsx(styles.center, styles.cancel)} style={{ display: 'flex' }}>
                     <CloseIcon />
                     <Hidden smDown implementation="css">
@@ -116,7 +123,7 @@ const EditableCard = props => {
 
                 <div className={styles.mediumSpacing} />
 
-                <Button className={styles.iconButton} disableRipple onClick={() => { onAccept && onAccept(() => { setEditable(false) }) }}>
+                <Button className={styles.iconButton} disableRipple onClick={() => { onAccept && onAccept(() => { handleToggle(false) }) }}>
                   <div className={clsx(styles.center, styles.accept)}>
                     <CheckIcon />
                     <Hidden smDown implementation="css">
@@ -127,7 +134,7 @@ const EditableCard = props => {
                 </Button>
               </div>
 
-              <Button className={clsx(styles.iconButton, !editable && !isLoading ? styles.fadein : styles.fadeout)} disableRipple onClick={() => { setEditable(true); }} style={{ position: 'absolute', right: 0 }}>
+              <Button className={clsx(styles.iconButton, !editable && !isLoading ? styles.fadein : styles.fadeout)} disableRipple onClick={() => { handleToggle(true); }} style={{ position: 'absolute', right: 0 }}>
                 <div className={clsx(styles.center, styles.edit)} style={{ display: 'flex' }}>
                   <EditOutlinedIcon />
                   <Hidden xsDown implementation="css">
@@ -155,6 +162,7 @@ const EditableCard = props => {
 
 EditableCard.propTypes = {
   disabled: PropTypes.bool,
+  onFormToggle: PropTypes.func,
 };
 
 EditableCard.defaultProps = {
