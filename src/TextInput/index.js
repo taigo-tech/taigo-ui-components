@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme => ({
     lineHeight: 1.43
   },
   disabled: {
-    backgroundColor: theme.palette.grey[300],
+    backgroundColor: theme.palette.grey[200],
   }
 }));
 
