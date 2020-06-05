@@ -82,7 +82,7 @@ const TextInput = props => {
   }
 
   return (
-    <div className={clsx(!editable && styles.root)}>
+    <div>
       {label && (
         <div className={clsx(styles.label, (error && editable) && styles.error)} {...labelProps}>
           {label}
