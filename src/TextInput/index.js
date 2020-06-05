@@ -1,9 +1,9 @@
+import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import clsx from 'clsx';
 import _ from 'lodash';
-import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
 import EditableContext from '../context/EditableContext';
 import LoadingContext from '../context/LoadingContext';
 
@@ -19,30 +19,21 @@ const useStyles = makeStyles(theme => ({
   },
   input: {
     padding: '10px 14px',
-    height: '100%',
     color: theme.palette.grey[900],
     backgroundColor: theme.palette.common.white,
     fontSize: 14,
-  },
-  visible: {
-    visibility: 'visible'
+    lineHeight: 1.4,
+    height: 'auto',
   },
   hidden: {
-    visibility: 'hidden'
+    display: 'none',
   },
   text: {
-    position: 'absolute',
-    top: 0,
-    height: '100%',
-    width: '100%',
-    wordWrap: 'break-word',
+    padding: '10px 14px',
     backgroundColor: 'transparent',
-    wordBreak: ({ multiline }) => multiline ? 'break-all' : 'unset',
-    whiteSpace: ({ multiline }) => multiline ? 'unset' : 'nowrap',
-    overflowY: ({ multiline }) => multiline ? 'auto' : 'hidden',
-    overflowX: ({ multiline }) => !multiline ? 'auto' : 'hidden',
-    display: 'flex',
-    alignItems: ({ multiline }) => multiline ? 'flex-start' : 'center'
+    fontSize: 14,
+    lineHeight: 1.4,
+    overflow: 'hidden',
   },
   inputMultiline: {
     padding: 0,
@@ -91,33 +82,31 @@ const TextInput = props => {
   }
 
   return (
-    <div>
+    <div className={clsx(!editable && styles.root)}>
       {label && (
         <div className={clsx(styles.label, (error && editable) && styles.error)} {...labelProps}>
           {label}
         </div>
       )}
 
-      <div style={{ position: 'relative' }}>
-        <TextField
-          error={error}
-          disabled={disabled}
-          InputProps={{
-            classes: { input: styles.input, multiline: styles.inputMultiline, disabled: styles.disabled },
-            ...InputProps,
-          }}
-          {...inputProps}
-          {...textFieldProps}
-          variant="outlined"
-          className={!editable ? styles.hidden : ''}
-          fullWidth
-        />
+      <TextField
+        error={error}
+        disabled={disabled}
+        InputProps={{
+          classes: { input: styles.input, multiline: styles.inputMultiline, disabled: styles.disabled },
+          ...InputProps,
+        }}
+        {...inputProps}
+        {...textFieldProps}
+        variant="outlined"
+        className={!editable ? styles.hidden : ''}
+        fullWidth
+      />
 
-        <div className={clsx(styles.input, styles.text, editable && styles.hidden)} {...textProps}>
-          {props.select ? getSelectText(props.value) : (typeof renderText === 'function' ? renderText(props.value) : props.value)}
-        </div>
+      <div className={clsx(styles.text, editable && styles.hidden)} {...textProps}>
+        {props.select ? getSelectText(props.value) : (typeof renderText === 'function' ? renderText(props.value) : props.value)}
       </div>
-    </div >
+    </div>
   );
 }
 
