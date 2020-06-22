@@ -16,9 +16,9 @@ import clsx from 'clsx';
 
 const useStyles = makeStyles(theme => ({
   close: {
-    position: 'absolute',
-    top: `${theme.spacing(1)}px`,
-    right: `${theme.spacing(1)}px`,
+    // position: 'absolute',
+    // top: `${theme.spacing(1)}px`,
+    // right: `${theme.spacing(1)}px`,
     color: theme.palette.grey[300],
     padding: 0,
   },
@@ -29,10 +29,10 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center'
   },
   load: {
-    position: 'absolute',
-    right: 0,
-    top: '50%',
-    transform: 'translate(-50%, -50%)',
+    // position: 'absolute',
+    // right: 0,
+    // top: '50%',
+    // transform: 'translate(-50%, -50%)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -73,14 +73,16 @@ const useStyles = makeStyles(theme => ({
     margin: '10px 0 20px',
   },
   fadeout: {
-    visibility: 'hidden',
-    opacity: 0,
-    transition: 'visibility 0s .1s, opacity .1s linear',
+    // visibility: 'hidden',
+    // opacity: 0,
+    // transition: 'visibility 0s .1s, opacity .1s linear',
+    display: 'none',
   },
   fadein: {
-    visibility: 'visible',
-    opacity: 1,
-    transition: 'opacity .2s .2s linear',
+    // visibility: 'visible',
+    // opacity: 1,
+    // transition: 'opacity .2s .2s linear',
+    // display: 'initial',
   },
   smallSpacing: {
     margin: '.1em'
@@ -91,7 +93,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const EditableCard = props => {
-  const { onAccept, onCancel, isLoading, editIcon, cancelIcon, acceptIcon, editLabel, cancelLabel, acceptLabel, children, disabled, onFormToggle, ...inputProps } = props;
+  const { onAccept, onCancel, isLoading, editIcon, cancelIcon, acceptIcon, editLabel, cancelLabel, acceptLabel, children, disabled, onFormToggle, customActions, ...inputProps } = props;
   const theme = useTheme();
   const styles = useStyles();
   const [editable, setEditable] = useState(false);
@@ -106,49 +108,51 @@ const EditableCard = props => {
 
   return (
     <Card {...inputProps} className={styles.card}
-      actions={disabled ? null : (
-        <div className={styles.row}>
-          {
-            <div className={styles.row} style={{ position: 'relative' }}>
-              <div className={clsx(styles.row, editable && !isLoading ? styles.fadein : styles.fadeout)}>
-                <Button className={styles.iconButton} disableRipple onClick={() => { onCancel ? onCancel(() => { handleToggle(false) }) : handleToggle(false) }}>
-                  <div className={clsx(styles.center, styles.cancel)} style={{ display: 'flex' }}>
-                    <CloseIcon />
-                    <Hidden smDown implementation="css">
-                      <div className={styles.smallSpacing} />
-                      <div>{cancelLabel}</div>
-                    </Hidden>
-                  </div>
-                </Button>
+      actions={disabled ? customActions : (
+        <div className={styles.row} style={{ position: 'relative' }}>
+          <div className={clsx(styles.row, !editable && !isLoading ? styles.fadein : styles.fadeout)}>
+            {customActions}
+          </div>
 
-                <div className={styles.mediumSpacing} />
+          <div className={styles.mediumSpacing} />
 
-                <Button className={styles.iconButton} disableRipple onClick={() => { onAccept && onAccept(() => { handleToggle(false) }) }}>
-                  <div className={clsx(styles.center, styles.accept)}>
-                    <CheckIcon />
-                    <Hidden smDown implementation="css">
-                      <div className={styles.smallSpacing} />
-                      <div>{acceptLabel}</div>
-                    </Hidden>
-                  </div>
-                </Button>
+          <div className={clsx(styles.row, editable && !isLoading ? styles.fadein : styles.fadeout)}>
+            <Button className={styles.iconButton} disableRipple onClick={() => { onCancel ? onCancel(() => { handleToggle(false) }) : handleToggle(false) }}>
+              <div className={clsx(styles.center, styles.cancel)} style={{ display: 'flex' }}>
+                <CloseIcon />
+                <Hidden smDown implementation="css">
+                  <div className={styles.smallSpacing} />
+                  <div>{cancelLabel}</div>
+                </Hidden>
               </div>
+            </Button>
 
-              <Button className={clsx(styles.iconButton, !editable && !isLoading ? styles.fadein : styles.fadeout)} disableRipple onClick={() => { handleToggle(true); }} style={{ position: 'absolute', right: 0 }}>
-                <div className={clsx(styles.center, styles.edit)} style={{ display: 'flex' }}>
-                  <EditOutlinedIcon />
-                  <Hidden xsDown implementation="css">
-                    <div className={styles.smallSpacing} />
-                    <div>{editLabel}</div>
-                  </Hidden>
-                </div>
-              </Button>
+            <div className={styles.mediumSpacing} />
 
-              <div className={clsx(styles.load, isLoading ? styles.fadein : styles.fadeout)}>
-                <CircularProgress size={20} className={styles.progress} />
+            <Button className={styles.iconButton} disableRipple onClick={() => { onAccept && onAccept(() => { handleToggle(false) }) }}>
+              <div className={clsx(styles.center, styles.accept)}>
+                <CheckIcon />
+                <Hidden smDown implementation="css">
+                  <div className={styles.smallSpacing} />
+                  <div>{acceptLabel}</div>
+                </Hidden>
               </div>
+            </Button>
+          </div>
+
+          <Button className={clsx(styles.iconButton, !editable && !isLoading ? styles.fadein : styles.fadeout)} disableRipple onClick={() => { handleToggle(true); }}>
+            <div className={clsx(styles.center, styles.edit)} style={{ display: 'flex' }}>
+              <EditOutlinedIcon />
+              <Hidden xsDown implementation="css">
+                <div className={styles.smallSpacing} />
+                <div>{editLabel}</div>
+              </Hidden>
             </div>
-          }
+          </Button>
+
+          <div className={clsx(styles.load, isLoading ? styles.fadein : styles.fadeout)}>
+            <CircularProgress size={20} className={styles.progress} />
+          </div>
         </div>
       )}>
       <LoadingContext.Provider value={isLoading}>
