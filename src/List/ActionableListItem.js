@@ -6,6 +6,11 @@ import Typography from '@material-ui/core/Typography';
 import ExpansionPanel from '../ExpansionPanel';
 
 const useStyles = makeStyles(theme => ({
+    root: {
+        [theme.breakpoints.up('md')]: {
+            minWidth: ({ minWidth }) => minWidth || 'fit-content',
+        },
+    },
     title: {
         fontWeight: 'bold',
         marginBottom: theme.spacing(1),
@@ -29,8 +34,8 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const Component = ({ title, subtitle, titleElement, content, actions = [], defaultExpanded, children, onClick }) => {
-    const styles = useStyles();
+const Component = ({ title, subtitle, titleElement, content, actions = [], defaultExpanded, children, onClick, minWidth }) => {
+    const styles = useStyles({ minWidth });
 
     const handleClick = e => {
         if (typeof onClick === 'function') {
@@ -61,9 +66,11 @@ const Component = ({ title, subtitle, titleElement, content, actions = [], defau
     );
 
     return (
-        <ExpansionPanel element={listItem} defaultExpanded={defaultExpanded}>
-            {children}
-        </ExpansionPanel>
+        <div className={styles.root}>
+            <ExpansionPanel element={listItem} defaultExpanded={defaultExpanded}>
+                {children}
+            </ExpansionPanel>
+        </div>
     );
 }
 

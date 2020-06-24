@@ -39,7 +39,6 @@ Component.propTypes = {
 Component.defaultProps = {
     collapsible: false,
     defaultExpanded: false,
-    minWidth: 960,
 }
 
 Component.TableListItem = TableListItem;
