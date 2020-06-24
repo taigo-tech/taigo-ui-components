@@ -7,6 +7,7 @@ import ExpansionPanel from '../ExpansionPanel';
 
 const useStyles = makeStyles(theme => ({
     root: {
+        marginBottom: theme.spacing(2),
         [theme.breakpoints.up('md')]: {
             minWidth: ({ minWidth }) => minWidth || 'fit-content',
         },
