@@ -12,6 +12,7 @@ import FindInPageIcon from '@material-ui/icons/FindInPage';
 import ListIcon from '@material-ui/icons/List';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import GitHubIcon from '@material-ui/icons/GitHub';
 
 import GlobalComponents from './demo-views/GlobalComponents';
 import PageElements from './demo-views/PageElements';
@@ -162,6 +163,12 @@ export default () => {
         },
       ]}
       footerMenu={[
+        {
+          title: 'Github',
+          path: 'https://github.com/taigo-tech/taigo-ui-components',
+          external: true,
+          icon: GitHubIcon,
+        },
         {
           title: 'Sign out',
           path: '/signIn',

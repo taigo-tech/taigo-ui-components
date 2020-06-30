@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import { isUrl } from '../utils/utils';
 
 const useStyles = makeStyles(theme => ({
     icon: {
@@ -22,7 +23,7 @@ const useStyles = makeStyles(theme => ({
 export default ({ item, level, onClick, menuItemComponent: MenuLink, selected }) => {
     const styles = useStyles();
 
-    const listItemComponent = MenuLink && forwardRef((props, ref) => <MenuLink to={item.navPath || item.path} {...props} ref={ref} />);
+    const listItemComponent = isUrl(item.path) ? 'a' : MenuLink && forwardRef((props, ref) => <MenuLink to={item.navPath || item.path} {...props} ref={ref} />);
 
     const onItemClick = () => {
         if (typeof item.onClick === 'function') {
@@ -41,6 +42,8 @@ export default ({ item, level, onClick, menuItemComponent: MenuLink, selected })
                 selected: styles.selected,
             }}
             selected={selected}
+            href={isUrl(item.path) && item.path}
+            target={isUrl(item.path) && item.external ? '_blank' : '_self'}
         >
             {!!item.icon && !item.hideIcon && (
                 <ListItemIcon className={styles.icon}>

@@ -38,16 +38,7 @@ export default class MenuUtil {
 	}
 
 	getMenuItemPath = (item, level) => {
-		const itemPath = this.conversionPath(item.path || '/');
 		const { location: { pathname } } = this.props;
-
-		if (isUrl(itemPath)) {
-			return (
-				<a href={itemPath}>
-					{createElement(item.icon)} <span>{item.title}</span>
-				</a>
-			);
-		}
 
 		return (
 			<MenuItem
@@ -55,7 +46,7 @@ export default class MenuUtil {
 				menuItemComponent={this.props.menuItemComponent}
 				onClick={this.props.onMenuItemClick}
 				level={level}
-				selected={pathToRegexp(item.path).test(pathname)}
+				selected={!isUrl(item.path) && pathToRegexp(item.path).test(pathname)}
 			/>
 		);
 	}
