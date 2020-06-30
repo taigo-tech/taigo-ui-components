@@ -42,7 +42,7 @@ export default ({ item, level, onClick, menuItemComponent: MenuLink, selected })
                 selected: styles.selected,
             }}
             selected={selected}
-            href={isUrl(item.path) && item.path}
+            href={isUrl(item.path) ? item.path : '/'}
             target={isUrl(item.path) && item.external ? '_blank' : '_self'}
         >
             {!!item.icon && !item.hideIcon && (
